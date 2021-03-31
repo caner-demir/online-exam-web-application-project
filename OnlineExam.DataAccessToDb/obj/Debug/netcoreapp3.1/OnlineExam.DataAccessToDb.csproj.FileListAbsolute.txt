@@ -1,0 +1,14 @@
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.deps.json
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.csprojAssemblyReference.cache
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.AssemblyInfoInputs.cache
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.AssemblyInfo.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.csproj.CoreCompileInputs.cache
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.Models.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.Utilities.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.Models.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\bin\Debug\netcoreapp3.1\OnlineExam.Utilities.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccessToDb\obj\Debug\netcoreapp3.1\OnlineExam.DataAccessToDb.csproj.CopyComplete
