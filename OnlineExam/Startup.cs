@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineExam.DataAccessToDb.Data;
+using OnlineExam.DataAccessToDb.Repository;
+using OnlineExam.DataAccessToDb.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +36,9 @@ namespace OnlineExam
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

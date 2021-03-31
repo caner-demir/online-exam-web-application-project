@@ -448,3 +448,4 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Ad
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Admin\Views\_ViewStart.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Lecturer\Views\_ViewImports.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Lecturer\Views\_ViewStart.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\Dapper.dll
