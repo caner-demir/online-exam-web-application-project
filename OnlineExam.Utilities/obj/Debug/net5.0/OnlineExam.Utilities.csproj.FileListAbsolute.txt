@@ -1,0 +1,12 @@
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\bin\Debug\net5.0\OnlineExam.Utilities.deps.json
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\bin\Debug\net5.0\OnlineExam.Utilities.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\bin\Debug\net5.0\ref\OnlineExam.Utilities.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\bin\Debug\net5.0\OnlineExam.Utilities.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.csprojAssemblyReference.cache
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.AssemblyInfoInputs.cache
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.AssemblyInfo.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\ref\OnlineExam.Utilities.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Utilities\obj\Debug\net5.0\OnlineExam.Utilities.pdb
