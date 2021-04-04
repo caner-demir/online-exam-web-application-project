@@ -102,9 +102,9 @@ namespace OnlineExam.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.Role_Lecturer))
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Teacher))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Lecturer));
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Teacher));
                     }
                     if (!await _roleManager.RoleExistsAsync(SD.Role_Student))
                     {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OnlineExam.Utilities;
 
 namespace OnlineExam.Areas.Identity.Pages.Account.Manage
 {
@@ -35,18 +36,32 @@ namespace OnlineExam.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Become a teacher")]
+            public bool IsInRoleTeacher { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            bool isInRoleTeacher;
 
             Username = userName;
 
+            if (await _userManager.IsInRoleAsync(user, SD.Role_Teacher))
+            {
+                isInRoleTeacher = true;
+            }
+            else
+            {
+                isInRoleTeacher = false;
+            }
+
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                IsInRoleTeacher = isInRoleTeacher
             };
         }
 
@@ -85,6 +100,17 @@ namespace OnlineExam.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+
+            if (await _userManager.IsInRoleAsync(user, SD.Role_Student) && Input.IsInRoleTeacher == true)
+            {
+                await _userManager.AddToRoleAsync(user, SD.Role_Teacher);
+                await _userManager.RemoveFromRoleAsync(user, SD.Role_Student);
+            }
+            else if (await _userManager.IsInRoleAsync(user, SD.Role_Teacher) && Input.IsInRoleTeacher == false)
+            {
+                await _userManager.AddToRoleAsync(user, SD.Role_Student);
+                await _userManager.RemoveFromRoleAsync(user, SD.Role_Teacher);
             }
 
             await _signInManager.RefreshSignInAsync(user);

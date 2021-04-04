@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Lecturer\Controllers\" />
+    <Folder Include="Areas\Teacher\Controllers\" />
   </ItemGroup>
 
 </Project>
