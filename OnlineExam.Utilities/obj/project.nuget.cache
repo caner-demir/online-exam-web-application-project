@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3NM3MCg0ExxLgbO/F+ITttUSZVXa1uCb0FWq9ttvoLm5mwSDq3Sfd+kC7kLXzWgmv9ghMbIR3bebs1/dF3YWIw==",
+  "dgSpecHash": "YBuM5w/IaVWZghfd83T6MR65vmbyd4Kh74Fyb4iDLgQFArgTMv7osPv5OJliOeS50RaP1FbWBNfogIX/l9alCg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.Utilities\\OnlineExam.Utilities.csproj",
   "expectedPackageFiles": [
@@ -17,7 +17,8 @@
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
-    "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+    "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\Caner Demir\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

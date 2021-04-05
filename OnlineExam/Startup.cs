@@ -42,6 +42,19 @@ namespace OnlineExam
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.LoginPath = $"/Identity/Account/Login"; // Set here login path.
+                options.LogoutPath = $"/Identity/Account/Logout"; // Set here logout path.
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied"; // set here access denied path.
+            });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +75,7 @@ namespace OnlineExam
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

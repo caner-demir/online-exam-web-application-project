@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "a6fAP8vmtkvzq9JdsMEpP6u+aFh664IR/UogqobDojGYXprMyh4wzppaVfToDcZLGNwjSF7+xl2bmH13Dim3LQ==",
+  "dgSpecHash": "stznC/kCU/s+CWsiiC2X8vuZmgHranx0BrwK2IWuTRFZLrFu4bGBi8FcSZfyoaQOvgAyY+N8DMULC86Ta6ssWg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam\\OnlineExam.csproj",
   "expectedPackageFiles": [
@@ -66,7 +66,7 @@
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\5.0.2\\microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\Caner Demir\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Caner Demir\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",

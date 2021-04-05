@@ -7,6 +7,7 @@ namespace OnlineExam.DataAccessToDb.Repository.IRepository
     public interface IUnitOfWork : IDisposable
     {
         ICourseRepository Course { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         ISP_Call SP_Call { get; }
         void Save();
     }

@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v5.0": {
       "OnlineExam.Utilities/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Identity.UI": "5.0.4"
+          "Microsoft.AspNetCore.Identity.UI": "5.0.4",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "OnlineExam.Utilities.dll": {}
@@ -117,7 +118,15 @@
           "Microsoft.Extensions.Primitives": "5.0.0"
         }
       },
-      "Microsoft.Extensions.Primitives/5.0.0": {}
+      "Microsoft.Extensions.Primitives/5.0.0": {},
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -223,6 +232,13 @@
       "sha512": "sha512-cI/VWn9G1fghXrNDagX9nYaaB/nokkZn0HYAawGaELQrl8InSezfe9OnfPZLcJq3esXxygh3hkq2c3qoV3SDyQ==",
       "path": "microsoft.extensions.primitives/5.0.0",
       "hashPath": "microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     }
   }
 }

@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OnlineExam.DataAccessToDb.Repository.IRepository;
 using OnlineExam.Models;
+using OnlineExam.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +14,7 @@ using System.Threading.Tasks;
 namespace OnlineExam.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
+    [Authorize(Roles = SD.Role_Teacher)]
     public class CourseController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -21,6 +26,12 @@ namespace OnlineExam.Areas.Teacher.Controllers
 
         public IActionResult Index()
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var AllCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
+            HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(AllCourses));
+
             return View();
         }
 
@@ -31,6 +42,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var AllCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
+
             return Json(new { data = AllCourses });
         }
 
