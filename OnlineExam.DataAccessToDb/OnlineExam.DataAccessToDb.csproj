@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OnlineExam.Models\OnlineExam.Models.csproj" />
     <ProjectReference Include="..\OnlineExam.Utilities\OnlineExam.Utilities.csproj" />
   </ItemGroup>

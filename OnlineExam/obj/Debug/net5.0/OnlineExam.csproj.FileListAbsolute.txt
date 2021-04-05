@@ -488,3 +488,7 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Id
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\_ViewImports.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\_ViewStart.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\Index.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\Upsert.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Views\Shared\_CreateBackToListButtons.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Views\Shared\_EditBackToListButtons.cshtml.g.cs

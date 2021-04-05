@@ -13,9 +13,11 @@ namespace OnlineExam.DataAccessToDb.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Course = new CourseRepository(_db);
             SP_Call = new SP_Call(_db);
         }
 
+        public ICourseRepository Course { get; private set; }
         public ISP_Call SP_Call { get; private set; }
 
         public void Dispose()
