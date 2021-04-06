@@ -12,5 +12,6 @@ namespace OnlineExam.Utilities
 
         public const string Session_MyCourses = "Session My Courses";
         public const string Session_CoursesTaken = "Session Courses Taken";
+        public const string Session_SelectedCourseId = "Selected Course Id";
     }
 }

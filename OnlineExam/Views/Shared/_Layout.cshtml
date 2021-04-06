@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OnlineExam</title>
+    <title>@ViewData["Title"] - ExamHub</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineExam</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,6 +28,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Student))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Courses Taken
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark" asp-area="Student" asp-controller="Course" asp-action="Index">All Courses</a>
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_CoursesTaken) != null)
+                                    {
+                                        var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_CoursesTaken);
+                                        if (allCourses.Count > 0)
+                                        {
+                                            <div class="dropdown-divider"></div>
+                                            foreach (var course in allCourses)
+                                            {
+                                                <a class="dropdown-item" asp-area="Teacher" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </li>
+                        }
                         @if (User.IsInRole(SD.Role_Teacher))
                         {
                             <li class="nav-item dropdown">
@@ -44,7 +67,7 @@
                                             <div class="dropdown-divider"></div>
                                             foreach (var course in allCourses)
                                             {
-                                                <a class="dropdown-item" asp-area="Teacher" asp-controller="Exam" asp-action="Index" asp-route-Id="@course.Id">@course.Name</a>
+                                                <a class="dropdown-item" asp-area="Teacher" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
                                             }
                                         }
                                     }
@@ -65,7 +88,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - OnlineExam - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - ExamHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

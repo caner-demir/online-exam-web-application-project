@@ -49,10 +49,11 @@ namespace OnlineExam.Areas.Teacher.Controllers
         public IActionResult Upsert(int? id)
         {
             Course course = new Course();
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (id == null)
             {
-                var claimsIdentity = (ClaimsIdentity)User.Identity;
-                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 course.ApplicationUserId = claim.Value;
 
                 return View(course);
@@ -62,6 +63,11 @@ namespace OnlineExam.Areas.Teacher.Controllers
             if (course == null)
             {
                 return NotFound();
+            }
+
+            if (course.ApplicationUserId != claim.Value)
+            {
+                return RedirectToAction("AccessDenied", "Account", new { area = "Identity" });
             }
 
             return View(course);
