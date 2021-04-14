@@ -14,36 +14,35 @@ namespace OnlineExam.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
     [Authorize(Roles = SD.Role_Teacher)]
-    public class ExamController : Controller
+    public class QuestionController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ExamController(IUnitOfWork unitOfWork)
+        public QuestionController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            var course = _unitOfWork.Course.GetFirstOrDefault(c => c.Id == id);
-            //Check if there is a course with this id.
-            if (course == null)
+            var exam = _unitOfWork.Exam.GetFirstOrDefault(e => e.Id == id, includeProperties: "Course");
+            //Check if there is an exam with this id.
+            if (exam == null)
             {
                 return NotFound();
             }
-            //Check if the user is the one who has this course.
-            if (course.ApplicationUserId != claim.Value)
+            //Check if the user is the one who has this exam.
+            if (exam.Course.ApplicationUserId != claim.Value)
             {
                 return NotFound();
             }
 
-            //Save course Id to session storage.
-            HttpContext.Session.SetInt32(SD.Session_SelectedCourseId, id);
+            //Save exam Id to session storage.
+            HttpContext.Session.SetInt32(SD.Session_SelectedExamId, id);
 
-            return View(course);
+            return View(exam);
         }
 
         [HttpGet]
@@ -52,48 +51,48 @@ namespace OnlineExam.Areas.Teacher.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            //Get exams
-            var CourseId = HttpContext.Session.GetInt32(SD.Session_SelectedCourseId);
-            var AllExams = _unitOfWork.Exam.GetAll(e => e.CourseId == CourseId);
+            //Get questions
+            var ExamId = HttpContext.Session.GetInt32(SD.Session_SelectedExamId);
+            var AllQuestions = _unitOfWork.Question.GetAll(q => q.ExamId == ExamId);
 
-            return Json(new { data = AllExams });
+            return Json(new { data = AllQuestions });
         }
 
-        public IActionResult Upsert(int? id, int? courseId)
+        public IActionResult Upsert(int? id, int? examId)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            //Check if courseId parameter is null.
-            if (courseId == null)
+            //Check if examId parameter is null.
+            if (examId == null)
             {
                 return NotFound();
             }
-            //If courseId is not null, check if there is a course with this Id in database.
-            var course = _unitOfWork.Course.GetFirstOrDefault(c => c.Id == courseId);
-            if (course == null)
+            //If examId is not null, check if there is an exam with this Id in database.
+            var exam = _unitOfWork.Exam.GetFirstOrDefault(e => e.Id == examId, includeProperties: "Course");
+            if (exam == null)
             {
                 return NotFound();
             }
-            //If there is a course with this Id in database, check if the user is the owner of this course.
-            if (course.ApplicationUserId != claim.Value)
+            //If there is an exam with this Id in database, check if the user is the owner of this exam.
+            if (exam.Course.ApplicationUserId != claim.Value)
             {
                 return NotFound();
             }
 
-            //If user has a course with this Id, create an Exam object.
-            Exam exam = new Exam();
+            //If user has an exam with this Id, create a Question object.
+            Question question = new Question();
             if (id == null)
-            {                
-                exam.CourseId = (int)courseId;
-                return View(exam);
+            {
+                question.ExamId = (int)examId;
+                return View(question);
             }
             else
             {
-                //Check if there is an exam with this Id in database and check if the course has an 
-                //exam with this Id.
-                exam = _unitOfWork.Exam.GetFirstOrDefault(e => e.Id == id, includeProperties: "Course");
-                if (exam == null || exam.CourseId != courseId)
+                //Check if there is a question with this Id in database and check if the exam has a
+                //question with this Id.
+                question = _unitOfWork.Question.GetFirstOrDefault(e => e.Id == id, includeProperties: "Exam");
+                if (question == null || question.ExamId != examId)
                 {
                     return NotFound();
                 }
@@ -104,39 +103,39 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 }
             }
 
-            return View(exam);
+            return View(question);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Exam exam)
+        public IActionResult Upsert(Question question)
         {
             if (ModelState.IsValid)
             {
-                if (exam.Id == 0)
+                if (question.Id == 0)
                 {
-                    _unitOfWork.Exam.Add(exam);
+                    _unitOfWork.Question.Add(question);
                 }
                 else
                 {
-                    _unitOfWork.Exam.Update(exam);
+                    _unitOfWork.Question.Update(question);
                 }
                 _unitOfWork.Save();
-                return RedirectToAction("Index", new { id = exam.CourseId });
+                return RedirectToAction("Index", new { id = question.ExamId });
             }
-            return View(exam);
+            return View(question);
         }
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.Exam.Get(id);
+            var objFromDb = _unitOfWork.Question.Get(id);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting." });
             }
 
-            _unitOfWork.Exam.Remove(objFromDb);
+            _unitOfWork.Question.Remove(objFromDb);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete successful." });
         }

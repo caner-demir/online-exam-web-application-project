@@ -67,7 +67,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
 
             if (course.ApplicationUserId != claim.Value)
             {
-                return RedirectToAction("AccessDenied", "Account", new { area = "Identity" });
+                return NotFound();
             }
 
             return View(course);

@@ -1,0 +1,31 @@
+﻿@model OnlineExam.Models.Exam
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-primary">@Model.Name</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary text-white" asp-action="Upsert" asp-route-examId="@Model.Id"><i class="fas fa-plus"></i> &nbsp; Create New Question</a>
+    </div>
+</div>
+
+<br />
+<div>
+    <table id="tblData" class="table table-hover" style="width:100%">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/question.js"></script>
+}

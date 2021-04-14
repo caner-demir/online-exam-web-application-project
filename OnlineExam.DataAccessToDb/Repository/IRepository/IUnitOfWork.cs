@@ -9,6 +9,7 @@ namespace OnlineExam.DataAccessToDb.Repository.IRepository
         ICourseRepository Course { get; }
         IApplicationUserRepository ApplicationUser { get; }
         IExamRepository Exam { get; }
+        IQuestionRepository Question { get; }
         ISP_Call SP_Call { get; }
         void Save();
     }

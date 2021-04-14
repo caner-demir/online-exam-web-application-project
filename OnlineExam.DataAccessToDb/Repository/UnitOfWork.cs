@@ -16,12 +16,14 @@ namespace OnlineExam.DataAccessToDb.Repository
             Course = new CourseRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             Exam = new ExamRepository(_db);
+            Question = new QuestionRepository(_db);
             SP_Call = new SP_Call(_db);
         }
 
         public ICourseRepository Course { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IExamRepository Exam { get; private set; }
+        public IQuestionRepository Question { get; private set; }
         public ISP_Call SP_Call { get; private set; }
 
         public void Dispose()

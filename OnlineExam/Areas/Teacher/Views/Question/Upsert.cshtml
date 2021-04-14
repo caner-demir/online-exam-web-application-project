@@ -1,7 +1,7 @@
-﻿@model OnlineExam.Models.Course
+﻿@model OnlineExam.Models.Question
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var title = "Create Course";
+    var title = "Create Question";
 }
 
 <form method="post">
@@ -9,9 +9,9 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         @if (Model.Id != 0)
         {
-            title = "Edit Course";
+            title = "Edit Question";
         }
-        <input type="hidden" asp-for="ApplicationUserId" />
+        <input type="hidden" asp-for="ExamId" />
         <div class="col-12 border-bottom">
             <h2 class="text-primary">@title</h2>
         </div>
@@ -31,10 +31,10 @@
                     {
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.Id">Update</button>
+                                <button type="submit" class="btn btn-primary form-control">Update</button>
                             </div>
                             <div class="col">
-                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                                <a asp-action="Index" class="btn btn-success form-control" asp-route-id="@Model.ExamId">Back to List</a>
                             </div>
                         </div>
                     }
@@ -45,7 +45,7 @@
                                 <button type="submit" class="btn btn-primary form-control">Create</button>
                             </div>
                             <div class="col">
-                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                                <a asp-action="Index" class="btn btn-success form-control" asp-route-id="@Model.ExamId">Back to List</a>
                             </div>
                         </div>
                     }
