@@ -494,3 +494,4 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Te
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Exam\Upsert.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Question\Index.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Question\Upsert.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Question\_UpsertModal.cshtml.g.cs

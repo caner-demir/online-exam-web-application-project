@@ -17,7 +17,8 @@ function loadDataTable() {
                 },
                 "render": function (data) {
                     return `
-                            <a href="/Teacher/Question/Index/${data.id}" class="text-dark">${data.name}</a>
+                            <a onclick="openModal('/Teacher/Question/Upsert/${data.id}?examId=${data.examId}', 'Edit Question')"
+                                    class="text-dark" style="cursor:pointer">${data.name}</a>
                             `
                 }, "width": "60%"
             },
@@ -29,7 +30,8 @@ function loadDataTable() {
                 "render": function (data) {
                     return `
                             <div class="text-center">
-                                <a href="/Teacher/Question/Upsert/${data.id}?examId=${data.examId}" class="btn btn-success text-white" style="cursor:pointer">
+                                <a onclick="openModal('/Teacher/Question/Upsert/${data.id}?examId=${data.examId}', 'Edit Question')" 
+                                        class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a onclick=Delete("/Teacher/Question/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer">

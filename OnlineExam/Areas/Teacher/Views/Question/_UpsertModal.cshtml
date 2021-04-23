@@ -1,0 +1,57 @@
+﻿@model OnlineExam.Models.Question
+
+<form asp-action="Upsert" enctype="multipart/form-data" onsubmit="return postModal(this);">
+    <div class="row pt-3" id="modal-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ExamId" />
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-9">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    Image
+                </div>
+                <div class="col-9">
+                    <input type="file" name="files" id="upload-box" multiple class="form-control-file" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    @if (Model.Id != 0)
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary form-control">Update</button>
+                            </div>
+                            <div class="col">
+                                <a onclick="closeModal()" class="btn btn-success text-white form-control" style="cursor:pointer">Back to List</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a onclick="closeModal()" class="btn btn-success text-white form-control" style="cursor:pointer">Back to List</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

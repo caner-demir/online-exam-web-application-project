@@ -58,6 +58,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             return Json(new { data = AllQuestions });
         }
 
+        [NoDirectAccess]
         public IActionResult Upsert(int? id, int? examId)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -85,7 +86,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             if (id == null)
             {
                 question.ExamId = (int)examId;
-                return View(question);
+                return PartialView("_UpsertModal", question);
             }
             else
             {
@@ -103,7 +104,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 }
             }
 
-            return View(question);
+            return PartialView("_UpsertModal", question);
         }
 
         [HttpPost]
@@ -121,10 +122,12 @@ namespace OnlineExam.Areas.Teacher.Controllers
                     _unitOfWork.Question.Update(question);
                 }
                 _unitOfWork.Save();
-                return RedirectToAction("Index", new { id = question.ExamId });
+                return Json(new { isValid = true });
             }
             return View(question);
         }
+
+
 
         [HttpDelete]
         public IActionResult Delete(int id)
