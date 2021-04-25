@@ -221,6 +221,30 @@ namespace OnlineExam.DataAccessToDb.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("OnlineExam.Models.Choice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ChoiceNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Choices");
+                });
+
             modelBuilder.Entity("OnlineExam.Models.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -272,6 +296,9 @@ namespace OnlineExam.DataAccessToDb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CorrectChoice")
+                        .HasColumnType("int");
 
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
@@ -353,6 +380,17 @@ namespace OnlineExam.DataAccessToDb.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OnlineExam.Models.Choice", b =>
+                {
+                    b.HasOne("OnlineExam.Models.Question", "Question")
+                        .WithMany("Choices")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
             modelBuilder.Entity("OnlineExam.Models.Course", b =>
                 {
                     b.HasOne("OnlineExam.Models.ApplicationUser", "ApplicationUser")
@@ -384,6 +422,11 @@ namespace OnlineExam.DataAccessToDb.Migrations
                         .IsRequired();
 
                     b.Navigation("Exam");
+                });
+
+            modelBuilder.Entity("OnlineExam.Models.Question", b =>
+                {
+                    b.Navigation("Choices");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,11 @@
             $("#form-modal").modal("show")
             $('.modal-dialog').draggable({
                 handle: ".modal-header"
-            });
+            })
+
+            $("form").removeData("validator");
+            $("form").removeData("unobtrusiveValidation");
+            $.validator.unobtrusive.parse("form");
         }
     })
 }
@@ -17,12 +21,7 @@ closeModal = () => {
     $('#form-modal').modal('hide');
 }
 
-
 postModal = form => {
-    if ($('#upload-box').val() == "") {
-        swal("Error", "Please select an image", "error")
-        return false
-    }
     $.ajax({
         type: 'POST',
         url: form.action,
@@ -44,4 +43,5 @@ postModal = form => {
     //to prevent default form submit event
     return false;
 }
+
 

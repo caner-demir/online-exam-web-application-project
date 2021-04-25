@@ -1,27 +1,100 @@
 ﻿@model OnlineExam.Models.Question
 
 <form asp-action="Upsert" enctype="multipart/form-data" onsubmit="return postModal(this);">
-    <div class="row pt-3" id="modal-form">
+    <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="ExamId" />
+        @if (Model.Id != 0)
+        {
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageUrl" id="question-imageurl" />
+        }
         <div class="col-12">
+            @if (Model.Id != 0)
+            {
+                <div class="form-group row">
+                    <div class="col-12 pt-0">
+                        <img src="@Model.ImageUrl" style="width:100%; border-radius:5px; border:1px solid #bbb9b9" />
+                    </div>
+                </div>
+            }
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Name"></label>
                 </div>
-                <div class="col-9">
-                    <input asp-for="Name" class="form-control" />
+                <div class="col-10">
+                    <input asp-for="Name" class="form-control" id="question-name" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     Image
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <input type="file" name="files" id="upload-box" multiple class="form-control-file" />
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    CORRECT
+                </div>
+                <div class="col-10">
+                    CHOICE
+                </div>
+            </div>
+            @{
+                int i = 0;
+                int? CorrectChoice = Model.CorrectChoice;
+                if (Model.Choices != null)
+                {
+                    foreach (var Choice in Model.Choices)
+                    {
+                        <div class="form-group row">
+                            <input type="hidden" name="Choices[@i].Id" value="@Choice.Id" />
+                            <input type="hidden" name="Choices[@i].ChoiceNumber" value="@Choice.ChoiceNumber" />
+                            <input type="hidden" name="Choices[@i].QuestionId" value="@Model.Id" />
+                            <div class="col-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="CorrectChoice" id="choice-@i"
+                                           value="@Choice.ChoiceNumber" checked="@(Choice.ChoiceNumber == CorrectChoice ? "checked" : null)">
+                                    <label class="form-check-label" for="choice-@i">
+                                        Choice @i
+                                    </label>
+                                    <span asp-validation-for="CorrectChoice" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <input asp-for="@Choice.Description" class="form-control" name="Choices[@i].Description" id="description-@i" />
+                                <span asp-validation-for="@Choice.Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                }
+
+                for (int j = i; j < 4; j++)
+                {
+                    <div class="form-group row">
+                        <input type="hidden" name="Choices[@j].ChoiceNumber" value="@j" />
+                        <input type="hidden" name="Choices[@j].QuestionId" value="@Model.Id" />
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="CorrectChoice" id="choice-@j"
+                                       value="@j">
+                                <label class="form-check-label" for="choice-@j">
+                                    Choice @j
+                                </label>
+                                <span asp-validation-for="CorrectChoice" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control" name="Choices[@j].Description" />
+                            @*<span asp-validation-for="@Choice.Description" class="text-danger"></span>*@
+                        </div>
+                    </div>
+                }
+            }
             <div class="form-group row">
                 <div class="col-12">
                     @if (Model.Id != 0)
@@ -53,5 +126,12 @@
 </form>
 
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/teqsjce1ese20batl17a9jmgqs2f9zefn1xjf9h1cauhe2v5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        })
+    </script>
 }

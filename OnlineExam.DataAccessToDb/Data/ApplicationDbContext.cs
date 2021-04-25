@@ -18,5 +18,6 @@ namespace OnlineExam.DataAccessToDb.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Choice> Choices { get; set; }
     }
 }

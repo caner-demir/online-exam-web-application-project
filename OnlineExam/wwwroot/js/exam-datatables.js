@@ -29,7 +29,8 @@ function loadDataTable() {
                 "render": function (data) {
                     return `
                             <div class="text-center">
-                                <a href="/Teacher/Exam/Upsert/${data.id}?courseId=${data.courseId}" class="btn btn-success text-white" style="cursor:pointer">
+                                <a onclick="openModal('/Teacher/Exam/Upsert/${data.id}?courseId=${data.courseId}', 'Edit Exam')" 
+                                        class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a onclick=Delete("/Teacher/Exam/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer">

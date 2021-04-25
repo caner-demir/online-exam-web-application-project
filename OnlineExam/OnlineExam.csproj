@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="wwwroot\images\questions\" />
   </ItemGroup>
 
 </Project>

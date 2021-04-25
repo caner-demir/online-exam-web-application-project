@@ -10,7 +10,13 @@
         <h2 class="text-primary">@Model.Name</h2>
     </div>
     <div class="col-6 text-right">
-        <a class="btn btn-primary text-white" asp-action="Upsert" asp-route-courseId="@Model.Id"><i class="fas fa-plus"></i> &nbsp; Create New Exam</a>
+        @*<a class="btn btn-primary text-white" asp-action="Upsert" asp-route-courseId="@Model.Id">
+            <i class="fas fa-plus"></i> &nbsp; Create New Exam
+        </a>*@
+        <button onclick="openModal('/Teacher/Exam/Upsert?courseId=@Model.Id', 'Create Exam')"
+                class="btn btn-primary text-white">
+            <i class="fas fa-plus"></i> &nbsp; Create New Exam
+        </button>
     </div>
 </div>
 
@@ -26,6 +32,24 @@
     </table>
 </div>
 
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="form-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script src="~/js/exam-datatables.js"></script>
+    <script src="~/js/modal-form-exam.js"></script>
 }

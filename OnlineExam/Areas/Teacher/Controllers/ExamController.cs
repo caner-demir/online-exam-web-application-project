@@ -86,7 +86,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             if (id == null)
             {                
                 exam.CourseId = (int)courseId;
-                return View(exam);
+                return PartialView("_UpsertModal", exam);
             }
             else
             {
@@ -104,7 +104,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 }
             }
 
-            return View(exam);
+            return PartialView("_UpsertModal", exam);
         }
 
         [HttpPost]
@@ -122,7 +122,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
                     _unitOfWork.Exam.Update(exam);
                 }
                 _unitOfWork.Save();
-                return RedirectToAction("Index", new { id = exam.CourseId });
+                return Json(new { isValid = true });
             }
             return View(exam);
         }

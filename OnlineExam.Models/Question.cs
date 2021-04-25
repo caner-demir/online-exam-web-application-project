@@ -15,7 +15,11 @@ namespace OnlineExam.Models
         [MaxLength(250)]
         public string Name { get; set; }
 
+        public int? CorrectChoice { get; set; }
+
         public string ImageUrl { get; set; }
+
+        public ICollection<Choice> Choices { get; set; }
 
         [Required]
         public int ExamId { get; set; }

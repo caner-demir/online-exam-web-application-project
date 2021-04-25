@@ -20,7 +20,19 @@ namespace OnlineExam.DataAccessToDb.Repository
 
         public void Update(Question question)
         {
-            _db.Update(question);
+            //_db.Update(question);
+            var ObjFromDb = _db.Questions.FirstOrDefault(q => q.Id == question.Id);
+
+            if (ObjFromDb != null)
+            {
+                if (question.ImageUrl != null)
+                {
+                    ObjFromDb.ImageUrl = question.ImageUrl;
+                }
+
+                ObjFromDb.Name = question.Name;
+                ObjFromDb.CorrectChoice = question.CorrectChoice;
+            }
         }
     }
 }
