@@ -1,8 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<OnlineExam.Models.Course>
+@*@section Styles{
+        <link rel="Stylesheet" href="@Href("~/css/home-index.css")" />
+    }*@
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card bg-light rounded-0" style="padding:25px; padding-top:5px;">
+    <div class="row backgroundWhite">
+        @foreach (var course in Model)
+        {
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                <div class="row" style="padding:5px">
+                    <div class="card card-item" style="border:0px">
+                        <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px">
+                            <img src="https://via.placeholder.com/250" class="card-img-top rounded-0" style="height:260px" />
+                            <div class="pl-1">
+                                <p class="card-title" style="height:42px; font-size:17px"><b style="color:#2c3e50">@course.Name</b></p>
+                                <p class="card-title text-primary" style="height:18px; line-height: 90%; font-size: 15px ">
+                                    by <b>
+                                        @course.ApplicationUser.Name
+                                    </b>
+                                </p>
+                            </div>
+                            <div>
+                                <a asp-action="Details" class="btn btn-info form-control" asp-route-id="@course.Id">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

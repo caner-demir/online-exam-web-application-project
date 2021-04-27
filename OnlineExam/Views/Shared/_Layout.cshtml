@@ -34,7 +34,7 @@
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Courses Taken
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu" style="margin-top:10px" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark" asp-area="Student" asp-controller="Course" asp-action="Index">All Courses</a>
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_CoursesTaken) != null)
                                     {
@@ -57,7 +57,7 @@
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Course Management
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu" style="margin-top:10px" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_MyCourses) != null)
                                     {
@@ -96,6 +96,7 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dropdown.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

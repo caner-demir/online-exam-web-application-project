@@ -29,16 +29,18 @@ namespace OnlineExam.Areas.Student.Controllers
 
         public IActionResult Index()
         {
+            IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser");
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            
+
             if (claim != null)
             {
                 var AllCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
                 HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(AllCourses));
             }
 
-            return View();
+            return View(courseList);
         }
 
         public IActionResult Privacy()
