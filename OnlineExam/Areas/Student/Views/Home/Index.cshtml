@@ -1,4 +1,5 @@
-﻿@model IEnumerable<OnlineExam.Models.Course>
+﻿@using OnlineExam.Utilities
+@model IEnumerable<OnlineExam.Models.Course>
 @*@section Styles{
         <link rel="Stylesheet" href="@Href("~/css/home-index.css")" />
     }*@
@@ -21,7 +22,19 @@
                                 </p>
                             </div>
                             <div>
-                                <a asp-action="Details" class="btn btn-info form-control" asp-route-id="@course.Id">Details</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a onclick="sendRequest(this, @course.Id)" class="btn btn-info text-white form-control" style="cursor: pointer">
+                                        Enroll
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a onclick="redirectToLogin()" class="btn btn-info text-white form-control" style="cursor: pointer">
+                                        Enroll
+                                    </a>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -30,3 +43,7 @@
         }
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/home-index.js"></script>
+}

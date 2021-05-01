@@ -20,5 +20,7 @@ namespace OnlineExam.Models
 
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
+
+        public ICollection<CourseUser> Users { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace OnlineExam.Models
 
         [NotMapped]
         public string Role { get; set; }
+
+        public ICollection<CourseUser> Courses { get; set; }
     }
 }

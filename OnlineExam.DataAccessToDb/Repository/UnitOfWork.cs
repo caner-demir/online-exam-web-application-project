@@ -18,6 +18,7 @@ namespace OnlineExam.DataAccessToDb.Repository
             Exam = new ExamRepository(_db);
             Question = new QuestionRepository(_db);
             Choice = new ChoiceRepository(_db);
+            CourseUser = new CourseUserRepository(_db);
             SP_Call = new SP_Call(_db);
         }
 
@@ -26,6 +27,7 @@ namespace OnlineExam.DataAccessToDb.Repository
         public IExamRepository Exam { get; private set; }
         public IQuestionRepository Question { get; private set; }
         public IChoiceRepository Choice { get; private set; }
+        public ICourseUserRepository CourseUser { get; private set; }
         public ISP_Call SP_Call { get; private set; }
 
         public void Dispose()

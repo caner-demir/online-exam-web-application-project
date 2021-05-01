@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -36,11 +37,49 @@ namespace OnlineExam.Areas.Student.Controllers
 
             if (claim != null)
             {
-                var AllCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
-                HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(AllCourses));
+                var userCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
+                HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(userCourses));
+
+                var coursesTaken = _unitOfWork.CourseUser
+                                        .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true),
+                                        includeProperties: "Course")
+                                        .Select(cu => new { cu.Course.Name, cu.Course.Id })
+                                        .ToList();
+                HttpContext.Session.SetString(SD.Session_CoursesTaken, JsonConvert.SerializeObject(coursesTaken));
+
+                var coursesEnrolled = _unitOfWork.CourseUser.GetAll(cu => cu.UserId == claim.Value)
+                                        .Select(cu => cu.CourseId)
+                                        .ToList();
+
+                var coursesAvailable = courseList
+                                            .Where(cl => !coursesEnrolled.Any(ce => cl.Id == ce))
+                                            .ToList();
+
+                return View(coursesAvailable);
             }
 
             return View(courseList);
+        }
+
+        //[Authorize(Roles = SD.Role_Student + "," + SD.Role_Teacher)]
+        [Authorize]
+        [HttpPost]
+        public IActionResult SendRequest([FromBody]int Id)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            var CourseUser = new CourseUser()
+            {
+                CourseId = Id,
+                UserId = claim.Value,
+                IsAccepted = false
+            };
+
+            _unitOfWork.CourseUser.Add(CourseUser);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "Enrollment request sent." });
         }
 
         public IActionResult Privacy()

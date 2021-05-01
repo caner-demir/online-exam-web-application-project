@@ -19,5 +19,23 @@ namespace OnlineExam.DataAccessToDb.Data
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Choice> Choices { get; set; }
+        public DbSet<CourseUser> CourseUsers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<CourseUser>()
+                .HasKey(cu => new { cu.CourseId, cu.UserId });
+            builder.Entity<CourseUser>()
+                .HasOne(cu => cu.Course)
+                .WithMany(cu => cu.Users)
+                .HasForeignKey(cu => cu.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<CourseUser>()
+                .HasOne(cu => cu.User)
+                .WithMany(cu => cu.Courses)
+                .HasForeignKey(cu => cu.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            base.OnModelCreating(builder);
+        }
     }
 }

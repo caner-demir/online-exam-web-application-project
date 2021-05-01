@@ -44,7 +44,7 @@
                                             <div class="dropdown-divider"></div>
                                             foreach (var course in allCourses)
                                             {
-                                                <a class="dropdown-item" asp-area="Teacher" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
+                                                <a class="dropdown-item" asp-area="Student" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
                                             }
                                         }
                                     }

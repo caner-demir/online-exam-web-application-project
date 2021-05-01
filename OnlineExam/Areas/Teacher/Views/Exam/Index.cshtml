@@ -11,8 +11,8 @@
     </div>
     <div class="col-6 text-right">
         @*<a class="btn btn-primary text-white" asp-action="Upsert" asp-route-courseId="@Model.Id">
-            <i class="fas fa-plus"></i> &nbsp; Create New Exam
-        </a>*@
+                <i class="fas fa-plus"></i> &nbsp; Create New Exam
+            </a>*@
         <button onclick="openModal('/Teacher/Exam/Upsert?courseId=@Model.Id', 'Create Exam')"
                 class="btn btn-primary text-white">
             <i class="fas fa-plus"></i> &nbsp; Create New Exam
@@ -22,7 +22,19 @@
 
 <br />
 <div>
-    <table id="tblData" class="table table-hover" style="width:100%">
+    <table id="table-exam" class="table table-hover" style="width:100%">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<br />
+<div>
+    <table id="table-waiting" class="table table-hover" style="width:100%">
         <thead class="thead-dark">
             <tr>
                 <th>Name</th>

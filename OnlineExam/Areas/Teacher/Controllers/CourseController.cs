@@ -103,6 +103,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             }
 
             _unitOfWork.Course.Remove(objFromDb);
+
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete successful." });
         }
