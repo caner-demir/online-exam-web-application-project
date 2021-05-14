@@ -17,6 +17,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="TinyMCE" Version="5.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="wwwroot\images\courses\" />
     <Folder Include="wwwroot\images\questions\" />
   </ItemGroup>
 

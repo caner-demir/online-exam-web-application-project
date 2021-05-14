@@ -16,6 +16,32 @@ namespace OnlineExam.Models
         public string Name { get; set; }
 
         [Required]
+        public string Details { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
+        [Required]
+        [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
+        public DateTime StartDate { get; set; }
+
+        [Required]
+        [DataType(DataType.Time)]
+        public TimeSpan Duration { get; set; }
+
+        [DataType(DataType.Time)]
+        [NotMapped]
+        [Display(Name = "Start Time")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        public TimeSpan StartTime { get; set; }
+
+        [DataType(DataType.Time)]
+        [NotMapped]
+        [Display(Name = "End Time")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        public TimeSpan EndTime { get; set; }
+
+        [Required]
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]

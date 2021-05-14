@@ -59,6 +59,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             return Json(new { data = AllExams });
         }
 
+        [NoDirectAccess]
         public IActionResult Upsert(int? id, int? courseId)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -86,6 +87,10 @@ namespace OnlineExam.Areas.Teacher.Controllers
             if (id == null)
             {                
                 exam.CourseId = (int)courseId;
+                var dateTime = DateTime.Now;
+                exam.StartDate = dateTime.Date;
+                exam.StartTime = new TimeSpan(dateTime.TimeOfDay.Hours + 1, 0, 0);
+                exam.EndTime = new TimeSpan(dateTime.TimeOfDay.Hours + 1, 0, 0);
                 return PartialView("_UpsertModal", exam);
             }
             else
@@ -103,6 +108,8 @@ namespace OnlineExam.Areas.Teacher.Controllers
                     return NotFound();
                 }
             }
+            exam.StartTime = exam.StartDate.TimeOfDay;
+            exam.EndTime = exam.StartTime.Add(exam.Duration);
 
             return PartialView("_UpsertModal", exam);
         }
@@ -111,10 +118,17 @@ namespace OnlineExam.Areas.Teacher.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Exam exam)
         {
-            if (ModelState.IsValid)
+            //Check if exam start date & time is greater than today's date & time.
+            int dateCompare = DateTime.Compare(exam.StartDate.Add(exam.StartTime), DateTime.Now);
+            //Check if exam end time is greater than exam start time.
+            int timeCompare = TimeSpan.Compare(exam.EndTime, exam.StartTime);
+            if (ModelState.IsValid && dateCompare > 0 && timeCompare > 0)
             {
+                exam.StartDate = exam.StartDate.Add(exam.StartTime);
+                exam.Duration = exam.EndTime.Subtract(exam.StartTime);
                 if (exam.Id == 0)
                 {
+                    exam.DateCreated = DateTime.Now;
                     _unitOfWork.Exam.Add(exam);
                 }
                 else

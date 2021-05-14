@@ -1,0 +1,88 @@
+﻿@model OnlineExam.Models.ViewModels.ExamsVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-student-exam">
+    <div class="container">
+        <div class="row pt-4" style="background-color:#f6f6f6">
+            <div class="col-9">
+                <div class="mb-4 p-0 shadow-sm">
+                    <div class="card bg-danger rounded-0">
+                        <div class="card-header rounded-0 text-light">
+                            <span style="font-size:larger">
+                                <i class="fas fa-info-circle text-light"></i>&nbsp; About this course
+                            </span>
+                        </div>
+                        <div class="card-body bg-light">
+                            <h2 class="text-secondary">@Model.Course.Name</h2>
+                            @Html.Raw(Model.Course.DescriptionDetailed)
+                            <div class="text-secondary">
+                                <div class="mb-2" style="font-size:medium"><i class="fas fa-user"></i>&nbsp; Created by @Model.Course.ApplicationUser.Name</div>
+                                <div style="font-size:medium"><i class="fas fa-users"></i>&nbsp; @Model.CourseUsers.Count() Students</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var exam in Model.Exams)
+                {
+                    <div class="mb-5">
+                        <div class="col-12 mb-3 bd-callout bd-callout-danger bg-primary shadow-sm">
+                            <span class="text-light" style="font-size:larger">
+                                <i class="fas fa-user-edit text-light"></i>&nbsp; @exam.DateCreated.ToString("dd MMMM yyyy HH:mm")
+                            </span>
+                        </div>
+                        <div class="card shadow-sm rounded-0" style="background-color:#828b93">
+                            <div class="card-header p-2">
+                                <h3 class="text-center text-light">@exam.Name</h3>
+                            </div>
+                            <div class="card-body bg-light" style="">
+                                <p class="card-text">@Html.Raw(exam.Details)</p>
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-primary text-center">Go somewhere</a>
+                                </div>
+                            </div>
+                            @*<div class="card-footer text-center text-light">
+                                2 days ago
+                            </div>*@
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-3">
+                <div class="card bg-danger rounded-0 shadow-sm mb-4" style="background-color:none">
+                    <div class="card-header border-bottom">
+                        <h3 class="font-weight-normal text-center text-light"><i class="fas fa-sitemap"></i>&nbsp; Navigation</h3>
+                    </div>
+                    <div class="card-body bg-light p-3 pl-4" style="min-height:600px">
+                        @{
+                            foreach (var course in Model.CoursesNavigation)
+                            {
+                                <div class="mb-1">
+                                    <a class="text-dark font-weight-bold" asp-area="Student" asp-controller="Exam" asp-action="Index"
+                                       asp-route-id="@course.Id"><i class="fas fa-chalkboard-teacher text-secondary"></i>&nbsp; @course.Name</a>
+                                </div>
+                                var exams = Model.ExamsNavigation.Where(e => e.CourseId == course.Id);
+                                foreach (var exam in exams)
+                                {
+                                    <div class="pl-4 mb-1">
+                                        <a class="text-dark" asp-area="Student" asp-controller="Exam" asp-action="Index"
+                                           asp-route-id="@exam.Id"><i class="fas fa-chevron-right text-secondary"></i>&nbsp; @exam.Name</a>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        document.getElementById("container-main").className = "container-fluid p-0";
+    </script>
+}
+

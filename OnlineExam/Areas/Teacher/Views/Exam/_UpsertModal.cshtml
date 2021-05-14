@@ -1,46 +1,76 @@
 ﻿@model OnlineExam.Models.Exam
 
 <form asp-action="Upsert" enctype="multipart/form-data" onsubmit="return postModal(this);" id="main-form">
-    <div class="row pt-3">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="CourseId" />
-        <div class="col-12">
-            <div class="form-group row">
-                <div class="col-3">
-                    <label asp-for="Name"></label>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="CourseId" />
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text border-secondary"><i class="fas fa-pen"></i></div>
+                    </div>
+                    <input asp-for="Name" class="form-control border-secondary" />
                 </div>
-                <div class="col-9">
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-12">
-                    @if (Model.Id != 0)
-                    {
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary form-control">Update</button>
-                            </div>
-                            <div class="col">
-                                <a onclick="closeModal()" class="btn btn-success text-white form-control" style="cursor:pointer">Back to List</a>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary form-control">Create</button>
-                            </div>
-                            <div class="col">
-                                <a onclick="closeModal()" class="btn btn-success text-white form-control" style="cursor:pointer">Back to List</a>
-                            </div>
-                        </div>
-                    }
-                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="StartDate"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text border-secondary"><i class="fas fa-calendar-alt"></i></div>
+                    </div>
+                    <input asp-for="StartDate" id="start-date" class="form-control border-secondary" />
+                </div>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="StartTime"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text border-secondary"><i class="fas fa-hourglass-start"></i></div>
+                    </div>
+                    <input asp-for="StartTime" id="start-time" class="form-control border-secondary" />
+                </div>
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="EndTime"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text border-secondary"><i class="fas fa-hourglass-end"></i></div>
+                    </div>
+                    <input asp-for="EndTime" id="end-time" class="form-control border-secondary" />
+                </div>
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-12 p-0">
+            <label asp-for="Details"></label>
+            <textarea asp-for="Details" class="form-control border-secondary" rows="6"></textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row modal-footer">
+        @if (Model.Id != 0)
+        {
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a onclick="closeModal()" class="btn btn-success text-white" style="cursor:pointer">Back to List</a>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a onclick="closeModal()" class="btn btn-success text-white" style="cursor:pointer">Back to List</a>
+        }
     </div>
 </form>
 

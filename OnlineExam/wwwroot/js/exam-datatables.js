@@ -8,6 +8,7 @@ $(document).ready(function () {
 
 function loadTableExams() {
     dataTable = $("#table-exam").DataTable({
+        "order": [[4, "asc"]],
         "ajax": {
             "url": "/Teacher/Exam/GetAll"
         },
@@ -21,7 +22,28 @@ function loadTableExams() {
                     return `
                             <a href="/Teacher/Question/Index/${data.id}" class="text-dark">${data.name}</a>
                             `
-                }, "width": "60%"
+                }, "width": "20%"
+            },
+            {
+                "data": "dateCreated",
+                "render": function (data) {
+                    return moment(data).format('MMMM DD YYYY, HH:mm')
+                },
+                "width": "20%"
+            },
+            {
+                "data": "startDate",
+                "render": function (data) {
+                    return moment(data).format('MMMM DD YYYY, HH:mm')
+                },
+                "width": "20%"
+            },
+            {
+                "data": "duration",
+                "render": function (data) {
+                    return data.hours + " Hours, " + data.minutes + " Minutes"
+                },
+                "width": "20%"
             },
             {
                 "data": {
@@ -40,7 +62,7 @@ function loadTableExams() {
                                 </a>
                             </div>
                             `
-                }, "width": "40%"
+                }, "width": "20%"
             }
         ]
     })
@@ -88,10 +110,10 @@ function loadTableWaiting() {
                     return `
                             <div class="text-center">
                                 <a onclick=acceptWaiting('${data.userName}') class="btn btn-success text-white" style="cursor:pointer">
-                                    <i class="fas fa-check-square"></i> Confirm
+                                    <i class="fas fa-check-square"></i>&nbsp; Confirm
                                 </a>
                                 <a onclick=deleteWaiting('${data.userName}') class="btn btn-danger text-white" style="cursor:pointer">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i>&nbsp; Delete
                                 </a>
                             </div>
                             `

@@ -4,58 +4,93 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-<div class="row">
-    <div class="col-6">
-        <h2 class="text-primary">@Model.Name</h2>
-    </div>
-    <div class="col-6 text-right">
-        @*<a class="btn btn-primary text-white" asp-action="Upsert" asp-route-courseId="@Model.Id">
-                <i class="fas fa-plus"></i> &nbsp; Create New Exam
-            </a>*@
-        <button onclick="openModal('/Teacher/Exam/Upsert?courseId=@Model.Id', 'Create Exam')"
-                class="btn btn-primary text-white">
-            <i class="fas fa-plus"></i> &nbsp; Create New Exam
-        </button>
-    </div>
-</div>
-
-<br />
-<div>
-    <table id="table-exam" class="table table-hover" style="width:100%">
-        <thead class="thead-dark">
-            <tr>
-                <th>Name</th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
-</div>
-
-<br />
-<div>
-    <table id="table-waiting" class="table table-hover" style="width:100%">
-        <thead class="thead-dark">
-            <tr>
-                <th>Name</th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
-</div>
-
-<!-- Modal -->
-<div class="modal" tabindex="-1" role="dialog" id="form-modal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="container-main-counter">
+    <div class="container">
+        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:300px">
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-users" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Users</h4>
+                </div>
             </div>
-            <div class="modal-body">
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-shapes" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Courses</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-clipboard-list" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Exams</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-check" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Questions</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="background-color:#fafafa">
+    <div class="container">
+        <div class="row pt-3 pb-5" style="background-color:#f6f6f6">
+            <div class="col-12">
+                <div class="row pt-4">
+                    <div class="col-6">
+                        <h2 class="font-weight-bold text-secondary"><i class="fas fa-book-reader text-danger"></i>&nbsp; @Model.Name</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button onclick="openModal('/Teacher/Exam/Upsert?courseId=@Model.Id', 'Create Exam')"
+                                class="btn btn-primary text-white">
+                            <i class="fas fa-plus"></i> &nbsp; Create New Exam
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <table id="table-exam" class="table table-bordered table-striped rounded" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Date Created</th>
+                            <th>Start Date</th>
+                            <th>Duration</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <br />
+                <table id="table-waiting" class="table table-bordered table-striped" style="width:100%">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
 
+            <!-- Modal -->
+            <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light">
+                            <h5 class="modal-title"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -63,5 +98,8 @@
 
 @section Scripts{
     <script src="~/js/exam-datatables.js"></script>
-    <script src="~/js/modal-form-exam.js"></script>
+    <script src="~/js/exam-modal-form.js"></script>
+    <script>
+        document.getElementById("container-main").className = "container-fluid p-0";
+    </script>
 }

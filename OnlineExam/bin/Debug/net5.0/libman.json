@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery-datetimepicker@2.5.20",
+      "destination": "wwwroot/lib/jquery-datetimepicker/"
+    },
+    {
+      "library": "dayjs@1.10.4",
+      "destination": "wwwroot/lib/dayjs/"
+    },
+    {
+      "library": "datatables.net@1.10.24",
+      "destination": "wwwroot/lib/datatables.net/"
+    },
+    {
+      "library": "moment.js@2.29.1",
+      "destination": "wwwroot/lib/moment.js/"
+    }
+  ]
+}

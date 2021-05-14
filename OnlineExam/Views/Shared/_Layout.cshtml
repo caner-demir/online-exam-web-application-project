@@ -10,13 +10,14 @@
     <title>@ViewData["Title"] - ExamHub</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/callout.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -34,7 +35,7 @@
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Courses Taken
                                 </a>
-                                <div class="dropdown-menu" style="margin-top:10px" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu rounded-0" style="margin-top:10px" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark" asp-area="Student" asp-controller="Course" asp-action="Index">All Courses</a>
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_CoursesTaken) != null)
                                     {
@@ -57,7 +58,7 @@
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Course Management
                                 </a>
-                                <div class="dropdown-menu" style="margin-top:10px" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu rounded-0" style="margin-top:10px" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_MyCourses) != null)
                                     {
@@ -80,13 +81,13 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container p-3" id="container-main">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-white">
         <div class="container">
             &copy; 2021 - ExamHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -95,12 +96,15 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/dayjs/dayjs.min.js"></script>
+    <script src="~/lib/moment.js/moment.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/dropdown.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.24/dataRender/datetime.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/teqsjce1ese20batl17a9jmgqs2f9zefn1xjf9h1cauhe2v5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

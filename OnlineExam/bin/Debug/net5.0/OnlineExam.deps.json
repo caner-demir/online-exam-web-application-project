@@ -9,7 +9,15 @@
       "DEBUG",
       "NET",
       "NET5_0",
-      "NETCOREAPP"
+      "NETCOREAPP",
+      "NET5_0_OR_GREATER",
+      "NETCOREAPP1_0_OR_GREATER",
+      "NETCOREAPP1_1_OR_GREATER",
+      "NETCOREAPP2_0_OR_GREATER",
+      "NETCOREAPP2_1_OR_GREATER",
+      "NETCOREAPP2_2_OR_GREATER",
+      "NETCOREAPP3_0_OR_GREATER",
+      "NETCOREAPP3_1_OR_GREATER"
     ],
     "languageVersion": "9.0",
     "platform": "",
@@ -35,6 +43,7 @@
           "OnlineExam.DataAccessToDb": "1.0.0",
           "OnlineExam.Models": "1.0.0",
           "OnlineExam.Utilities": "1.0.0",
+          "TinyMCE": "5.8.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -1984,6 +1993,7 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
+      "TinyMCE/5.8.0": {},
       "OnlineExam.DataAccessToDb/1.0.0": {
         "dependencies": {
           "Dapper": "2.0.78",
@@ -4645,6 +4655,13 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "TinyMCE/5.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/DkTvexBX13iW3Ruaw/wB0WVyFNEe/Q2sNibaGX/xHmuUS+/uP9ofpni9PvaQeQ2cQsTOtWRpZme/0fCzE89sg==",
+      "path": "tinymce/5.8.0",
+      "hashPath": "tinymce.5.8.0.nupkg.sha512"
     },
     "OnlineExam.DataAccessToDb/1.0.0": {
       "type": "project",

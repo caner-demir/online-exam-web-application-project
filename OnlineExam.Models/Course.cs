@@ -18,6 +18,19 @@ namespace OnlineExam.Models
         [Required]
         public string ApplicationUserId { get; set; }
 
+        [Required]
+        [MaxLength(200)]
+        [Display(Name = "Short Description")]
+        public string DescriptionShort { get; set; }
+
+        [Required]
+        [Display(Name = "Detailed Description")]
+        public string DescriptionDetailed { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
 

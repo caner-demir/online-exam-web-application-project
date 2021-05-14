@@ -31,14 +31,24 @@ namespace OnlineExam.Areas.Student.Controllers
         public IActionResult Index()
         {
             IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser");
+            IEnumerable<CourseUser> courseUsers = _unitOfWork.CourseUser.GetAll(cu => cu.IsAccepted == true);
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
+            CoursesVM coursesVM = new CoursesVM()
+            {
+                CourseUsers = courseUsers
+            };
             if (claim != null)
             {
                 var userCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
-                HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(userCourses));
+
+                HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(userCourses, new JsonSerializerSettings
+                                                                            {
+                                                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                                                            })
+                                                                        );
 
                 var coursesTaken = _unitOfWork.CourseUser
                                         .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true),
@@ -47,6 +57,7 @@ namespace OnlineExam.Areas.Student.Controllers
                                         .ToList();
                 HttpContext.Session.SetString(SD.Session_CoursesTaken, JsonConvert.SerializeObject(coursesTaken));
 
+                //For finding the courses the user has not enrolled, fetch the courses user is taking.
                 var coursesEnrolled = _unitOfWork.CourseUser.GetAll(cu => cu.UserId == claim.Value)
                                         .Select(cu => cu.CourseId)
                                         .ToList();
@@ -55,10 +66,12 @@ namespace OnlineExam.Areas.Student.Controllers
                                             .Where(cl => !coursesEnrolled.Any(ce => cl.Id == ce))
                                             .ToList();
 
-                return View(coursesAvailable);
+                coursesVM.Courses = coursesAvailable;
+                return View(coursesVM);
             }
 
-            return View(courseList);
+            coursesVM.Courses = courseList;
+            return View(coursesVM);
         }
 
         //[Authorize(Roles = SD.Role_Student + "," + SD.Role_Teacher)]

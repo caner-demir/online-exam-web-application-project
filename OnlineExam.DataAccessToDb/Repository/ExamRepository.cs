@@ -20,7 +20,15 @@ namespace OnlineExam.DataAccessToDb.Repository
 
         public void Update(Exam exam)
         {
-            _db.Update(exam);
+            var ObjFromDb = _db.Exams.FirstOrDefault(e => e.Id == exam.Id);
+
+            if (ObjFromDb != null)
+            {
+                ObjFromDb.Name = exam.Name;
+                ObjFromDb.StartDate = exam.StartDate;
+                ObjFromDb.Duration = exam.Duration;
+                ObjFromDb.Details = exam.Details;
+            }
         }
     }
 }

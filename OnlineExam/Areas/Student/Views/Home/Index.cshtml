@@ -1,49 +1,84 @@
 ﻿@using OnlineExam.Utilities
-@model IEnumerable<OnlineExam.Models.Course>
-@*@section Styles{
-        <link rel="Stylesheet" href="@Href("~/css/home-index.css")" />
-    }*@
+@model OnlineExam.Models.ViewModels.CoursesVM
 
-<div class="card bg-light rounded-0" style="padding:25px; padding-top:5px;">
-    <div class="row backgroundWhite">
-        @foreach (var course in Model)
-        {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                <div class="row" style="padding:5px">
-                    <div class="card card-item" style="border:0px">
-                        <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px">
-                            <img src="https://via.placeholder.com/250" class="card-img-top rounded-0" style="height:260px" />
-                            <div class="pl-1">
-                                <p class="card-title" style="height:42px; font-size:17px"><b style="color:#2c3e50">@course.Name</b></p>
-                                <p class="card-title text-primary" style="height:18px; line-height: 90%; font-size: 15px ">
-                                    by <b>
-                                        @course.ApplicationUser.Name
-                                    </b>
+<div class="container-main-counter">
+    <div class="container">
+        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:400px">
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-users" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Users</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-shapes" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Courses</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-clipboard-list" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Exams</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-check" style="font-size:50px"></i></p>
+                    <h2>11+</h2>
+                    <h4>Questions</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-main-courses p-0">
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            @foreach (var course in Model.Courses)
+            {
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow border border-success">
+                        <img src="@course.ImageUrl" class="card-img-top shadow-sm" style="width:100%; height:225px" />
+                        <div class="card-body text-dark">
+                            <h5 class="font-weight-bolder text-secondary">@course.Name</h5>
+                            <div class="d-flex justify-content-between text-black-50">
+                                <p style="font-size:small"><i class="fas fa-user"></i>&nbsp; By @course.ApplicationUser.Name</p>
+                                <p style="font-size:small">
+                                    <i class="fas fa-users"></i>&nbsp;
+                                    @Model.CourseUsers.Where(cu => cu.CourseId == course.Id).Count() Students
                                 </p>
                             </div>
-                            <div>
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a onclick="sendRequest(this, @course.Id)" class="btn btn-info text-white form-control" style="cursor: pointer">
-                                        Enroll
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a onclick="redirectToLogin()" class="btn btn-info text-white form-control" style="cursor: pointer">
-                                        Enroll
-                                    </a>
-                                }
-
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-danger text-light">View</button>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-success text-light" onclick="sendRequest(this, @course.Id)">Enroll</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-sm btn-success text-light" onclick="redirectToLogin()">Enroll</button>
+                                    }
+                                </div>
+                                <small class="font-weight-bold text-black-50">@course.DateCreated.ToString("MM dd yyyy")</small>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
 
+
 @section Scripts{
-    <script src="~/js/home-index.js"></script>
+    <script src="~/js/student-home-index.js"></script>
+    <script>
+        document.getElementById("container-main").className = "container-fluid p-0";
+    </script>
 }
