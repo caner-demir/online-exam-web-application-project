@@ -7,77 +7,134 @@
 <div class="container-main-counter">
     <div class="container">
         <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:300px">
+            <h1 class="col-12 text-center text-white pb-3">@Model.Name</h1>
             <div class="col-3">
-                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fa fa-users" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
-                    <h4>Users</h4>
+                    <h2 id="student-counter"></h2>
+                    <h4>Students</h4>
                 </div>
             </div>
             <div class="col-3">
-                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-shapes" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
-                    <h4>Courses</h4>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fas fa-clipboard-list" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
+                    <h2 id="exam-counter"></h2>
                     <h4>Exams</h4>
                 </div>
             </div>
             <div class="col-3">
-                <div class="col-12 border border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fa fa-check" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-question-circle" style="font-size:50px"></i></p>
+                    <h2 id="question-counter"></h2>
                     <h4>Questions</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-user-edit" style="font-size:50px"></i></p>
+                    <h2 id="request-counter"></h2>
+                    <h4>Requests</h4>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div style="background-color:#fafafa">
+<div class="container-teacher">
     <div class="container">
-        <div class="row pt-3 pb-5" style="background-color:#f6f6f6">
+        <div class="row pt-4 pb-5" style="background-color:rgb(255,255,255,0.01)">
+            <div class="col-12 p-0 pt-3 rounded-top bg-light">
+                <ul class="nav nav-tabs border-bottom">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#exam-tab">Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#student-tab">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#request-tab">Enrollment Requests</a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-12">
-                <div class="row pt-4">
-                    <div class="col-6">
-                        <h2 class="font-weight-bold text-secondary"><i class="fas fa-book-reader text-danger"></i>&nbsp; @Model.Name</h2>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="exam-tab" role="tabpanel" aria-labelledby="exam-tab">
+                        <div class="row pt-3 pb-2 rounded-bottom bg-light">
+                            <div class="col-6">
+                                <h2 class="font-weight-normal text-secondary"><i class="fas fa-clipboard-list text-danger"></i>&nbsp; Exams</h2>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button onclick="openModal('/Teacher/Exam/Upsert?courseId=@Model.Id', 'Create Exam')"
+                                        class="btn btn-primary text-white">
+                                    <i class="fas fa-plus"></i> &nbsp; Create New Exam
+                                </button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
+                            <div class="col-12">
+                                <table id="table-exam" class="table table-hover shadow-sm w-100">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Date Created</th>
+                                            <th>Start Date</th>
+                                            <th>Duration</th>
+                                            <th class="text-center">Edit</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6 text-right">
-                        <button onclick="openModal('/Teacher/Exam/Upsert?courseId=@Model.Id', 'Create Exam')"
-                                class="btn btn-primary text-white">
-                            <i class="fas fa-plus"></i> &nbsp; Create New Exam
-                        </button>
+                    <div class="tab-pane fade" id="student-tab" role="tabpanel" aria-labelledby="student-tab">
+                        <div class="row pt-3 pb-2 rounded-bottom bg-light">
+                            <div class="col-12">
+                                <h2 class="font-weight-normal text-secondary"><i class="fas fa-user-friends text-danger"></i>&nbsp; Students</h2>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
+                            <div class="col-12">
+                                <table id="table-students" class="table table-hover shadow-sm w-100">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Enrollment Date</th>
+                                            <th class="text-center">Edit</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="request-tab" role="tabpanel" aria-labelledby="request-tab">
+                        <div class="row pt-3 pb-2 rounded-bottom bg-light">
+                            <div class="col-12">
+                                <h2 class="font-weight-normal text-secondary"><i class="fas fa-user-edit text-danger"></i>&nbsp; Requests</h2>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
+                            <div class="col-12">
+                                <table id="table-requests" class="table table-hover shadow-sm w-100">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Request Date</th>
+                                            <th class="text-center">Edit</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br />
-                <table id="table-exam" class="table table-bordered table-striped rounded" style="width:100%">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Name</th>
-                            <th>Date Created</th>
-                            <th>Start Date</th>
-                            <th>Duration</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
-                <br />
-                <table id="table-waiting" class="table table-bordered table-striped" style="width:100%">
-                    <thead class="thead-dark text-center">
-                        <tr>
-                            <th>Name</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
             </div>
 
             <!-- Modal -->
-            <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+            <div class="modal fade" tabindex="-1" role="dialog" id="form-modal">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-light">

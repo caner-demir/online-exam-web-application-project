@@ -8,7 +8,12 @@
             if (data.success) {
                 toastr.success(data.message)
                 $(button).prop("onclick", null).off("click")
-                $(button).html("Request Sent")
+                $(button).animate({
+                    width: '120px'
+                }, 'fast')
+                $(button).fadeOut(600, function () {
+                    $(this).text('Request Sent').fadeIn(600)
+                })
             }
             else {
                 toastr.error(data.message)
@@ -20,7 +25,7 @@
 function redirectToLogin() {
     swal({
         title: "Warning",
-        text: "You must be logged in to enroll in a course.",
+        text: "You must be logged in to enroll in a course",
         icon: "warning",
         timer: 5000
     }).then(() => {

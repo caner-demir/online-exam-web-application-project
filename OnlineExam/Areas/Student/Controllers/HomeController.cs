@@ -31,14 +31,14 @@ namespace OnlineExam.Areas.Student.Controllers
         public IActionResult Index()
         {
             IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser");
-            IEnumerable<CourseUser> courseUsers = _unitOfWork.CourseUser.GetAll(cu => cu.IsAccepted == true);
+            var countUsers = _unitOfWork.CourseUser.GetAll(cu => cu.IsAccepted == true).Select(cu => cu.CourseId );
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             CoursesVM coursesVM = new CoursesVM()
             {
-                CourseUsers = courseUsers
+                CountUsers = countUsers
             };
             if (claim != null)
             {
@@ -57,7 +57,7 @@ namespace OnlineExam.Areas.Student.Controllers
                                         .ToList();
                 HttpContext.Session.SetString(SD.Session_CoursesTaken, JsonConvert.SerializeObject(coursesTaken));
 
-                //For finding the courses the user has not enrolled, fetch the courses user is taking.
+                //For finding the courses the user has not enrolled yet, fetch the courses user is taking.
                 var coursesEnrolled = _unitOfWork.CourseUser.GetAll(cu => cu.UserId == claim.Value)
                                         .Select(cu => cu.CourseId)
                                         .ToList();
@@ -74,7 +74,6 @@ namespace OnlineExam.Areas.Student.Controllers
             return View(coursesVM);
         }
 
-        //[Authorize(Roles = SD.Role_Student + "," + SD.Role_Teacher)]
         [Authorize]
         [HttpPost]
         public IActionResult SendRequest([FromBody]int Id)
@@ -86,7 +85,8 @@ namespace OnlineExam.Areas.Student.Controllers
             {
                 CourseId = Id,
                 UserId = claim.Value,
-                IsAccepted = false
+                IsAccepted = false,
+                DateCreated = DateTime.Now
             };
 
             _unitOfWork.CourseUser.Add(CourseUser);

@@ -489,11 +489,10 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Id
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\_ViewImports.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\_ViewStart.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\Index.cshtml.g.cs
-C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\Upsert.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Exam\Index.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Question\Index.cshtml.g.cs
-C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Question\Upsert.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Question\_UpsertModal.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Exam\_UpsertModal.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Student\Views\Exam\Index.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\libman.json
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\_UpsertModal.cshtml.g.cs

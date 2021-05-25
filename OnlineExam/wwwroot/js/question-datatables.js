@@ -6,21 +6,38 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $("#tblData").DataTable({
+        "autoWidth": false,
+        "order": [[1, "asc"]],
+        "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "className": "table-active font-weight-bold table-buttons",
+                "targets": 0,
+            },
+            { className: "table-buttons", "targets": [2] },
+            { className: "table-active table-buttons", "targets": [3] }
+        ],
         "ajax": {
             "url": "/Teacher/Question/GetAll"
         },
         "columns": [
+            {"data": "id", "width": "10%" },
             {
-                "data": {
-                    "id": "id",
-                    "name": "name"
-                },
+                "data": "imageUrl",
                 "render": function (data) {
                     return `
-                            <a onclick="openModal('/Teacher/Question/Upsert/${data.id}?examId=${data.examId}', 'Edit Question')"
-                                    class="text-dark" style="cursor:pointer">${data.name}</a>
+                            <div class="rounded d-flex align-items-center overflow-hidden" style="max-height:100px;">
+                                <img src="${data}" class="w-100" >
+                            </div>
                             `
-                }, "width": "60%"
+                }, "width": "35%"
+            },
+            {
+                "data": "dateCreated",
+                "render": function (data) {
+                    return moment(data).format('MMMM DD YYYY, HH:mm')
+                },
+                "width": "25%"
             },
             {
                 "data": {
@@ -31,18 +48,25 @@ function loadDataTable() {
                     return `
                             <div class="text-center">
                                 <a onclick="openModal('/Teacher/Question/Upsert/${data.id}?examId=${data.examId}', 'Edit Question')" 
-                                        class="btn btn-success text-white" style="cursor:pointer">
-                                    <i class="fas fa-edit"></i>
+                                        class="btn btn-success text-white" style="cursor:pointer; width:94px">
+                                    <i class="fas fa-edit"></i>&nbsp; Edit
                                 </a>
                                 <a onclick=Delete("/Teacher/Question/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i class="fas fa-trash-alt"></i>&nbsp; Delete
                                 </a>
                             </div>
                             `
-                }, "width": "40%"
+                }, "width": "30%"
             }
         ]
     })
+
+    //Give index numbers to rows.
+    dataTable.on('order.dt search.dt', function () {
+        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = `<span style="font-size: 120%">${i + 1}</span>`;
+        });
+    }).draw();
 }
 
 function Delete(url) {

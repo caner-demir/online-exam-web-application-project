@@ -44,16 +44,16 @@ namespace OnlineExam.Areas.Student.Controllers
             //Return the exams belong to this course.
             var exams = _unitOfWork.Exam.GetAll(e => e.CourseId == id);
 
-            //Fetch enrolled courses and related exams for navigation map.
-            var allCoursesEnrolled = _unitOfWork.CourseUser
-                                        .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true));
+            //Fetch enrolled courses and related exams for the navigation map.
+            var IdsOfCoursesEnrolled = _unitOfWork.CourseUser
+                                        .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true)).Select(cu => cu.CourseId);
             var coursesNavigation = _unitOfWork.Course.GetAll()
-                                        .Where(c => allCoursesEnrolled.Any(ce => c.Id == ce.CourseId)).ToList();
+                                        .Where(c => IdsOfCoursesEnrolled.Any(ce => ce == c.Id));
             var examsNavigation = _unitOfWork.Exam.GetAll()
-                                        .Where(e => allCoursesEnrolled.Any(ce => e.CourseId == ce.CourseId)).ToList();
+                                        .Where(e => IdsOfCoursesEnrolled.Any(ce => ce == e.CourseId));
 
-            //Fetch all students enrolled in this course.
-            var allEnrolled = _unitOfWork.CourseUser.GetAll(cu => (cu.CourseId == id) && (cu.IsAccepted == true));
+            //Fetch ids of all students enrolled in this course.
+            var countCourseUsers = _unitOfWork.CourseUser.GetAll(cu => (cu.CourseId == id) && (cu.IsAccepted == true)).Count();
 
             ExamsVM examsVM = new ExamsVM()
             {
@@ -61,7 +61,7 @@ namespace OnlineExam.Areas.Student.Controllers
                 Course = course,
                 CoursesNavigation = coursesNavigation,
                 ExamsNavigation = examsNavigation,
-                CourseUsers = allEnrolled
+                CountCourseUsers = countCourseUsers
             };
 
             return View(examsVM);

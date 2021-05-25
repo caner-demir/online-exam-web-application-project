@@ -19,12 +19,12 @@ namespace OnlineExam.Models
         public string ApplicationUserId { get; set; }
 
         [Required]
-        [MaxLength(200)]
-        [Display(Name = "Short Description")]
+        [MaxLength(120)]
+        [Display(Name = "Description for Homepage")]
         public string DescriptionShort { get; set; }
 
         [Required]
-        [Display(Name = "Detailed Description")]
+        [Display(Name = "Description for Course Page")]
         public string DescriptionDetailed { get; set; }
 
         public string ImageUrl { get; set; }

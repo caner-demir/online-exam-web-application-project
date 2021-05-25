@@ -54,34 +54,217 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    /* Scrolling behavior for page scrolling */
+    scroll-behavior: smooth;
 }
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 80px;
+    font-family: Helvetica;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 80px; /* Vertically center the text there */
 }
 
-.container-main-courses{
-    background:url(../images/background/education.png)
+/* ------------------------ Background images for different containers -------------------------- */
+.container-main-intro {
+    background: #f1f1f1 url(../images/background/cloud_background.jpg);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-size: cover;
 }
-.container-main-counter{
-    background:url(../images/background/counter.jpg);
-    background-position: top
+.container-main-counter {
+    background: url(../images/background/counter.jpg);
+    background-position: top;
+}
+.container-main-courses {
+    background: linear-gradient( 45deg, rgba(0, 157, 224, 1) 0%, rgba(0, 172, 65, 1) 100% );
 }
 .container-student-exam {
-    background-color: #666666;
-    background-image: url(../images/background/pattern-randomized.svg)
+    background-image: url(../images/background/tortoise-shell.svg);
+}
+.container-teacher {
+    background-image:url(../images/background/rose-petals.svg);
+    background-size: cover;
+}
+.container-question {
+    height: 240px;
+    background: url(../images/background/thumbnail-question.svg);
+    background-position: center center;
 }
 
+/*Styling for sweet alert texts*/
 .swal-text {
     text-align: center;
+}
+
+/*Styling for table columns*/
+td.table-buttons {
+    height: 100px;
+    line-height: 100px;
+}
+td.table-exams {
+    height: 40px;
+    line-height: 40px;
+}
+
+
+/* ------------------------ Styling for Bootstrap classes -------------------------- */
+/*Styling for bootstrap callouts*/
+.bd-callout {
+    padding: 0.25rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e4e5e6;
+    border-left-width: .50rem;
+    border-radius: .50rem;
+}
+.bd-callout-danger {
+    border-left-color: #d9534f;
+}
+
+/*Styling for home page course details section*/
+.home-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 120px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+/*Styling for bootstrap nav tabs*/
+ul.nav.nav-tabs a:not(.active) {
+    border-left: solid 1px #dddddd;
+    border-right: solid 1px #dddddd;
+    border-top: solid 1px #dddddd;
+    color: grey;
+    transition: all 0.4s;
+}
+ul.nav.nav-tabs a:not(.active):hover {
+    background: #0366d6;
+    color: white;
+    border-color: #1265ac;
+}
+ul.nav.nav-tabs a.active {
+    border-top: 3px solid #0275d8;
+    border-left: 1px solid #0275d8;
+    border-right: 1px solid #0275d8;
+}
+
+/*Thick border for counter area*/
+div.rounded.border-thick {
+    border: 3px solid red;
+}
+
+/*Dropdown menu transition effect on hover.*/
+.dropdown .dropdown-menu {
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s, opacity 0.2s 0.2s;
+}
+.dropdown:hover .dropdown-menu {
+    max-height: 400px;
+    opacity: 1;
+    transition: max-height 0.6s 0.05s, opacity 0.4s 0.05s;
+}
+
+/*Dropdown menu styling.*/
+.dropdown-menu a {
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+.dropdown-menu a:hover {
+    background: linear-gradient(to bottom, #5bc0de, #00a4d0);
+    color: white;
+}
+
+/*Nav styling.*/
+nav {
+    height: 64px;
+}
+nav ul li {
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+nav ul li.nav-hover:hover > a {
+    color: #343a40 !important;
+    transition: .02s ease 0.02s;
+}
+nav ul li > a {
+    color: #fff !important;
+    transition: .02s ease 0.02s;
+}
+nav ul li a:hover {
+    color: #343a40 !important;
+}
+
+/*Animation for cards.*/
+.card-home {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-home .card-body {
+    height: 227px;
+    overflow: hidden;
+    transition: .3s ease 0.1s;
+}
+.card-home .card-body button {
+    opacity: 0;
+    transition: .3s ease 0.1s;
+}
+.card-home:hover .card-body button {
+    opacity: 1;
+    visibility: visible;
+}
+.card-home .card-body > p {
+    height: 120px;
+    transition: .3s ease 0.1s;
+}
+.card-home:hover .card-body > p {
+    height: 72px;
+}
+.card-home .card-body small {
+    opacity: 0;
+    transition: .3s ease 0.1s;
+}
+.card-home:hover .card-body small {
+    opacity: 1;
+}
+
+/*Animation for intro arrow.*/
+.arrow {
+    position: relative;
+    animation-name: arrow;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 2.5s;
+}
+@keyframes arrow {
+    0% {
+        opacity: 0.0;
+        top: 0px;
+    }
+    25% {
+        opacity: 0.75;
+    }
+    80% {
+        top: 32px;
+        opacity: 1.0;
+    }
+    100% {
+        top: 40px;
+        opacity: 0.0;
+    }
+
 }

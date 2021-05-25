@@ -1,0 +1,80 @@
+﻿@model OnlineExam.Models.Course
+
+<form asp-action="Upsert" enctype="multipart/form-data" onsubmit="return postModal(this);">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @if (Model.Id != 0)
+    {
+        <input type="hidden" asp-for="ImageUrl" />
+    }
+    <input type="hidden" asp-for="ApplicationUserId" />
+    <div class="row">
+        <div class="col-8">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-pen"></i></div>
+                    </div>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <label>Image</label>
+            <div class="custom-file">
+                <input type="file" name="files" id="uploadBox" accept="image/*" multiple class="custom-file-input" />
+                <label class="custom-file-label" for="uploadBox">Choose file...</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label asp-for="DescriptionShort"></label>
+        </div>
+        <div class="col-8">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-info-circle"></i></div>
+                    </div>
+                    <textarea rows="6" asp-for="DescriptionShort" class="form-control"></textarea>
+                </div>
+                <span asp-validation-for="DescriptionShort" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="rounded d-flex align-items-center overflow-hidden" style="max-height:158px;">
+                @if (Model.Id != 0)
+                {
+                    <img id="img-preview" src="@Model.ImageUrl" class="w-100" />
+                }
+                else
+                {
+                    <img id="img-preview" src="~/images/background/thumbnail.svg" class="w-100" />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="DescriptionDetailed"></label>
+        <textarea id="detailed-description" asp-for="DescriptionDetailed" class="form-control"></textarea>
+    </div>
+
+    <div class="row modal-footer">
+        @if (Model.Id != 0)
+        {
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a onclick="closeModal()" class="btn btn-success text-white" style="cursor:pointer">Back to List</a>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a onclick="closeModal()" class="btn btn-success text-white" style="cursor:pointer">Back to List</a>
+        }
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

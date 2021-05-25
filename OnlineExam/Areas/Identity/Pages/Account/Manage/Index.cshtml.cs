@@ -37,7 +37,7 @@ namespace OnlineExam.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
-            [Display(Name = "Become a teacher")]
+            [Display(Name = "I also want to be a Teacher.")]
             public bool IsInRoleTeacher { get; set; }
         }
 

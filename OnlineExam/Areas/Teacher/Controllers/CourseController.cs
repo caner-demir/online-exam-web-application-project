@@ -50,6 +50,29 @@ namespace OnlineExam.Areas.Teacher.Controllers
             return Json(new { data = AllCourses });
         }
 
+        public IActionResult GetCounter()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            //Get ids of the courses the user has.
+            var courseIds = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value).Select(cu => cu.Id);
+            
+            //Get ids of the exams the user has.
+            var examIds = _unitOfWork.Exam.GetAll(cu => courseIds.Any(ci => ci == cu.CourseId));
+
+            //Populate dictionary with values required for the counter panel.
+            IDictionary<string, int> counterValues = new Dictionary<string, int>()
+            {
+                { "studentCounter", _unitOfWork.CourseUser.GetAll().Where(cu => courseIds.Any(ci => ci == cu.CourseId) && cu.IsAccepted == true).Count() },
+                { "courseCounter", courseIds.Count() },
+                { "examCounter", examIds.Count() },
+                { "questionCounter", _unitOfWork.Question.GetAll().Where(q => examIds.Any(ei => ei.Id == q.ExamId)).Count() }
+            };
+            return Json(new { counter = counterValues });
+
+        }
+
         public IActionResult Upsert(int? id)
         {
             Course course = new Course();
@@ -60,7 +83,8 @@ namespace OnlineExam.Areas.Teacher.Controllers
             {
                 course.ApplicationUserId = claim.Value;
 
-                return View(course);
+                //return View(course);
+                return PartialView("_UpsertModal", course);
             }
 
             course = _unitOfWork.Course.Get(id.GetValueOrDefault());
@@ -74,7 +98,8 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 return NotFound();
             }
 
-            return View(course);
+            //return View(course);
+            return PartialView("_UpsertModal", course);
         }
 
         [HttpPost]
@@ -125,7 +150,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
                     _unitOfWork.Course.Update(course);
                 }
                 _unitOfWork.Save();
-                return RedirectToAction(nameof(Index));
+                return Json(new { isValid = true });
             }
             return View(course);
         }
@@ -137,6 +162,30 @@ namespace OnlineExam.Areas.Teacher.Controllers
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting." });
+            }
+
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var imagePath = Path.Combine(webRootPath, objFromDb.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+
+            //----------------- Code section for deleting images of the questions belong to this exam. -----------------
+            //Get exams belong to this course.
+            var examIds = _unitOfWork.Exam.GetAll(e => e.CourseId == objFromDb.Id).Select(e => e.Id);
+
+            //Get questions belong to this course.
+            var questionImages = _unitOfWork.Question.GetAll(q => examIds.Any(e => e == q.ExamId)).Select(q => q.ImageUrl);
+
+            //Delete images of the questions belong to this course.
+            foreach (var image in questionImages)
+            {
+                imagePath = Path.Combine(webRootPath, image.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
             }
 
             _unitOfWork.Course.Remove(objFromDb);

@@ -72,6 +72,9 @@ namespace OnlineExam.Areas.Identity.Pages.Account
 
             [Required]
             public string Name { get; set; }
+
+            [Display(Name = "I also want to be a Teacher.")]
+            public bool IsInRoleTeacher { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -98,20 +101,14 @@ namespace OnlineExam.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (!await _roleManager.RoleExistsAsync(SD.Role_Admin))
+                    if (Input.IsInRoleTeacher == true)
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
+                        await _userManager.AddToRoleAsync(user, SD.Role_Teacher);
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.Role_Teacher))
+                    else
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Teacher));
+                        await _userManager.AddToRoleAsync(user, SD.Role_Student);
                     }
-                    if (!await _roleManager.RoleExistsAsync(SD.Role_Student))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Student));
-                    }
-
-                    await _userManager.AddToRoleAsync(user, SD.Role_Student);
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

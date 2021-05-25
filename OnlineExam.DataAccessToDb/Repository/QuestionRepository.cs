@@ -30,7 +30,6 @@ namespace OnlineExam.DataAccessToDb.Repository
                     ObjFromDb.ImageUrl = question.ImageUrl;
                 }
 
-                ObjFromDb.Name = question.Name;
                 ObjFromDb.CorrectChoice = question.CorrectChoice;
             }
         }

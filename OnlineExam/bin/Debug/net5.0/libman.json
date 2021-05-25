@@ -17,6 +17,10 @@
     {
       "library": "moment.js@2.29.1",
       "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "library": "bs-custom-file-input@1.3.4",
+      "destination": "wwwroot/lib/bs-custom-file-input/"
     }
   ]
 }

@@ -10,6 +10,6 @@ namespace OnlineExam.Models.ViewModels
         public Course Course { get; set; }
         public IEnumerable<Course> CoursesNavigation { get; set; }
         public IEnumerable<Exam> ExamsNavigation { get; set; }
-        public IEnumerable<CourseUser> CourseUsers { get; set; }
+        public int CountCourseUsers { get; set; }
     }
 }

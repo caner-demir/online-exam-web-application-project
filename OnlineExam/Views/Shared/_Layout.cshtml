@@ -10,14 +10,13 @@
     <title>@ViewData["Title"] - ExamHub</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/callout.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow" style="font-family: Helvetica">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -27,22 +26,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
                         </li>
                         @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Student))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item nav-hover dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Courses Taken
                                 </a>
-                                <div class="dropdown-menu rounded-0" style="margin-top:10px" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark" asp-area="Student" asp-controller="Course" asp-action="Index">All Courses</a>
+                                <div class="dropdown-menu border-secondary" aria-labelledby="navbarDropdown">
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_CoursesTaken) != null)
                                     {
                                         var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_CoursesTaken);
                                         if (allCourses.Count > 0)
                                         {
-                                            <div class="dropdown-divider"></div>
                                             foreach (var course in allCourses)
                                             {
                                                 <a class="dropdown-item" asp-area="Student" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
@@ -54,12 +51,12 @@
                         }
                         @if (User.IsInRole(SD.Role_Teacher))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item nav-hover dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Course Management
                                 </a>
-                                <div class="dropdown-menu rounded-0" style="margin-top:10px" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
+                                <div class="dropdown-menu border-secondary" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_MyCourses) != null)
                                     {
                                         var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_MyCourses);
@@ -87,9 +84,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-white">
+    <footer class="footer text-light border-top" style="background:#2e5374; font-size:large;">
         <div class="container">
-            &copy; 2021 - ExamHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - ExamHub
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

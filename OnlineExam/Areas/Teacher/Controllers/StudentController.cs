@@ -27,17 +27,31 @@ namespace OnlineExam.Areas.Teacher.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetWaiting()
+        public IActionResult GetStudents()
         {
             //Get course Id
             var CourseId = HttpContext.Session.GetInt32(SD.Session_SelectedCourseId);
 
-            var studentsWaiting = _unitOfWork.CourseUser
+            var students = _unitOfWork.CourseUser
+                                        .GetAll(cu => (cu.IsAccepted == true) && (cu.CourseId == CourseId),
+                                        includeProperties: "User,Course")
+                                        .Select(cu => new { cu.User.Name, cu.User.UserName, cu.DateCreated }).ToList();
+
+            return Json(new { data = students });
+        }
+
+        [HttpGet]
+        public IActionResult GetRequests()
+        {
+            //Get course Id
+            var CourseId = HttpContext.Session.GetInt32(SD.Session_SelectedCourseId);
+
+            var enrollmentRequests = _unitOfWork.CourseUser
                                         .GetAll(cu => (cu.IsAccepted == false) && (cu.CourseId == CourseId),
                                         includeProperties: "User,Course")
-                                        .Select(cu => new { cu.User.Name, cu.User.UserName }).ToList();
+                                        .Select(cu => new { cu.User.Name, cu.User.UserName, cu.DateCreated }).ToList();
 
-            return Json(new { data = studentsWaiting });
+            return Json(new { data = enrollmentRequests });
         }
 
         [HttpPost]
@@ -56,6 +70,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             }
 
             userFromDb.IsAccepted = true;
+            userFromDb.DateCreated = DateTime.Now;
             _unitOfWork.CourseUser.Update(userFromDb);
             _unitOfWork.Save();
             return Json(new { success = true, message = "The user successfully enrolled in the course." });

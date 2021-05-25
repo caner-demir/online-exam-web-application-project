@@ -25,11 +25,11 @@ closeModal = () => {
 postModal = form => {
     if ($('#question-imageurl').length == 0) {
         if ($('#upload-box').val() == "") {
-            swal("Error", "Please select an image.", "error")
+            swal("Error", "Please select an Image.", "error")
             return false
         }
         if ($("input[name=CorrectChoice]").is(":checked") == false) {
-            swal("Error", "Please select correct choice.", "error")
+            swal("Error", "Please select Correct Choice.", "error")
             return false
         }
     }    
@@ -55,3 +55,18 @@ postModal = form => {
     return false;
 }
 
+//Display input and input filename.
+$(document).on('change', '.custom-file-input', function (event) {
+    var fileReader = new FileReader();
+    fileReader.onload = function (e) {
+        $('#img-preview').attr('src', e.target.result)
+    }
+    fileReader.readAsDataURL(event.target.files[0])
+    if (event.target.files[0].name.length < 30) {
+        $(this).next('.custom-file-label').html(event.target.files[0].name)
+    }
+    else {
+        let fileName = event.target.files[0].name
+        $(this).next('.custom-file-label').html(fileName.substr(0, 20) + "..." + fileName.substr(fileName.length - 7));
+    }
+})

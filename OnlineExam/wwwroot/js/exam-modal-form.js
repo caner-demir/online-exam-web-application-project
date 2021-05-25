@@ -36,9 +36,9 @@ postModal = form => {
     var startDateTime = dayjs(startDate + " " + startTime)
     if (!startDateTime.isAfter(dayjs())) {
         swal({
-            title: "Warning",
-            text: "The Start Date cannot be less than or equal to today's date.",
-            icon: "warning"
+            title: "Error",
+            text: "Start Date cannot be less than or equal to today's date.",
+            icon: "error"
         })
         return false
     }
@@ -47,9 +47,9 @@ postModal = form => {
     var endDateTime = dayjs(startDate + " " + endTime)
     if (!endDateTime.isAfter(startDateTime)) {
         swal({
-            title: "Warning",
-            text: "The End Time cannot be less than or equal to the Start Time.",
-            icon: "warning"
+            title: "Error",
+            text: "End Time cannot be less than or equal to Start Time.",
+            icon: "error"
         })
         return false
     }
@@ -64,6 +64,7 @@ postModal = form => {
         success: function (res) {
             if (res.isValid) {
                 dataTable.ajax.reload()
+                loadCounterValues()
                 $('#form-modal .modal-body').html('');
                 $('#form-modal .modal-title').html('');
                 $('#form-modal').modal('hide');

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.DataAccessToDb.Repository.IRepository;
@@ -6,6 +7,7 @@ using OnlineExam.Models;
 using OnlineExam.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -17,10 +19,12 @@ namespace OnlineExam.Areas.Teacher.Controllers
     public class ExamController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ExamController(IUnitOfWork unitOfWork)
+        public ExamController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index(int id)
@@ -59,6 +63,23 @@ namespace OnlineExam.Areas.Teacher.Controllers
             return Json(new { data = AllExams });
         }
 
+        [HttpGet]
+        public IActionResult GetCounter()
+        {
+            var courseId = HttpContext.Session.GetInt32(SD.Session_SelectedCourseId);
+
+            //Populate dictionary with values required for the counter panel.
+            IDictionary<string, int> counterValues = new Dictionary<string, int>()
+            {
+                { "examCounter", _unitOfWork.Exam.GetAll(cu => cu.CourseId == courseId).Count() },
+                { "studentCounter", _unitOfWork.CourseUser.GetAll(cu => cu.CourseId == courseId && cu.IsAccepted == true).Count() },
+                { "questionCounter", _unitOfWork.Question.GetAll(q => q.Exam.CourseId == courseId).Count() },
+                { "requestCounter", _unitOfWork.CourseUser.GetAll(cu => cu.CourseId == courseId && cu.IsAccepted == false).Count() }
+            };
+            return Json(new { counter = counterValues });
+
+        }
+
         [NoDirectAccess]
         public IActionResult Upsert(int? id, int? courseId)
         {
@@ -85,7 +106,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
             //If user has a course with this Id, create an Exam object.
             Exam exam = new Exam();
             if (id == null)
-            {                
+            {
                 exam.CourseId = (int)courseId;
                 var dateTime = DateTime.Now;
                 exam.StartDate = dateTime.Date;
@@ -148,6 +169,18 @@ namespace OnlineExam.Areas.Teacher.Controllers
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting." });
+            }
+
+            //----------------- Code section for deleting images of the questions belong to this exam. -----------------
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var questionImages = _unitOfWork.Question.GetAll(q => q.ExamId == objFromDb.Id).Select(q => q.ImageUrl);
+            foreach (var image in questionImages)
+            {
+                var imagePath = Path.Combine(webRootPath, image.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
             }
 
             _unitOfWork.Exam.Remove(objFromDb);

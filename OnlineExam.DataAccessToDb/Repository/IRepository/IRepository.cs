@@ -10,7 +10,7 @@ namespace OnlineExam.DataAccessToDb.Repository.IRepository
     {
         T Get(int id);
 
-        IEnumerable<T> GetAll(
+        IQueryable<T> GetAll(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = null

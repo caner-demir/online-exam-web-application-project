@@ -11,13 +11,11 @@ namespace OnlineExam.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(250)]
-        public string Name { get; set; }
-
         public int? CorrectChoice { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public DateTime DateCreated { get; set; }
 
         public ICollection<Choice> Choices { get; set; }
 

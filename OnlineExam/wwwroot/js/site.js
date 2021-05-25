@@ -13,7 +13,7 @@ function toggleDropdown(e) {
         _m.toggleClass('show', shouldOpen);
         _d.toggleClass('show', shouldOpen);
         $('[data-toggle="dropdown"]', _d).attr('aria-expanded', shouldOpen);
-    }, e.type === 'mouseleave' ? 50 : 0);
+    }, e.type === 'mouseleave' ? 75 : 0);
 }
 
 $('body')

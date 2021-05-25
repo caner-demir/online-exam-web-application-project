@@ -154,6 +154,8 @@ namespace OnlineExam.Areas.Teacher.Controllers
 
                 if (question.Id == 0)
                 {
+                    question.DateCreated = DateTime.Now;
+
                     _unitOfWork.Question.Add(question);
                     foreach (var choice in question.Choices)
                     {
