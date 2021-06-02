@@ -1,4 +1,22 @@
-﻿function sendRequest(button, id) {
+﻿$(document).ready(function () {
+    loadCounterValues()
+})
+
+// ------------------------------- Code section for counter panel. ---------------------------
+function loadCounterValues() {
+    $.ajax({
+        type: "GET",
+        url: '/Student/Home/GetCounter',
+        success: function (response) {
+            $("#user-counter").html(response.counter.userCounter)
+            $("#course-counter").html(response.counter.courseCounter)
+            $("#exam-counter").html(response.counter.examCounter)
+            $("#question-counter").html(response.counter.questionCounter)
+        }
+    })
+}
+
+function sendRequest(button, id) {
     $.ajax({
         type: "POST",
         url: '/Student/Home/SendRequest/',

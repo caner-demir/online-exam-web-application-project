@@ -16,18 +16,15 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow" style="font-family: Helvetica">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom border-light shadow-sm fixed-top" style="font-family: Helvetica">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExamHub</a>
+                <a class="navbar-brand" style="font-size:125%" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-check-double text-warning"></i> ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
-                        </li>
                         @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Student))
                         {
                             <li class="nav-item nav-hover dropdown">
@@ -78,7 +75,7 @@
             </div>
         </nav>
     </header>
-    <div class="container p-3" id="container-main">
+    <div class="container p-3" id="container-main" style="margin-top:64px">
         <main role="main">
             @RenderBody()
         </main>

@@ -10,18 +10,80 @@
                 handle: ".modal-header"
             })
 
-            $("form").removeData("validator");
-            $("form").removeData("unobtrusiveValidation");
-            $.validator.unobtrusive.parse("form");
+            $("form").removeData("validator")
+            $("form").removeData("unobtrusiveValidation")
+            $.validator.unobtrusive.parse("form")
+
+            addButtons()
         }
     })
 }
+
+// ------------------------------- Code section for adding, removing choices. -----------------------------
+addButtons = () => {
+    $(".input-group-append").remove()
+    var length = $(".input-group").length
+    if (length == 3) {
+        $(".input-group").last().append(`
+                                <div class="input-group-append">
+                                    <button onclick="addChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                                </div>`
+        )
+    }
+    else if (length <= 5) {
+        $(".input-group").last().append(`
+                                <div class="input-group-append">
+                                    <button onclick="removeChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
+                                    <button onclick="addChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                                </div>`
+        )
+    }
+    else if (length == 6) {
+        $(".input-group").last().append(`
+                                <div class="input-group-append">
+                                    <button onclick="removeChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
+                                </div>`
+        )
+    }
+    $("form").removeData("validator")
+    $("form").removeData("unobtrusiveValidation")
+    $.validator.unobtrusive.parse("form")
+}
+
+addChoice = () => {
+    var length = $(".input-group").length - 1
+    var letter = String.fromCharCode(65 + length)
+    $(".input-group").last().after(`
+                            <input type="hidden" name="Choices[${length}].ChoiceNumber" value="${length}" />
+                            <input type="hidden" name="Choices[${length}].QuestionId" value="0" />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text border border-secondary">
+                                        <input type="radio" atype="radio" id="choice-${length}" value="${length}" name="CorrectChoice">
+                                        <label class="form-check-label" for="choice-${length}">&nbsp; Choice ${letter} </label>
+                                    </div>
+                                </div>
+                                <textarea rows="1" class="form-control border border-secondary" name="Choices[${length}].Description"></textarea>
+                            </div>
+    `)
+    addButtons()
+}
+
+removeChoice = () => {
+    for (var i = 0; i < 2; i++) {
+        $('input[name^="Choices"]').last().remove()
+    }
+    $(".input-group").last().remove()
+    addButtons()
+}
+
 
 closeModal = () => {
     $('#form-modal').modal('hide');
 }
 
 
+//Post modal form.
 postModal = form => {
     if ($('#question-imageurl').length == 0) {
         if ($('#upload-box').val() == "") {
@@ -42,6 +104,7 @@ postModal = form => {
         success: function (res) {
             if (res.isValid) {
                 dataTable.ajax.reload()
+                loadCounterValues()
                 $('#form-modal .modal-body').html('');
                 $('#form-modal .modal-title').html('');
                 $('#form-modal').modal('hide');

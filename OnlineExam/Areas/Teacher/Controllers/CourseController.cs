@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OnlineExam.DataAccessToDb.Repository.IRepository;
 using OnlineExam.Models;
+using OnlineExam.Models.ViewModels;
 using OnlineExam.Utilities;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,18 @@ namespace OnlineExam.Areas.Teacher.Controllers
 
             var AllCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
 
-            return Json(new { data = AllCourses });
+            IList<TeacherCourseVM> AllData = new List<TeacherCourseVM>();
+            foreach (var course in AllCourses)
+            {
+                AllData.Add(new TeacherCourseVM 
+                { 
+                    Course = course, 
+                    Students = _unitOfWork.CourseUser.GetAll(cu => cu.IsAccepted == true && cu.CourseId == course.Id).Count(),
+                    Exams = _unitOfWork.Exam.GetAll(e => e.CourseId == course.Id).Count()
+                });
+            }
+
+            return Json(new { data = AllData });
         }
 
         public IActionResult GetCounter()
@@ -98,7 +110,6 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 return NotFound();
             }
 
-            //return View(course);
             return PartialView("_UpsertModal", course);
         }
 

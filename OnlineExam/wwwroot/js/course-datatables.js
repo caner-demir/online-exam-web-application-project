@@ -24,28 +24,25 @@ function loadDataTable() {
     dataTable = $("#tblData").DataTable({
         "autoWidth": false,
         "columnDefs": [
-            { className: "table-active table-buttons", "targets": [0] },
-            { className: "table-buttons", "targets": [2] },
-            { className: "table-active table-buttons", "targets": [3] }
+            { className: "table-container-lg", "targets": [0] },
+            { className: "table-cells-lg", "targets": [2, 3, 4] },
+            { className: "table-active table-cells-lg", "targets": [5] }
         ],
-        "order": [[3, "asc"]],
+        "order": [[5, "asc"]],
         "ajax": {
             "url": "/Teacher/Course/GetAll"
         },
         "columns": [
             {
-                "data": {
-                    "id": "id",
-                    "name": "name"
-                },
+                "data": "course",
                 "render": function (data) {
                     return `
-                            <a href="/Teacher/Exam/Index/${data.id}" class="text-dark font-weight-bold" style="font-size: 120%">${data.name}</a>
+                            <a href="/Teacher/Exam/Index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
                             `
-                }, "width": "25%"
+                }, "width": "20%"
             },
             {
-                "data": "imageUrl",
+                "data": "course.imageUrl",
                 "render": function (data) {
                     return `
                             <div class="rounded d-flex align-items-center overflow-hidden" style="max-height:100px;">
@@ -55,27 +52,41 @@ function loadDataTable() {
                 }, "width": "25%"
             },
             {
-                "data": "dateCreated",
+                "data": "course.dateCreated",
                 "render": function (data) {
-                    return moment(data).format('MMMM DD YYYY, HH:mm')
+                    return moment(data).format('MMM DD YYYY, HH:mm')
                 },
-                "width": "25%"
+                "width": "18%"
             },
             {
-                "data": "id",
+                "data": "students",
+                "render": function (data) {
+                    return `<i class="fas fa-user-friends"></i>&nbsp;&nbsp; ${data}`
+                },
+                "width": "12%"
+            },
+            {
+                "data": "exams",
+                "render": function (data) {
+                    return `<i class="far fa-clipboard"></i>&nbsp;&nbsp; ${data}`
+                },
+                "width": "12%"
+            },
+            {
+                "data": "course",
                 "render": function (data) {
                     return `
                             <div class="text-center">
-                                <a onclick="openModal('/Teacher/Course/Upsert/${data}', 'Edit Course')" 
-                                        class="btn btn-success text-white" style="cursor:pointer; width:94px">
-                                    <i class="fas fa-edit"></i>&nbsp; Edit
+                                <a onclick="openModal('/Teacher/Course/Upsert/${data.id}', 'Edit Course')" 
+                                        class="btn btn-success text-white" style="cursor:pointer; width:50px">
+                                    <i class="fas fa-edit"></i>
                                 </a>
-                                <a onclick=Delete("/Teacher/Course/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
-                                    <i class="fas fa-trash-alt"></i>&nbsp; Delete
+                                <a onclick=Delete("/Teacher/Course/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer; width:50px">
+                                    <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
                             `
-                }, "width": "25%"
+                }, "width": "23%"
             }
         ]
     })

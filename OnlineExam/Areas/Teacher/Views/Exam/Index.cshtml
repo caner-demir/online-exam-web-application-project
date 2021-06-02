@@ -7,7 +7,7 @@
 <div class="container-main-counter">
     <div class="container">
         <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:300px">
-            <h1 class="col-12 text-center text-white pb-3">@Model.Name</h1>
+            <h2 class="col-12 text-center text-white pb-3">Course: @Model.Name</h2>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fa fa-users" style="font-size:50px"></i></p>
@@ -72,13 +72,14 @@
                         <br />
                         <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
                             <div class="col-12">
-                                <table id="table-exam" class="table table-hover shadow-sm w-100">
+                                <table id="table-exam" class="table table-hover table-bordered shadow-sm w-100">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Name</th>
                                             <th>Date Created</th>
                                             <th>Start Date</th>
                                             <th>Duration</th>
+                                            <th>Questions</th>
                                             <th class="text-center">Edit</th>
                                         </tr>
                                     </thead>
@@ -95,7 +96,7 @@
                         <br />
                         <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
                             <div class="col-12">
-                                <table id="table-students" class="table table-hover shadow-sm w-100">
+                                <table id="table-students" class="table table-hover table-bordered shadow-sm w-100">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Name</th>
@@ -117,7 +118,7 @@
                         <br />
                         <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
                             <div class="col-12">
-                                <table id="table-requests" class="table table-hover shadow-sm w-100">
+                                <table id="table-requests" class="table table-hover table-bordered shadow-sm w-100">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Name</th>

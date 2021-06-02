@@ -17,6 +17,9 @@ namespace OnlineExam.Models
 
         public DateTime DateCreated { get; set; }
 
+        [Required]
+        public int Points { get; set; }
+
         public ICollection<Choice> Choices { get; set; }
 
         [Required]

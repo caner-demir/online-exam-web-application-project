@@ -31,6 +31,7 @@ namespace OnlineExam.DataAccessToDb.Repository
                 }
 
                 ObjFromDb.CorrectChoice = question.CorrectChoice;
+                ObjFromDb.Points = question.Points;
             }
         }
     }

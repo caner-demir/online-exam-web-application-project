@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.DataAccessToDb.Repository.IRepository;
 using OnlineExam.Models;
+using OnlineExam.Models.ViewModels;
 using OnlineExam.Utilities;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,17 @@ namespace OnlineExam.Areas.Teacher.Controllers
             var CourseId = HttpContext.Session.GetInt32(SD.Session_SelectedCourseId);
             var AllExams = _unitOfWork.Exam.GetAll(e => e.CourseId == CourseId);
 
-            return Json(new { data = AllExams });
+            IList<TeacherExamVM> AllData = new List<TeacherExamVM>();
+            foreach (var exam in AllExams)
+            {
+                AllData.Add(new TeacherExamVM
+                {
+                    Exam = exam,
+                    Questions = _unitOfWork.Question.GetAll(q => q.ExamId == exam.Id).Count()
+                });
+            }
+
+            return Json(new { data = AllData });
         }
 
         [HttpGet]
@@ -77,7 +88,6 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 { "requestCounter", _unitOfWork.CourseUser.GetAll(cu => cu.CourseId == courseId && cu.IsAccepted == false).Count() }
             };
             return Json(new { counter = counterValues });
-
         }
 
         [NoDirectAccess]

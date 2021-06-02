@@ -8,29 +8,42 @@
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="ImageUrl" id="question-imageurl" />
     }
-    <div class="form-group">       
+    <div class="form-group">
         @if (Model.Id != 0)
         {
-            <div class="rounded d-flex align-items-center overflow-hidden shadow-sm" style="max-height:240px;">
+            <div class="rounded d-flex align-items-center overflow-hidden shadow-sm" style="max-height:220px;">
                 <img id="img-preview" src="@Model.ImageUrl" class="w-100 rounded" />
             </div>
         }
         else
-        {            
+        {
             <div class="rounded d-flex align-items-center overflow-hidden shadow-sm container-question">
                 <img id="img-preview" src="" class="w-100" />
             </div>
         }
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Points"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text border border-secondary"><i class="fa fa-star"></i></div>
+                    </div>
+                    <input asp-for="Points" class="form-control border border-secondary" />
+                </div>
+                <span asp-validation-for="Points" class="text-danger"></span>
+            </div>
         </div>
-    <div class="form-group row">
-        <div class="col-8">           
+        <div class="col-6">
+            <label>Image</label>
             <div class="custom-file">
                 <input type="file" name="files" id="upload-box" accept="image/*" multiple class="custom-file-input" />
-                <label class="custom-file-label" for="upload-box">Choose an Image file...</label>
+                <label class="custom-file-label border border-secondary" for="upload-box">Choose an Image file...</label>
             </div>
         </div>
     </div>
-    
+
     @{
         int? CorrectChoice = Model.CorrectChoice;
         if (Model.Choices != null)
@@ -38,9 +51,6 @@
             //foreach (var Choice in Model.Choices)
             for (int i = 0; i < Model.Choices.Count(); i++)
             {
-                //Id of this choice.
-                <input type="hidden" name="Choices[@i].Id" value="@Model.Choices.ElementAt(i).Id" />
-
                 //Choice number of this choice with respect to the question it belongs to.
                 <input type="hidden" name="Choices[@i].ChoiceNumber" value="@Model.Choices.ElementAt(i).ChoiceNumber" />
 
@@ -51,7 +61,7 @@
                 char letter = (char)('A' + (char)(i % 27));
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">
+                        <div class="input-group-text border border-secondary">
 
                             @*If this is the correct choice, make radio button checked.*@
                             <input type="radio" asp-for="CorrectChoice" id="choice-@i" value="@Model.Choices.ElementAt(i).ChoiceNumber"
@@ -61,17 +71,17 @@
                     </div>
 
                     @*Fill input element with the content of this choice.*@
-                    <textarea rows="1" class="form-control" asp-for="@Model.Choices.ElementAt(i).Description" name="Choices[@i].Description" id="description-@i" ></textarea>
+                    <textarea rows="1" class="form-control border border-secondary" asp-for="@Model.Choices.ElementAt(i).Description" name="Choices[@i].Description" id="description-@i"></textarea>
                     @*<span asp-validation-for="@Model.Choices.ElementAt(i).Description" class="text-danger"></span>*@
                     @*<div class="input-group-append">
-                        <button class="btn input-group-text" type="button"><i class="fas fa-plus pl-2 pr-2"></i></button>
-                    </div>*@
+                            <button class="btn input-group-text" type="button"><i class="fas fa-plus pl-2 pr-2"></i></button>
+                        </div>*@
                 </div>
             }
         }
         else
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
                 //Choice number of this choice with respect to the question it belongs to.
                 <input type="hidden" name="Choices[@i].ChoiceNumber" value="@i" />
@@ -83,7 +93,7 @@
                 char letter = (char)('A' + (char)(i % 27));
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">
+                        <div class="input-group-text border border-secondary">
 
                             @*If this is the correct choice, make radio button checked.*@
                             <input type="radio" atype="radio" asp-for="CorrectChoice" id="choice-@i" value="@i">
@@ -92,12 +102,12 @@
                     </div>
 
                     @*Fill input element with the content of this choice.*@
-                    <textarea rows="1" class="form-control" name="Choices[@i].Description" ></textarea>
+                    <textarea rows="1" class="form-control border border-secondary" name="Choices[@i].Description"></textarea>
                 </div>
             }
         }
     }
-    <div class="row modal-footer">
+    <div class="row modal-footer pb-2">
         @if (Model.Id != 0)
         {
             <button type="submit" class="btn btn-primary">Update</button>

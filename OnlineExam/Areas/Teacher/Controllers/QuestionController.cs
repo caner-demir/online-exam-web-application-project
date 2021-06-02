@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using OnlineExam.DataAccessToDb.Data;
 using OnlineExam.DataAccessToDb.Repository.IRepository;
 using OnlineExam.Models;
@@ -60,9 +61,36 @@ namespace OnlineExam.Areas.Teacher.Controllers
 
             //Get questions
             var ExamId = HttpContext.Session.GetInt32(SD.Session_SelectedExamId);
-            var AllQuestions = _unitOfWork.Question.GetAll(q => q.ExamId == ExamId);
+            var AllQuestions = _unitOfWork.Question.GetAll(q => q.ExamId == ExamId, includeProperties: "Choices");
 
-            return Json(new { data = AllQuestions });
+            //For preventing loop serialize and derialize the allQuestions data.
+            var jsonData = JsonConvert.SerializeObject(AllQuestions, new JsonSerializerSettings
+                                {
+                                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                });
+
+            var dataDeseriazed = JsonConvert.DeserializeObject<IEnumerable<Question>>(jsonData);
+
+            return Json(new { data = dataDeseriazed });
+        }
+
+        [HttpGet]
+        public IActionResult GetCounter(int id)
+        {
+            var courseId = _unitOfWork.Exam.Get(id)?.CourseId;
+
+            //Populate dictionary with values required for the counter panel.
+            IDictionary<string, int> counterValues = new Dictionary<string, int>();
+            if (courseId != null)
+            {
+                counterValues = new Dictionary<string, int>()
+                {
+                    { "questionCounter", _unitOfWork.Question.GetAll(q => q.ExamId == id).Count() },
+                    { "pointsCounter", _unitOfWork.Question.GetAll(q => q.ExamId == id).Select(q => q.Points).Sum() },
+                    { "studentCounter", _unitOfWork.CourseUser.GetAll(cu => cu.CourseId == courseId && cu.IsAccepted == true).Count() }
+                };
+            }
+            return Json(new { counter = counterValues });
         }
 
         [NoDirectAccess]
@@ -118,7 +146,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Question question)
         {
-            if (ModelState.IsValid && question.CorrectChoice != null)
+            if (ModelState.IsValid && question.CorrectChoice != null && question.Choices.Count() <= 5)
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
@@ -165,6 +193,14 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 else
                 {
                     _unitOfWork.Question.Update(question);
+
+                    var choicesFromDb = _unitOfWork.Choice.GetAll(c => c.QuestionId == question.Id).ToList();
+                    var choicesRemoved = choicesFromDb.Where(c => !question.Choices.Any(q => q.Id == c.Id));
+                    foreach (var choice in choicesRemoved)
+                    {
+                        _unitOfWork.Choice.Remove(choice);
+                    }
+
                     foreach (var choice in question.Choices)
                     {
                         if (choice.Id != 0)
@@ -173,6 +209,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
                         }
                         if (choice.Id == 0)
                         {
+                            choice.QuestionId = question.Id;
                             _unitOfWork.Choice.Add(choice);
                         }
                     }

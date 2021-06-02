@@ -20,7 +20,12 @@ namespace OnlineExam.DataAccessToDb.Repository
 
         public void Update(Choice choice)
         {
-            _db.Update(choice);
+            var ObjFromDb = _db.Choices.FirstOrDefault(c => c.Id == choice.Id);
+
+            if (ObjFromDb != null)
+            {
+                ObjFromDb.Description = choice.Description;
+            }
         }
     }
 }

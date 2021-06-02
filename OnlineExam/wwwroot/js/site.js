@@ -19,3 +19,10 @@ function toggleDropdown(e) {
 $('body')
     .on('mouseenter mouseleave', '.dropdown', toggleDropdown)
     .on('click', '.dropdown-menu a', toggleDropdown)
+
+//For deleting empty dropdown menus.
+$(".dropdown-menu").each(function () {
+    if ($(this).children("a").length == 0 && $(this).children("dropdown-divider").length == 0) {
+        $(this).remove()
+    }
+})

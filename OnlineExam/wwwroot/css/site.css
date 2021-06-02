@@ -96,7 +96,7 @@ body {
     background-size: cover;
 }
 .container-question {
-    height: 240px;
+    height: 220px;
     background: url(../images/background/thumbnail-question.svg);
     background-position: center center;
 }
@@ -106,16 +106,29 @@ body {
     text-align: center;
 }
 
-/*Styling for table columns*/
-td.table-buttons {
+/*Styling for DataTables columns*/
+td.table-cells-lg {
     height: 100px;
     line-height: 100px;
 }
-td.table-exams {
+td.table-container-lg {
+    position: relative;
+    height: 100px;
+}
+td.table-cells-sm {
     height: 40px;
     line-height: 40px;
 }
-
+td.table-container-sm {
+    position: relative;
+    height: 40px;
+}
+.table-button-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 /* ------------------------ Styling for Bootstrap classes -------------------------- */
 /*Styling for bootstrap callouts*/
@@ -185,8 +198,8 @@ div.rounded.border-thick {
     align-items: center;
 }
 .dropdown-menu a:hover {
-    background: linear-gradient(to bottom, #5bc0de, #00a4d0);
-    color: white;
+    background: linear-gradient(to bottom, #4db1cf, #00a4d0);
+    color: white !important;
 }
 
 /*Nav styling.*/
@@ -199,7 +212,7 @@ nav ul li {
     align-items: center;
 }
 nav ul li.nav-hover:hover > a {
-    color: #343a40 !important;
+    color: #495057 !important;
     transition: .02s ease 0.02s;
 }
 nav ul li > a {
@@ -207,7 +220,7 @@ nav ul li > a {
     transition: .02s ease 0.02s;
 }
 nav ul li a:hover {
-    color: #343a40 !important;
+    color: #495057 !important;
 }
 
 /*Animation for cards.*/

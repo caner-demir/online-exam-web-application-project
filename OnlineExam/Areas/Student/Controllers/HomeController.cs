@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OnlineExam.DataAccessToDb;
 using OnlineExam.DataAccessToDb.Repository.IRepository;
 using OnlineExam.Models;
 using OnlineExam.Models.ViewModels;
@@ -17,6 +18,7 @@ using System.Threading.Tasks;
 namespace OnlineExam.Areas.Student.Controllers
 {
     [Area("Student")]
+    //[ServiceFilter(typeof(Filters.GetCoursesAttribute))]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -28,6 +30,7 @@ namespace OnlineExam.Areas.Student.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        //[ServiceFilter(typeof(GetCoursesAttribute))]
         public IActionResult Index()
         {
             IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser");
@@ -36,18 +39,15 @@ namespace OnlineExam.Areas.Student.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            CoursesVM coursesVM = new CoursesVM()
-            {
-                CountUsers = countUsers
-            };
+            IList<HomeCourseVM> AllData = new List<HomeCourseVM>();
             if (claim != null)
             {
                 var userCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
 
                 HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(userCourses, new JsonSerializerSettings
-                                                                            {
-                                                                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                                                                            })
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                })
                                                                         );
 
                 var coursesTaken = _unitOfWork.CourseUser
@@ -66,12 +66,41 @@ namespace OnlineExam.Areas.Student.Controllers
                                             .Where(cl => !coursesEnrolled.Any(ce => cl.Id == ce))
                                             .ToList();
 
-                coursesVM.Courses = coursesAvailable;
-                return View(coursesVM);
+                foreach (var course in coursesAvailable)
+                {
+                    AllData.Add(new HomeCourseVM
+                    {
+                        Course = course,
+                        Students = countUsers.Where(cu => cu == course.Id).Count()
+                    });
+                }
+                return View(AllData);
             }
 
-            coursesVM.Courses = courseList;
-            return View(coursesVM);
+            foreach (var course in courseList)
+            {
+                AllData.Add(new HomeCourseVM
+                {
+                    Course = course,
+                    Students = countUsers.Where(cu => cu == course.Id).Count()
+                });
+            }
+            return View(AllData);
+        }
+
+        [HttpGet]
+        public IActionResult GetCounter()
+        {
+
+            //Populate dictionary with values required for the counter panel.
+            IDictionary<string, int> counterValues = new Dictionary<string, int>()
+            {
+                { "userCounter", _unitOfWork.ApplicationUser.GetAll().Count() },
+                { "courseCounter", _unitOfWork.Course.GetAll().Count() },
+                { "examCounter", _unitOfWork.Exam.GetAll().Count() },
+                { "questionCounter", _unitOfWork.Question.GetAll().Count() }
+            };
+            return Json(new { counter = counterValues });
         }
 
         [Authorize]

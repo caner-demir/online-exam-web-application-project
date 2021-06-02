@@ -1,5 +1,5 @@
 ﻿@using OnlineExam.Utilities
-@model OnlineExam.Models.ViewModels.CoursesVM
+@model IEnumerable<OnlineExam.Models.ViewModels.HomeCourseVM>
 
     <div class="container-main-intro">
         <div class="container">
@@ -18,32 +18,32 @@
 <div class="container-main-counter">
     <div class="container">
         <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:400px">
-            <h1 class="col-12 text-center text-white pb-3">Numbers Speak Aloud</h1>
+            <h2 class="col-12 text-center text-white mb-0">Numbers Speak Aloud</h2>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fa fa-users" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
+                    <h2><span id="user-counter"></span>+</h2>
                     <h4>Users</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fas fa-shapes" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
+                    <h2><span id="course-counter"></span>+</h2>
                     <h4>Courses</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fas fa-clipboard-list" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
+                    <h2><span id="exam-counter"></span>+</h2>
                     <h4>Exams</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fas fa-question-circle" style="font-size:50px"></i></p>
-                    <h2>11+</h2>
+                    <h2><span id="question-counter"></span>+</h2>
                     <h4>Questions</h4>
                 </div>
             </div>
@@ -51,36 +51,36 @@
     </div>
 </div>
 <div class="container-main-courses p-0" id="container-main-courses">
-    <div class="container pt-3">
-        <h1 class="text-light text-center">Courses</h1>
-        <div class="row pt-3 pb-4">
-            @foreach (var course in Model.Courses)
+    <div class="container pt-4">
+        <h2 class="text-light text-center">Courses</h2>
+        <div class="row pt-4 pb-4">
+            @foreach (var course in Model)
             {
                 <div class="col-md-3">
                     <div class="card mb-4 card-home border">
                         <div class="overflow-hidden rounded-top">
-                            <img src="@course.ImageUrl" class="card-img-top" style="width:100%; height:225px" />
+                            <img src="@course.Course.ImageUrl" class="card-img-top" style="width:100%; height:225px; object-fit:cover" />
                         </div>
                         <div class="card-body text-black-50 rounded-bottom">
-                            <h5 class="font-weight-bolder">@course.Name</h5>
+                            <h5 class="font-weight-bolder">@course.Course.Name</h5>
                             <div class="d-flex justify-content-between font-weight-bold">
-                                <p style="font-size:small"><i class="fas fa-user"></i>&nbsp; By @course.ApplicationUser.Name</p>
+                                <p style="font-size:small"><i class="fas fa-user"></i>&nbsp; By @course.Course.ApplicationUser.Name</p>
                                 <p style="font-size:small">
                                     <i class="fas fa-users"></i>&nbsp;
-                                    @Model.CountUsers.Where(cu => cu == course.Id).Count() Students
+                                    @course.Students Students
                                 </p>
                             </div>
-                            <p class="card-text text-dark home-description" style="font-family: sans-serif;">@course.DescriptionShort</p>
+                            <p class="card-text text-dark home-description" style="font-family: sans-serif;">@course.Course.DescriptionShort</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="sendRequest(this, @course.Id)">Enroll</button>
+                                    <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="sendRequest(this, @course.Course.Id)">Enroll</button>
                                 }
                                 else
                                 {
                                     <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="redirectToLogin()">Enroll</button>
                                 }
-                                <small class="font-weight-bold">@course.DateCreated.ToString("MMM dd yyyy")</small>
+                                <small class="font-weight-bold">@course.Course.DateCreated.ToString("MMM dd yyyy")</small>
                             </div>
                         </div>
                     </div>

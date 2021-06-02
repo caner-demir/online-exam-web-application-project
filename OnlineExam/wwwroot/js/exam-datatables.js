@@ -30,52 +30,53 @@ function loadTableExams() {
     dataTable = $("#table-exam").DataTable({
         "autoWidth": false,
         "columnDefs": [
-            { className: "table-active table-exams", "targets": [0] },
-            { className: "table-exams", "targets": [1, 2, 3] },
-            { className: "table-active", "targets": [4] }
+            { className: "table-active table-container-sm", "targets": [0] },
+            { className: "table-cells-sm", "targets": [1, 2, 3, 4] },
+            { className: "table-active", "targets": [5] }
         ],
-        "order": [[4, "asc"]],
+        "order": [[5, "asc"]],
         "ajax": {
             "url": "/Teacher/Exam/GetAll"
         },
         "columns": [
             {
-                "data": {
-                    "id": "id",
-                    "name": "name"
-                },
+                "data": "exam",
                 "render": function (data) {
                     return `
-                            <a href="/Teacher/Question/Index/${data.id}" class="text-dark font-weight-bold" style="font-size: 110%">${data.name}</a>
+                            <a href="/Teacher/Question/Index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
                             `
                 }, "width": "20%"
             },
             {
-                "data": "dateCreated",
+                "data": "exam",
                 "render": function (data) {
-                    return moment(data).format('MMMM DD YYYY, HH:mm')
+                    return moment(data.dateCreated).format('MMM DD YYYY')
                 },
-                "width": "20%"
+                "width": "16%"
             },
             {
-                "data": "startDate",
+                "data": "exam",
                 "render": function (data) {
-                    return moment(data).format('MMMM DD YYYY, HH:mm')
+                    return moment(data.startDate).format('MMM DD YYYY, HH:mm')
                 },
-                "width": "20%"
+                "width": "16%"
             },
             {
-                "data": "duration",
+                "data": "exam",
                 "render": function (data) {
-                    return data.hours + " Hours, " + data.minutes + " Minutes"
+                    return data.duration.hours + " Hours, " + data.duration.minutes + " Minutes"
                 },
-                "width": "20%"
+                "width": "16%"
             },
             {
-                "data": {
-                    "id": "id",
-                    "courseId": "courseId"
+                "data": "questions",
+                "render": function (data) {
+                    return data
                 },
+                "width": "12%"
+            },
+            {
+                "data": "exam",
                 "render": function (data) {
                     return `
                             <div class="text-center">
@@ -88,7 +89,7 @@ function loadTableExams() {
                                 </a>
                             </div>
                             `
-                }, "width": "20%"
+                }, "width": "50%"
             }
         ]
     })
@@ -127,7 +128,7 @@ function loadTableStudents() {
         "autoWidth": false,
         "columnDefs": [
             { className: "table-active", "targets": [0, 3] },
-            { className: "table-exams", "targets": [0, 1, 2] }
+            { className: "table-cells-sm", "targets": [0, 1, 2] }
         ],
         "ajax": {
             "url": "/Teacher/Student/GetStudents"
@@ -200,8 +201,9 @@ function loadTableRequests() {
     dataTableRequests = $("#table-requests").DataTable({
         "autoWidth": false,
         "columnDefs": [
-            { className: "table-active", "targets": [0, 3] },
-            { className: "table-exams", "targets": [0, 1, 2] }
+            { className: "table-active", "targets": [0] },          
+            { className: "table-cells-sm", "targets": [0, 1, 2] },
+            { className: "table-active", "targets": [3] }
         ],
         "ajax": {
             "url": "/Teacher/Student/GetRequests"
