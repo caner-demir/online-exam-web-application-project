@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnlineExam.DataAccessToDb\OnlineExam.DataAccessToDb.csproj" />
+    <ProjectReference Include="..\OnlineExam.DataAccess\OnlineExam.DataAccess.csproj" />
     <ProjectReference Include="..\OnlineExam.Models\OnlineExam.Models.csproj" />
     <ProjectReference Include="..\OnlineExam.Utilities\OnlineExam.Utilities.csproj" />
   </ItemGroup>

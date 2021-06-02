@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineExam.DataAccessToDb.Data;
+using OnlineExam.DataAccess.Data;
 
 [assembly: HostingStartup(typeof(OnlineExam.Areas.Identity.IdentityHostingStartup))]
 namespace OnlineExam.Areas.Identity

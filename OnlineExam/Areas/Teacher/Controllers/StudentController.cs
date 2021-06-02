@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OnlineExam.DataAccessToDb.Repository.IRepository;
+using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Utilities;
 using System;
 using System.Collections.Generic;

@@ -5692,9 +5692,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj",
-      "projectName": "OnlineExam.DataAccessToDb",
-      "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj",
+      "projectUniqueName": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccess.csproj",
+      "projectName": "OnlineExam.DataAccess",
+      "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccess.csproj",
       "packagesPath": "C:\\Users\\Caner Demir\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\obj\\",
       "projectStyle": "PackageReference",

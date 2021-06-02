@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.DataAccessToDb.Repository.IRepository;
+using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Models;
 using OnlineExam.Models.ViewModels;
 using OnlineExam.Utilities;

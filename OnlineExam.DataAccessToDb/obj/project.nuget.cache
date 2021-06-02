@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "awFgJNaTkG+w7Q6LPMjCMa3L+Ock4jgbGFzVbMJL8zYfGtCYKo9sgRRl6v+NjGAr9TMpcvk6AfNXG2VRO0Xt/g==",
+  "dgSpecHash": "z7RqlchFehgot34r3AK4N14xwBV3LeASa9dJgMKudWo3Mglp3XUWYkf5Hrk3M9kHB87lzd8XswFFOLgfYtA29g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj",
+  "projectFilePath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Caner Demir\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.4\\microsoft.aspnetcore.cryptography.internal.5.0.4.nupkg.sha512",

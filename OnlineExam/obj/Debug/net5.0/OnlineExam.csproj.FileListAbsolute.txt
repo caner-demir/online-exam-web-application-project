@@ -390,9 +390,7 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\ref\OnlineExam
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\OnlineExam.pdb
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\OnlineExam.genruntimeconfig.cache
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
-C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.DataAccessToDb.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.Models.dll
-C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.DataAccessToDb.pdb
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.Models.pdb
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
@@ -496,3 +494,5 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Te
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Student\Views\Exam\Index.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\libman.json
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\_UpsertModal.cshtml.g.cs
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.DataAccess.dll
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.DataAccess.pdb

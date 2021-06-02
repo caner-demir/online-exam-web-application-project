@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using OnlineExam.DataAccessToDb.Repository.IRepository;
+using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Utilities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;

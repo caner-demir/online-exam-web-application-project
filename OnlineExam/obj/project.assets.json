@@ -2198,7 +2198,7 @@
       "TinyMCE/5.8.0": {
         "type": "package"
       },
-      "OnlineExam.DataAccessToDb/1.0.0": {
+      "OnlineExam.DataAccess/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -2210,10 +2210,10 @@
           "OnlineExam.Utilities": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/OnlineExam.DataAccessToDb.dll": {}
+          "bin/placeholder/OnlineExam.DataAccess.dll": {}
         },
         "runtime": {
-          "bin/placeholder/OnlineExam.DataAccessToDb.dll": {}
+          "bin/placeholder/OnlineExam.DataAccess.dll": {}
         }
       },
       "OnlineExam.Models/1.0.0": {
@@ -7800,10 +7800,10 @@
         "tinymce.nuspec"
       ]
     },
-    "OnlineExam.DataAccessToDb/1.0.0": {
+    "OnlineExam.DataAccess/1.0.0": {
       "type": "project",
-      "path": "../OnlineExam.DataAccessToDb/OnlineExam.DataAccessToDb.csproj",
-      "msbuildProject": "../OnlineExam.DataAccessToDb/OnlineExam.DataAccessToDb.csproj"
+      "path": "../OnlineExam.DataAccess/OnlineExam.DataAccess.csproj",
+      "msbuildProject": "../OnlineExam.DataAccess/OnlineExam.DataAccess.csproj"
     },
     "OnlineExam.Models/1.0.0": {
       "type": "project",
@@ -7825,7 +7825,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.4",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
-      "OnlineExam.DataAccessToDb >= 1.0.0",
+      "OnlineExam.DataAccess >= 1.0.0",
       "OnlineExam.Models >= 1.0.0",
       "OnlineExam.Utilities >= 1.0.0",
       "TinyMCE >= 5.8.0"
@@ -7858,8 +7858,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj": {
-              "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj"
+            "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj"
             },
             "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.Models\\OnlineExam.Models.csproj": {
               "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.Models\\OnlineExam.Models.csproj"

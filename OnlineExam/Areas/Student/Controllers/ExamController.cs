@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineExam.DataAccessToDb.Repository.IRepository;
+using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Models.ViewModels;
 using System;
 using System.Collections.Generic;

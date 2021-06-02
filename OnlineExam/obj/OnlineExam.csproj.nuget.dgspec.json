@@ -4,14 +4,14 @@
     "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam\\OnlineExam.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj": {
+    "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj",
-        "projectName": "OnlineExam.DataAccessToDb",
-        "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj",
+        "projectUniqueName": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj",
+        "projectName": "OnlineExam.DataAccess",
+        "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Caner Demir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\obj\\",
+        "outputPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Caner Demir\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -231,8 +231,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj": {
-                "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccessToDb\\OnlineExam.DataAccessToDb.csproj"
+              "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.DataAccess\\OnlineExam.DataAccess.csproj"
               },
               "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.Models\\OnlineExam.Models.csproj": {
                 "projectPath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam.Models\\OnlineExam.Models.csproj"
