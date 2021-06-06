@@ -36,7 +36,7 @@ postModal = form => {
     var startDateTime = dayjs(startDate + " " + startTime)
     if (!startDateTime.isAfter(dayjs())) {
         swal({
-            title: "Error",
+            title: "Error!",
             text: "Start Date cannot be less than or equal to today's date.",
             icon: "error"
         })
@@ -47,7 +47,7 @@ postModal = form => {
     var endDateTime = dayjs(startDate + " " + endTime)
     if (!endDateTime.isAfter(startDateTime)) {
         swal({
-            title: "Error",
+            title: "Error!",
             text: "End Time cannot be less than or equal to Start Time.",
             icon: "error"
         })

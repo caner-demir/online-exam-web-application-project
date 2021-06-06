@@ -20,6 +20,8 @@ function loadCounterValues() {
             $("#question-counter").html(response.counter.questionCounter)
             $("#points-counter").html(response.counter.pointsCounter)
             $("#student-counter").html(response.counter.studentCounter)
+            $("#hours-counter").html(response.counter.durationHours)
+            $("#minutes-counter").html(response.counter.durationMinutes)
         }
     })
 }
@@ -46,7 +48,7 @@ function loadDataTable() {
                 "data": "imageUrl",
                 "render": function (data) {
                     return `
-                            <div class="rounded d-flex align-items-center overflow-hidden" style="max-height:100px;">
+                            <div class="rounded d-flex align-items-center border border-secondary overflow-hidden" style="max-height:100px;">
                                 <img src="${data}" class="w-100" >
                             </div>
                             `
@@ -62,14 +64,14 @@ function loadDataTable() {
             {
                 "data": "points",
                 "render": function (data) {
-                    return `<i class="fas fa-star"></i>&nbsp;&nbsp; ${data}`
+                    return `${data}&nbsp; <i class="fas fa-star"></i>`
                 },
                 "width": "12%"
             },
             {
                 "data": "choices",
                 "render": function (data) {
-                    return `<i class="fas fa-list-ul"></i>&nbsp;&nbsp; ${data.length}`
+                    return `${data.length}&nbsp; <i class="fas fa-list-ul"></i>`
                 },
                 "width": "12%"
             },
@@ -82,10 +84,10 @@ function loadDataTable() {
                     return `
                             <div class="text-center">
                                 <a onclick="openModal('/Teacher/Question/Upsert/${data.id}?examId=${data.examId}', 'Edit Question')" 
-                                        class="btn btn-success text-white" style="cursor:pointer; width:50px">
+                                        class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a onclick=Delete("/Teacher/Question/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer; width:50px">
+                                <a onclick=Delete("/Teacher/Question/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>

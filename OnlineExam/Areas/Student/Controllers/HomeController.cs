@@ -45,10 +45,10 @@ namespace OnlineExam.Areas.Student.Controllers
                 var userCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
 
                 HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(userCourses, new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                })
-                                                                        );
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    })
+                );
 
                 var coursesTaken = _unitOfWork.CourseUser
                                         .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true),

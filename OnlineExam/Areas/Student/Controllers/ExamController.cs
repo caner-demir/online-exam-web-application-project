@@ -30,7 +30,7 @@ namespace OnlineExam.Areas.Student.Controllers
             {
                 return NotFound();
             }
-            //Check if the user is enrolled in this course course.
+            //Check if the user is enrolled in this course.
             var courseEnrolled = _unitOfWork.CourseUser
                                     .GetFirstOrDefault(cu => (cu.CourseId == id) && (cu.UserId == claim.Value) && (cu.IsAccepted == true));
             if (courseEnrolled == null)
@@ -43,6 +43,10 @@ namespace OnlineExam.Areas.Student.Controllers
 
             //Return the exams belong to this course.
             var exams = _unitOfWork.Exam.GetAll(e => e.CourseId == id);
+            foreach (var exam in exams)
+            {
+                exam.EndDate = exam.StartDate + exam.Duration;
+            }
 
             //Fetch enrolled courses and related exams for the navigation map.
             var IdsOfCoursesEnrolled = _unitOfWork.CourseUser

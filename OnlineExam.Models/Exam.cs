@@ -25,6 +25,11 @@ namespace OnlineExam.Models
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
+        [NotMapped]
+        [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
+        public DateTime EndDate { get; set; }
+
         [Required]
         [DataType(DataType.Time)]
         public TimeSpan Duration { get; set; }

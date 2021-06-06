@@ -6,6 +6,41 @@
 
 <div class="container-main-counter">
     <div class="container">
+        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:300px">
+            <h2 class="col-12 text-center text-white pb-3">Exam: @Model.Name</h2>
+            <div class="col-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-question-circle" style="font-size:50px"></i></p>
+                    <h2 id="question-counter"></h2>
+                    <h4>Questions</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-star" style="font-size:50px"></i></p>
+                    <h2 id="points-counter"></h2>
+                    <h4>Total Points</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fas fa-hourglass-end" style="font-size:50px"></i></p>
+                    <h2><span id="hours-counter"></span>hrs <span id="minutes-counter"></span>min</h2>
+                    <h4>Duration</h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                    <p><i class="fa fa-users" style="font-size:50px"></i></p>
+                    <h2 id="student-counter"></h2>
+                    <h4>Students</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="container-main-counter">
+    <div class="container">
         <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:250px">
             <h2 class="col-12 text-center text-white pb-3">Exam: @Model.Name</h2>
             <div class="col-4">
@@ -46,7 +81,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="container-teacher">
     <div class="container">
         <div class="row pt-4 pb-5" style="background-color:rgb(255,255,255,0.01)">
@@ -65,7 +100,7 @@
                 <br />
                 <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
                     <div class="col-12">
-                        <table id="tblData" class="table table-bordered table-hover w-100">
+                        <table id="tblData" class="table table-bordered table-striped w-100">
                             <thead class="thead-light">
                                 <tr>
                                     <th>#</th>

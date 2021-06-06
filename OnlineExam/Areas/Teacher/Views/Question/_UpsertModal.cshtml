@@ -11,13 +11,13 @@
     <div class="form-group">
         @if (Model.Id != 0)
         {
-            <div class="rounded d-flex align-items-center overflow-hidden shadow-sm" style="max-height:220px;">
+            <div class="rounded d-flex align-items-center overflow-hidden border" style="max-height:220px;">
                 <img id="img-preview" src="@Model.ImageUrl" class="w-100 rounded" />
             </div>
         }
         else
         {
-            <div class="rounded d-flex align-items-center overflow-hidden shadow-sm container-question">
+            <div class="rounded d-flex align-items-center overflow-hidden border container-question">
                 <img id="img-preview" src="" class="w-100" />
             </div>
         }
@@ -51,6 +51,9 @@
             //foreach (var Choice in Model.Choices)
             for (int i = 0; i < Model.Choices.Count(); i++)
             {
+                //Id of this choice.
+                <input type="hidden" name="Choices[@i].Id" value="@Model.Choices.ElementAt(i).Id" />
+
                 //Choice number of this choice with respect to the question it belongs to.
                 <input type="hidden" name="Choices[@i].ChoiceNumber" value="@Model.Choices.ElementAt(i).ChoiceNumber" />
 
@@ -83,6 +86,9 @@
         {
             for (int i = 0; i < 2; i++)
             {
+                //Id of this choice.
+                <input type="hidden" name="Choices[@i].Id" value="0" />
+
                 //Choice number of this choice with respect to the question it belongs to.
                 <input type="hidden" name="Choices[@i].ChoiceNumber" value="@i" />
 
@@ -96,7 +102,7 @@
                         <div class="input-group-text border border-secondary">
 
                             @*If this is the correct choice, make radio button checked.*@
-                            <input type="radio" atype="radio" asp-for="CorrectChoice" id="choice-@i" value="@i">
+                            <input type="radio" asp-for="CorrectChoice" id="choice-@i" value="@i">
                             <label class="form-check-label" for="choice-@i">&nbsp; Choice @letter </label>
                         </div>
                     </div>

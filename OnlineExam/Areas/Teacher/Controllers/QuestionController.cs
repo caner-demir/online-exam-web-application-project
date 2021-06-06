@@ -87,7 +87,9 @@ namespace OnlineExam.Areas.Teacher.Controllers
                 {
                     { "questionCounter", _unitOfWork.Question.GetAll(q => q.ExamId == id).Count() },
                     { "pointsCounter", _unitOfWork.Question.GetAll(q => q.ExamId == id).Select(q => q.Points).Sum() },
-                    { "studentCounter", _unitOfWork.CourseUser.GetAll(cu => cu.CourseId == courseId && cu.IsAccepted == true).Count() }
+                    { "studentCounter", _unitOfWork.CourseUser.GetAll(cu => cu.CourseId == courseId && cu.IsAccepted == true).Count() },
+                    { "durationHours", _unitOfWork.Exam.Get(id).Duration.Hours },
+                    { "durationMinutes", _unitOfWork.Exam.Get(id).Duration.Minutes }
                 };
             }
             return Json(new { counter = counterValues });
@@ -195,7 +197,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
                     _unitOfWork.Question.Update(question);
 
                     var choicesFromDb = _unitOfWork.Choice.GetAll(c => c.QuestionId == question.Id).ToList();
-                    var choicesRemoved = choicesFromDb.Where(c => !question.Choices.Any(q => q.Id == c.Id));
+                    var choicesRemoved = choicesFromDb.Where(c => !question.Choices.Any(q => q.Id == c.Id)).ToList();
                     foreach (var choice in choicesRemoved)
                     {
                         _unitOfWork.Choice.Remove(choice);

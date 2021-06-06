@@ -54,12 +54,13 @@ addChoice = () => {
     var length = $(".input-group").length - 1
     var letter = String.fromCharCode(65 + length)
     $(".input-group").last().after(`
+                            <input type="hidden" name="Choices[${length}].Id" value="0" />
                             <input type="hidden" name="Choices[${length}].ChoiceNumber" value="${length}" />
                             <input type="hidden" name="Choices[${length}].QuestionId" value="0" />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text border border-secondary">
-                                        <input type="radio" atype="radio" id="choice-${length}" value="${length}" name="CorrectChoice">
+                                        <input type="radio" id="choice-${length}" value="${length}" name="CorrectChoice">
                                         <label class="form-check-label" for="choice-${length}">&nbsp; Choice ${letter} </label>
                                     </div>
                                 </div>
@@ -70,7 +71,7 @@ addChoice = () => {
 }
 
 removeChoice = () => {
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 3; i++) {
         $('input[name^="Choices"]').last().remove()
     }
     $(".input-group").last().remove()
@@ -87,11 +88,11 @@ closeModal = () => {
 postModal = form => {
     if ($('#question-imageurl').length == 0) {
         if ($('#upload-box').val() == "") {
-            swal("Error", "Please select an Image.", "error")
+            swal("Error!", "Please select an Image.", "error")
             return false
         }
         if ($("input[name=CorrectChoice]").is(":checked") == false) {
-            swal("Error", "Please select Correct Choice.", "error")
+            swal("Error!", "Please select Correct Choice.", "error")
             return false
         }
     }    

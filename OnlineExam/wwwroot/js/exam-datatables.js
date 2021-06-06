@@ -66,7 +66,7 @@ function loadTableExams() {
                 "render": function (data) {
                     return data.duration.hours + " Hours, " + data.duration.minutes + " Minutes"
                 },
-                "width": "16%"
+                "width": "18%"
             },
             {
                 "data": "questions",

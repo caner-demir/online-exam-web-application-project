@@ -45,7 +45,7 @@ function loadDataTable() {
                 "data": "course.imageUrl",
                 "render": function (data) {
                     return `
-                            <div class="rounded d-flex align-items-center overflow-hidden" style="max-height:100px;">
+                            <div class="rounded d-flex align-items-center overflow-hidden border border-secondary" style="max-height:100px;">
                                 <img src="${data}" class="w-100" >
                             </div>
                             `
@@ -61,14 +61,14 @@ function loadDataTable() {
             {
                 "data": "students",
                 "render": function (data) {
-                    return `<i class="fas fa-user-friends"></i>&nbsp;&nbsp; ${data}`
+                    return `${data} <i class="fas fa-user-friends"></i>`
                 },
                 "width": "12%"
             },
             {
                 "data": "exams",
                 "render": function (data) {
-                    return `<i class="far fa-clipboard"></i>&nbsp;&nbsp; ${data}`
+                    return `${data}&nbsp; <i class="fas fa-clipboard"></i>`
                 },
                 "width": "12%"
             },
@@ -78,10 +78,10 @@ function loadDataTable() {
                     return `
                             <div class="text-center">
                                 <a onclick="openModal('/Teacher/Course/Upsert/${data.id}', 'Edit Course')" 
-                                        class="btn btn-success text-white" style="cursor:pointer; width:50px">
+                                        class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a onclick=Delete("/Teacher/Course/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer; width:50px">
+                                <a onclick=Delete("/Teacher/Course/Delete/${data.id}") class="btn btn-danger text-white" style="cursor:pointer">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>

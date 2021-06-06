@@ -42,8 +42,8 @@ function sendRequest(button, id) {
 
 function redirectToLogin() {
     swal({
-        title: "Warning",
-        text: "You must be logged in to enroll in a course",
+        title: "Warning!",
+        text: "You must be logged in to enroll in a course.",
         icon: "warning",
         timer: 5000
     }).then(() => {

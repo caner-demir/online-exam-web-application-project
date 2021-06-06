@@ -1,0 +1,70 @@
+﻿@model OnlineExam.Models.ViewModels.StudentQuestionVM
+
+<div class="container-student-exam">
+    <input type="hidden" asp-for="Duration" value="@string.Format("{0:hh\\:mm}", Model.Duration)" id="duration" />
+    <input type="hidden" asp-for="CourseId" id="course-id" />
+    <div class="container border-left border-right">
+        <div class="row pt-3" style="background-color:#f6f6f6; min-height:82vh">
+            <div class="col-md-2 text-primary text-center">
+                <div class="col-md-12 rounded bg-white border shadow-sm" style="margin-top:6px">
+                    <h4 class="font-weight-bold mt-2">Question</h4>
+                    <h4 class="text-secondary font-weight-bold mt-2" id="q-header">1</h4>
+                    <hr style="margin:0px">
+                    <h4 class="font-weight-bold mt-2">Points</h4>
+                    <h4 class="text-secondary font-weight-bold mt-2" id="q-points"></h4>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="col-md-12">
+                    <table id="table-questions" class="rounded bg-white border shadow-sm" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-light"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12 rounded bg-white p-2 mb-3 border shadow-sm" style="margin-top:6px">
+                    <div id="clockdiv">
+                        <div class="text-primary text-center">
+                            <h4 class=" font-weight-bold">Time Left</h4>
+                            <h4 class="text-secondary font-weight-bold">
+                                <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 rounded bg-white border shadow-sm" id="q-palette">
+                    <h4 class="text-primary font-weight-bold text-center p-2">Questions</h4>
+                    @{
+                        int index = 1;
+                        foreach (var item in Model.QuestionIds)
+                        {
+                            <div class="btn-group-vertical mb-1 q-no" style="margin:0.04rem; cursor:pointer;">
+                                <span class="btn btn-sm btn-primary shadow-sm" style="width:32px; height:24px; line-height:15px; pointer-events:none">@index</span>
+                                <span class="btn btn-sm btn-light btn-outline-primary shadow-sm" style="width:32px; height:24px; line-height:15px; pointer-events:none" id="@item"><i class="fa fas fa-question"></i></span>
+                            </div>
+                            index++;
+                        }
+                    }
+                    <div class="btn-group text-white text-md-center d-flex mt-3 mb-3" style="cursor:pointer">
+                        <a class="btn btn-danger overflow-hidden w-100 shadow-sm" id="q-prev">Previous Question</a>
+                        <a class="btn btn-success overflow-hidden w-100 shadow-sm" id="q-next">Next Question</a>
+                    </div>
+                </div>
+                <div class="col-md-12 rounded mt-3 p-0 shadow-sm" style="cursor:pointer">
+                    <a class="btn btn-danger btn-lg text-white w-100" id="btn-exit" onclick=finishExam()>Save & Exit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script src="~/js/student-question-index.js"></script>
+    <script>
+        document.getElementById("container-main").className = "container-fluid p-0";
+    </script>
+}

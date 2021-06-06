@@ -37,7 +37,7 @@ postModal = form => {
 
     if ($("#ImageUrl").length == 0) {
         if ($("#uploadBox").val() == "") {
-            swal("Error", "Please select an Image.", "error")
+            swal("Error!", "Please select an Image.", "error")
             return false
         }
     }

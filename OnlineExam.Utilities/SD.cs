@@ -15,5 +15,7 @@ namespace OnlineExam.Utilities
 
         public const string Session_SelectedCourseId = "Selected Course Id";
         public const string Session_SelectedExamId = "Selected Exam Id";
+
+        public const string Session_StudentSelectedExamId = "Student Selected Exam Id";
     }
 }

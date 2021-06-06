@@ -1,7 +1,4 @@
 ﻿@model OnlineExam.Models.ViewModels.ExamsVM
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <div class="container-student-exam">
     <div class="container border-left border-right">
@@ -28,6 +25,8 @@
                 @foreach (var exam in Model.Exams)
                 {
                     <div class="mb-5">
+                        <input type="hidden" asp-for="@exam.StartDate" id="exam-@exam.Id-startDate" />
+                        <input type="hidden" asp-for="@exam.EndDate" id="exam-@exam.Id-endDate" />
                         <div class="col-12 mb-3 bd-callout bd-callout-danger bg-primary shadow-sm" id="exam-@exam.Id">
                             <span class="text-light" style="font-size:larger">
                                 <i class="fas fa-user-edit text-light"></i>&nbsp; @exam.DateCreated.ToString("MMMM dd yyyy HH:mm")
@@ -42,7 +41,7 @@
                                 <p><span class="font-weight-bold text-secondary">Start Date:</span>&nbsp;@exam.StartDate.ToString("MMMM dd yyyy HH:mm")</p>
                                 <p><span class="font-weight-bold text-secondary">Duration:</span>&nbsp;@exam.Duration.Hours Hours, @exam.Duration.Minutes Minutes</p>
                                 <div class="text-center">
-                                    <a href="#" class="btn btn-warning rounded-0 text-dark pt-2 pb-2" style="width:130px">Begin Exam</a>
+                                    <button onclick="beginExam('@exam.Id')" class="btn btn-warning rounded-0 text-dark border border-secondary pt-2 pb-2" style="width:130px">Begin Exam</button>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +83,7 @@
 </div>
 
 @section Scripts{
+    <script src="~/js/student-exam-index.js"></script>
     <script>
         document.getElementById("container-main").className = "container-fluid p-0";
     </script>

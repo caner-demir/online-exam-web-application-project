@@ -496,3 +496,4 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\libman.json
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Teacher\Views\Course\_UpsertModal.cshtml.g.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.DataAccess.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\bin\Debug\net5.0\OnlineExam.DataAccess.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam\obj\Debug\net5.0\Razor\Areas\Student\Views\Question\Index.cshtml.g.cs
