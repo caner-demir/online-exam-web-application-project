@@ -13,7 +13,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace OnlineExam.Areas.Student.Controllers
 {
@@ -31,68 +33,100 @@ namespace OnlineExam.Areas.Student.Controllers
         }
 
         //[ServiceFilter(typeof(GetCoursesAttribute))]
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(int? page, string searchTerm = "")
         {
-            IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser");
-            var countUsers = _unitOfWork.CourseUser.GetAll(cu => cu.IsAccepted == true).Select(cu => cu.CourseId );
+            int pageNumber = (page ?? 1) - 1;
+            //Number of courses to display per page
+            int itemsPerPage = 8;
+            //Fetch courses by the page number
+            var courseList = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser")
+                                .Where(e => e.Name.Contains(searchTerm) || e.ApplicationUser.Name.Contains(searchTerm))
+                                .OrderByDescending(c => c.DateCreated)
+                                .Skip(itemsPerPage * pageNumber).Take(itemsPerPage)
+                                .ToList();
+            var totalItem = _unitOfWork.Course.GetAll()
+                                .Where(e => e.Name.Contains(searchTerm) || e.ApplicationUser.Name.Contains(searchTerm)).Count();
+            var totalUsers = _unitOfWork.CourseUser.GetAll(cu => cu.IsAccepted == true).Select(cu => cu.CourseId );
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            IList<HomeCourseVM> AllData = new List<HomeCourseVM>();
+            IList<HomeCourseVM> viewData = new List<HomeCourseVM>();
+            IPagedList<HomeCourseVM> pageOrders = null;
+            ViewData["searchTerm"] = searchTerm;
+            //Check if the user has logged in.
             if (claim != null)
             {
-                var userCourses = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
-
-                HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(userCourses, new JsonSerializerSettings
+                //Fetch the courses the user has to display them in dropdown.
+                var coursesUserHave = _unitOfWork.Course.GetAll(u => u.ApplicationUserId == claim.Value);
+                HttpContext.Session.SetString(SD.Session_MyCourses, JsonConvert.SerializeObject(coursesUserHave, new JsonSerializerSettings
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     })
                 );
-
-                var coursesTaken = _unitOfWork.CourseUser
-                                        .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true),
-                                        includeProperties: "Course")
+                //Fetch the courses the user take to display them in dropdown.
+                var coursesUserTakes = _unitOfWork.CourseUser
+                                        .GetAll(cu => (cu.UserId == claim.Value) && (cu.IsAccepted == true), includeProperties: "Course")
                                         .Select(cu => new { cu.Course.Name, cu.Course.Id })
                                         .ToList();
-                HttpContext.Session.SetString(SD.Session_CoursesTaken, JsonConvert.SerializeObject(coursesTaken));
+                HttpContext.Session.SetString(SD.Session_CoursesTaken, JsonConvert.SerializeObject(coursesUserTakes));
 
-                //For finding the courses the user has not enrolled yet, fetch the courses user is taking.
-                var coursesEnrolled = _unitOfWork.CourseUser.GetAll(cu => cu.UserId == claim.Value)
+                //For finding the courses the user has not applied or enrolled yet, first fetch the other courses.
+                var coursesUserApplied = _unitOfWork.CourseUser.GetAll(cu => cu.UserId == claim.Value)
                                         .Select(cu => cu.CourseId)
                                         .ToList();
-
-                var coursesAvailable = courseList
-                                            .Where(cl => !coursesEnrolled.Any(ce => cl.Id == ce))
+                var coursesAvailable = _unitOfWork.Course.GetAll(includeProperties: "ApplicationUser")
+                                            .Where(cl => !coursesUserApplied.Any(ce => cl.Id == ce))
+                                            .Where(e => e.Name.Contains(searchTerm) || e.ApplicationUser.Name.Contains(searchTerm))
+                                            .OrderByDescending(c => c.DateCreated)
+                                            .Skip(itemsPerPage * pageNumber).Take(itemsPerPage)
                                             .ToList();
-
+                totalItem = _unitOfWork.Course.GetAll()
+                                .Where(cl => !coursesUserApplied.Any(ce => cl.Id == ce))
+                                .Where(e => e.Name.Contains(searchTerm) || e.ApplicationUser.Name.Contains(searchTerm))
+                                .Count();
                 foreach (var course in coursesAvailable)
                 {
-                    AllData.Add(new HomeCourseVM
+                    viewData.Add(new HomeCourseVM
                     {
                         Course = course,
-                        Students = countUsers.Where(cu => cu == course.Id).Count()
+                        Students = totalUsers.Where(cu => cu == course.Id).Count()
                     });
                 }
-                return View(AllData);
+                pageOrders = new StaticPagedList<HomeCourseVM>(viewData, pageNumber + 1, itemsPerPage, totalItem);
+                //If the request is an AJAX request, return partial view.
+                if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    Thread.Sleep(800);
+                    return PartialView("_CoursesPartial", pageOrders);
+                }
+                return View(pageOrders);
             }
 
             foreach (var course in courseList)
             {
-                AllData.Add(new HomeCourseVM
+                viewData.Add(new HomeCourseVM
                 {
                     Course = course,
-                    Students = countUsers.Where(cu => cu == course.Id).Count()
+                    Students = totalUsers.Where(cu => cu == course.Id).Count()
                 });
             }
-            return View(AllData);
+
+            pageOrders = new StaticPagedList<HomeCourseVM>(viewData, pageNumber + 1, itemsPerPage, totalItem);
+            if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                Thread.Sleep(800);
+                return PartialView("_CoursesPartial", pageOrders);
+            }
+            return View(pageOrders);
         }
 
         [HttpGet]
         public IActionResult GetCounter()
         {
 
-            //Populate dictionary with values required for the counter panel.
+            //Populate the dictionary with values required for the counter panel.
             IDictionary<string, int> counterValues = new Dictionary<string, int>()
             {
                 { "userCounter", _unitOfWork.ApplicationUser.GetAll().Count() },

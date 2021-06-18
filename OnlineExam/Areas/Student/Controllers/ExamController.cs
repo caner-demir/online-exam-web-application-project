@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Models.ViewModels;
+using OnlineExam.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 namespace OnlineExam.Areas.Student.Controllers
 {
     [Area("Student")]
+    [Authorize(Roles = SD.Role_Student + "," + SD.Role_Teacher + "," + SD.Role_Admin)]
     public class ExamController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

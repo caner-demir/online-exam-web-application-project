@@ -37,7 +37,7 @@ function loadDataTable() {
                 "data": "course",
                 "render": function (data) {
                     return `
-                            <a href="/Teacher/Exam/Index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
+                            <a href="/teacher/exam/index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
                             `
                 }, "width": "20%"
             },
@@ -45,7 +45,7 @@ function loadDataTable() {
                 "data": "course.imageUrl",
                 "render": function (data) {
                     return `
-                            <div class="rounded d-flex align-items-center overflow-hidden border border-secondary" style="max-height:100px;">
+                            <div class="rounded d-flex align-items-center overflow-hidden" style="max-height:100px;">
                                 <img src="${data}" class="w-100" >
                             </div>
                             `
@@ -61,14 +61,14 @@ function loadDataTable() {
             {
                 "data": "students",
                 "render": function (data) {
-                    return `${data} <i class="fas fa-user-friends"></i>`
+                    return `${data}&nbsp;&nbsp; <i class="fas fa-user-friends text-secondary"></i>`
                 },
                 "width": "12%"
             },
             {
                 "data": "exams",
                 "render": function (data) {
-                    return `${data}&nbsp; <i class="fas fa-clipboard"></i>`
+                    return `${data}&nbsp;&nbsp; <i class="fas fa-clipboard text-secondary"></i>`
                 },
                 "width": "12%"
             },
@@ -90,6 +90,13 @@ function loadDataTable() {
             }
         ]
     })
+
+    //Scroll top after clicking a page button.
+    dataTable.on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top - 100
+        }, 'fast');
+    });
 }
 
 function Delete(url) {

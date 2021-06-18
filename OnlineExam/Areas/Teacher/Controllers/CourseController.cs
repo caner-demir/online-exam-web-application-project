@@ -12,12 +12,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace OnlineExam.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
-    [Authorize(Roles = SD.Role_Teacher)]
+    [Authorize(Roles = SD.Role_Teacher + "," + SD.Role_Admin)]
     public class CourseController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -169,8 +168,11 @@ namespace OnlineExam.Areas.Teacher.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             var objFromDb = _unitOfWork.Course.Get(id);
-            if (objFromDb == null)
+            if (objFromDb == null || (objFromDb.ApplicationUserId != claim.Value && !User.IsInRole(SD.Role_Admin)))
             {
                 return Json(new { success = false, message = "Error while deleting." });
             }

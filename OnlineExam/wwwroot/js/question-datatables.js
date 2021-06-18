@@ -48,7 +48,7 @@ function loadDataTable() {
                 "data": "imageUrl",
                 "render": function (data) {
                     return `
-                            <div class="rounded d-flex align-items-center border border-secondary overflow-hidden" style="max-height:100px;">
+                            <div class="rounded d-flex align-items-center border overflow-hidden" style="max-height:100px;">
                                 <img src="${data}" class="w-100" >
                             </div>
                             `
@@ -64,14 +64,14 @@ function loadDataTable() {
             {
                 "data": "points",
                 "render": function (data) {
-                    return `${data}&nbsp; <i class="fas fa-star"></i>`
+                    return `${data}&nbsp;&nbsp; <i class="fas fa-star text-secondary"></i>`
                 },
                 "width": "12%"
             },
             {
                 "data": "choices",
                 "render": function (data) {
-                    return `${data.length}&nbsp; <i class="fas fa-list-ul"></i>`
+                    return `${data.length}&nbsp;&nbsp; <i class="fas fa-list-ul text-secondary"></i>`
                 },
                 "width": "12%"
             },
@@ -103,6 +103,13 @@ function loadDataTable() {
             cell.innerHTML = `<span style="font-size: 110%">${i + 1}</span>`;
         });
     }).draw();
+
+    //Scroll top after clicking a page button.
+    dataTable.on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top - 100
+        }, 'fast');
+    });
 }
 
 function Delete(url) {

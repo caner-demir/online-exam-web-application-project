@@ -24,7 +24,7 @@
         buttons: true
     }).then((accept) => {
         if (accept) {
-            window.location.href = "/Student/Question/Index/" + id
+            window.location.href = "/student/question/index/" + id
         }
     })
 

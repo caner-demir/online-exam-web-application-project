@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GfdZzu52ZC87rdjmD+mN4qYkCfhvZ72SIevROL+2yt3BrvEsmId6Lesl/01ZEHdiLN8GayXq4XKtKwx2M/Q4ig==",
+  "dgSpecHash": "SuSIq42cKHus+tOIe77uFSWtYfskbPsnhGY89+yI9+uCLg0tjbjwDjq4aYzbdgSSJ0BHaJrVqRM+NRdXjKJPSw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Caner Demir\\Caner\\OnlineExam\\OnlineExam\\OnlineExam.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Caner Demir\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Caner Demir\\.nuget\\packages\\jetbrains.annotations\\2021.1.0\\jetbrains.annotations.2021.1.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.4\\microsoft.aspnetcore.cryptography.internal.5.0.4.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.4\\microsoft.aspnetcore.cryptography.keyderivation.5.0.4.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\5.0.1\\microsoft.aspnetcore.diagnostics.entityframeworkcore.5.0.1.nupkg.sha512",
@@ -141,7 +142,8 @@
     "C:\\Users\\Caner Demir\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Caner Demir\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\Caner Demir\\.nuget\\packages\\tinymce\\5.8.0\\tinymce.5.8.0.nupkg.sha512"
+    "C:\\Users\\Caner Demir\\.nuget\\packages\\x.pagedlist\\8.1.0\\x.pagedlist.8.1.0.nupkg.sha512",
+    "C:\\Users\\Caner Demir\\.nuget\\packages\\x.pagedlist.mvc.core\\8.1.0\\x.pagedlist.mvc.core.8.1.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -13,6 +13,10 @@
     {
       "library": "moment.js@2.29.1",
       "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "library": "jquery-ajax-unobtrusive@3.2.6",
+      "destination": "wwwroot/lib/jquery-ajax-unobtrusive/"
     }
   ]
 }

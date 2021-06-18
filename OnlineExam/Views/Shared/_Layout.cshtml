@@ -7,31 +7,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ExamHub</title>
+    <title>ExamHub - Online Exam System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
-<body>
+<body>    
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom border-light shadow-sm fixed-top" style="font-family: Helvetica">
+        @await RenderSectionAsync("NavbarSearch", required: false)
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary shadow @(IsSectionDefined("NavbarSearch") == true ? null : "fixed-top")" id="navbar-brand" style="font-family: Helvetica">
             <div class="container">
-                <a class="navbar-brand" style="font-size:125%" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-check-double text-warning"></i> ExamHub</a>
+                <a class="navbar-brand font-weight-bold" style="font-size:150%" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-check-double text-warning"></i> ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Student))
+                        @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Student) || User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item nav-hover dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Courses Taken
                                 </a>
-                                <div class="dropdown-menu border-secondary" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:220px" aria-labelledby="navbarDropdown">
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_CoursesTaken) != null)
                                     {
                                         var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_CoursesTaken);
@@ -39,33 +40,49 @@
                                         {
                                             foreach (var course in allCourses)
                                             {
-                                                <a class="dropdown-item" asp-area="Student" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
+                                                <a class="dropdown-item @(course == allCourses.Last() ? null : "border-bottom")" asp-area="Student" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" href="#">No Course Available</a>
+                                        }
+                                    }
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="nav-item nav-hover dropdown ml-1">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Course Management
+                                </a>
+                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:220px" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" style="font-size:105%" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_MyCourses) != null)
+                                    {
+                                        var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_MyCourses);
+                                        if (allCourses.Count > 0)
+                                        {
+                                            <div class="dropdown-divider" style="border-color:gainsboro;"></div>
+                                            foreach (var course in allCourses)
+                                            {
+                                                <a class="dropdown-item @(course == allCourses.Last() ? null : "border-bottom")" asp-area="Teacher" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
                                             }
                                         }
                                     }
                                 </div>
                             </li>
                         }
-                        @if (User.IsInRole(SD.Role_Teacher))
+                        @if (User.IsInRole(SD.Role_Admin))
                         {
-                            <li class="nav-item nav-hover dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Course Management
+                            <li class="nav-item nav-hover dropdown ml-1">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin Area
                                 </a>
-                                <div class="dropdown-menu border-secondary" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
-                                    @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_MyCourses) != null)
-                                    {
-                                        var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_MyCourses);
-                                        if (allCourses.Count > 0)
-                                        {
-                                            <div class="dropdown-divider"></div>
-                                            foreach (var course in allCourses)
-                                            {
-                                                <a class="dropdown-item" asp-area="Teacher" asp-controller="Exam" asp-action="Index" asp-route-id="@course.Id">@course.Name</a>
-                                            }
-                                        }
-                                    }
+                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:220px" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item border-bottom" style="font-size:105%" asp-area="Admin" asp-controller="User" asp-action="Index">All Users</a>
+                                    <a class="dropdown-item" style="font-size:105%" asp-area="Admin" asp-controller="Course" asp-action="Index">All Courses</a>
                                 </div>
                             </li>
                         }
@@ -75,10 +92,17 @@
             </div>
         </nav>
     </header>
-    <div class="container p-3" id="container-main" style="margin-top:64px">
+    <div class="container-fluid p-0" id="container-main" style="@(IsSectionDefined("NavbarSearch") == true ? null : "margin-top:72px")">
         <main role="main">
             @RenderBody()
         </main>
+    </div>
+
+    <!-- Loader -->
+    <div class="d-flex align-items-center justify-content-center d-none loader-body" id="loader-body">
+        <div class="fa-3x text-light">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
     </div>
 
     <footer class="footer text-light border-top" style="background:#2e5374; font-size:large;">
@@ -87,6 +111,7 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

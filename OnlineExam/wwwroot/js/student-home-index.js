@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    hideNavbar()
     loadCounterValues()
 })
 
@@ -38,6 +39,21 @@ function sendRequest(button, id) {
             }
         }
     })
+}
+
+function hideNavbar() {
+    $(window).on('scroll', function () {
+        var heightNavbarSearch = 280
+        var divMain = $(".container-fluid")
+        var navbarBrand = $("#navbar-brand");
+        if (window.pageYOffset > heightNavbarSearch) {
+            divMain.addClass("sticky-div-padding")
+            navbarBrand.addClass("fixed-top")
+        } else {
+            divMain.removeClass("sticky-div-padding")
+            navbarBrand.removeClass("fixed-top")
+        }
+    });
 }
 
 function redirectToLogin() {

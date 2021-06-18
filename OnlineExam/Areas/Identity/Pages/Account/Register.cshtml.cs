@@ -101,7 +101,11 @@ namespace OnlineExam.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (Input.IsInRoleTeacher == true)
+                    if (User.IsInRole(SD.Role_Admin))
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Admin);
+                    }
+                    else if (Input.IsInRoleTeacher == true)
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_Teacher);
                     }
@@ -127,8 +131,15 @@ namespace OnlineExam.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        if (!User.IsInRole(SD.Role_Admin))
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "User", new { Area = "Admin" });
+                        }
                     }
                 }
                 foreach (var error in result.Errors)

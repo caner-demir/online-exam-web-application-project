@@ -36,7 +36,7 @@ function loadQuestionTable() {
                                         </label>
                                     </div>
                                 </div>
-                                <label class="form-control border h-100" style="height:100%" for="${data.choices[i].id}">
+                                <label class="form-control border h-100" for="${data.choices[i].id}">
                                 ${data.choices[i].description}
                                 </label>
                             </div>`
@@ -70,21 +70,20 @@ var questionSelBottom = "btn-outline-warning";
 var questionDef = "btn-primary";
 var questionDefBottom = "btn-outline-primary";
 var successIcon = "fa-check";
+var durationWait = 400;
 
 
 // Question no headerinin yönetimi.
-$(function () {
-    setInterval(function () {
-        index = $(".q-selected").text();
-        $("#q-header").text(index);
-        var points = $("#q-points-" + index).val();
-        $("#q-points").text(points);
-    }, 100);
-});
+function changeQuestionNo() {
+    index = $(".q-selected").text();
+    $("#q-header").text(index);
+    var points = $("#q-points-" + index).val();
+    $("#q-points").text(points + " pts");
+}
 
-// Ilk "Mevcut soru" ikonunun yüklenmesi.
+// İlk "Mevcut soru" ikonunun yüklenmesi.
 $(document).ready(function () {
-    $(function () {
+    $(async function () {
         var first = $("#q-palette div:nth-child(2)").children().first();
         var firstBottom = $("#q-palette div:nth-child(2)").children().first().next();
 
@@ -92,6 +91,8 @@ $(document).ready(function () {
         first.removeClass(questionDef);
         firstBottom.addClass(questionSelBottom);
         firstBottom.removeClass(questionDefBottom);
+        await new Promise(r => setTimeout(r, durationWait));
+        changeQuestionNo()
     });
 });
 
@@ -108,7 +109,8 @@ $(function () {
 
 // "Mevcut soru" ikonunun tabloda yönetimi.
 $(function () {
-    $("#q-palette").on("click", ".q-no", function () {
+    $("#q-palette").on("click", ".q-no", async function () {
+        await new Promise(r => setTimeout(r, durationWait));
         // Onceki "Mevcut soru" ikonunun kaldirilmasi.
         var btn = $(".q-selected");
         var btnBottom = $(".q-selected").next();
@@ -135,9 +137,13 @@ $(function () {
 
 // "Mevcut soru" ikonunun previous ve next butonlarinda yönetimi.
 $(function () {
-    $("#q-prev").click(function () {
+    $("#q-prev").click(async function () {
+        $("#table-questions").addClass('d-none');
+        $("#loader-body").removeClass('d-none');
+        await new Promise(r => setTimeout(r, durationWait));
+        $("#table-questions").removeClass('d-none');
+        $("#loader-body").addClass('d-none');
         $(".pagination li:nth-child(2)").click();
-
         // "Mevcut soru" ikonunun yönetimi.
         var btn = $(".q-selected");
         var btnBottom = $(".q-selected").next();
@@ -163,10 +169,15 @@ $(function () {
             }
             btnBottom.removeClass(questionSelBottom);
         }
+        changeQuestionNo();
     });
-    $("#q-next").click(function () {
+    $("#q-next").click(async function () {
+        $("#table-questions").addClass('d-none');
+        $("#loader-body").removeClass('d-none');
+        await new Promise(r => setTimeout(r, durationWait));
+        $("#table-questions").removeClass('d-none');
+        $("#loader-body").addClass('d-none');
         $(".pagination li:nth-last-child(2)").click();
-
         // "Mevcut soru" ikonunun yönetimi.
         var btn = $(".q-selected");
         var btnBottom = $(".q-selected").next();
@@ -193,17 +204,24 @@ $(function () {
             }
             btnBottom.removeClass(questionSelBottom);
         }
+        changeQuestionNo();
     });
 });
 
 // Soru tablosunun paginationdaki linklere baglanmasi.
 $(function () {
-    $("#q-palette").on("click", ".q-no", function () {
+    $("#q-palette").on("click", ".q-no", async function () {
+        $("#table-questions").addClass('d-none');
+        $("#loader-body").removeClass('d-none');
+        await new Promise(r => setTimeout(r, durationWait));
+        $("#table-questions").removeClass('d-none');
+        $("#loader-body").addClass('d-none');
         var id = $(this).children().first().text();
         $(".page-link").first().click();
         for (i = 0; i < id - 1; i++) {
             $(".pagination li:nth-last-child(2)").click();
         }
+        changeQuestionNo();
     });
 });
 
@@ -277,7 +295,7 @@ function Redirect() {
 function finishExam() {
     swal({
         title: "Are you sure?",
-        text: "You are about to submit answers.",
+        text: "You are about to submit the answers.",
         icon: "warning",
         buttons: true,
         dangerMode: true

@@ -28,9 +28,9 @@
                 <label asp-for="Points"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text border border-secondary"><i class="fa fa-star"></i></div>
+                        <div class="input-group-text border"><i class="fa fa-star"></i></div>
                     </div>
-                    <input asp-for="Points" class="form-control border border-secondary" />
+                    <input asp-for="Points" class="form-control border" />
                 </div>
                 <span asp-validation-for="Points" class="text-danger"></span>
             </div>
@@ -39,7 +39,7 @@
             <label>Image</label>
             <div class="custom-file">
                 <input type="file" name="files" id="upload-box" accept="image/*" multiple class="custom-file-input" />
-                <label class="custom-file-label border border-secondary" for="upload-box">Choose an Image file...</label>
+                <label class="custom-file-label border" for="upload-box">Choose an Image file...</label>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
                 char letter = (char)('A' + (char)(i % 27));
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <div class="input-group-text border border-secondary">
+                        <div class="input-group-text border">
 
                             @*If this is the correct choice, make radio button checked.*@
                             <input type="radio" asp-for="CorrectChoice" id="choice-@i" value="@Model.Choices.ElementAt(i).ChoiceNumber"
@@ -74,7 +74,7 @@
                     </div>
 
                     @*Fill input element with the content of this choice.*@
-                    <textarea rows="1" class="form-control border border-secondary" asp-for="@Model.Choices.ElementAt(i).Description" name="Choices[@i].Description" id="description-@i"></textarea>
+                    <textarea rows="1" class="form-control border" asp-for="@Model.Choices.ElementAt(i).Description" name="Choices[@i].Description" id="description-@i"></textarea>
                     @*<span asp-validation-for="@Model.Choices.ElementAt(i).Description" class="text-danger"></span>*@
                     @*<div class="input-group-append">
                             <button class="btn input-group-text" type="button"><i class="fas fa-plus pl-2 pr-2"></i></button>
@@ -99,7 +99,7 @@
                 char letter = (char)('A' + (char)(i % 27));
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <div class="input-group-text border border-secondary">
+                        <div class="input-group-text border">
 
                             @*If this is the correct choice, make radio button checked.*@
                             <input type="radio" asp-for="CorrectChoice" id="choice-@i" value="@i">
@@ -108,7 +108,7 @@
                     </div>
 
                     @*Fill input element with the content of this choice.*@
-                    <textarea rows="1" class="form-control border border-secondary" name="Choices[@i].Description"></textarea>
+                    <textarea rows="1" class="form-control border" name="Choices[@i].Description"></textarea>
                 </div>
             }
         }

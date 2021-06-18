@@ -1,8 +1,11 @@
-﻿openModal = (url, title) => {
+﻿openModal = async (url, title) => {
+    $("#loader-body").removeClass('d-none');
+    await new Promise(r => setTimeout(r, 400));
     $.ajax({
         type: "GET",
         url: url,
         success: function (response) {
+            $("#loader-body").addClass('d-none');
             $("#form-modal .modal-body").html(response)
             $("#form-modal .modal-title").html(title)
             $("#form-modal").modal("show")
@@ -26,22 +29,22 @@ addButtons = () => {
     if (length == 3) {
         $(".input-group").last().append(`
                                 <div class="input-group-append">
-                                    <button onclick="addChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                                    <button onclick="addChoice()" class="btn btn-outline-secondary" style="border-color:#dcdcdc" type="button"><i class="fas fa-plus"></i></button>
                                 </div>`
         )
     }
     else if (length <= 5) {
         $(".input-group").last().append(`
                                 <div class="input-group-append">
-                                    <button onclick="removeChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
-                                    <button onclick="addChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                                    <button onclick="removeChoice()" class="btn btn-outline-secondary" style="border-color:#dcdcdc" type="button"><i class="fas fa-minus"></i></button>
+                                    <button onclick="addChoice()" class="btn btn-outline-secondary" style="border-color:#dcdcdc" type="button"><i class="fas fa-plus"></i></button>
                                 </div>`
         )
     }
     else if (length == 6) {
         $(".input-group").last().append(`
                                 <div class="input-group-append">
-                                    <button onclick="removeChoice()" class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
+                                    <button onclick="removeChoice()" class="btn btn-outline-secondary" style="border-color:#dcdcdc" type="button"><i class="fas fa-minus"></i></button>
                                 </div>`
         )
     }
@@ -59,12 +62,12 @@ addChoice = () => {
                             <input type="hidden" name="Choices[${length}].QuestionId" value="0" />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text border border-secondary">
+                                    <div class="input-group-text border">
                                         <input type="radio" id="choice-${length}" value="${length}" name="CorrectChoice">
                                         <label class="form-check-label" for="choice-${length}">&nbsp; Choice ${letter} </label>
                                     </div>
                                 </div>
-                                <textarea rows="1" class="form-control border border-secondary" name="Choices[${length}].Description"></textarea>
+                                <textarea rows="1" class="form-control border" name="Choices[${length}].Description"></textarea>
                             </div>
     `)
     addButtons()
@@ -92,8 +95,11 @@ postModal = form => {
             return false
         }
         if ($("input[name=CorrectChoice]").is(":checked") == false) {
-            swal("Error!", "Please select Correct Choice.", "error")
+            swal("Error!", "Please select the Correct Choice.", "error")
             return false
+        }
+        if ($("#Points").val() == 0) {
+            swal("Error!", "Please enter a value greater than 0 to the Points field.", "error")
         }
     }    
     $.ajax({

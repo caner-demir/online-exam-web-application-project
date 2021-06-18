@@ -1,36 +1,35 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-main-counter">
     <div class="container">
-        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:300px">
-            <h2 class="col-12 text-center text-white pb-3">Some Numbers</h2>
+        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:360px">
+            <h2 class="col-12 text-center text-light pb-3">Some Numbers</h2>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fa fa-users" style="font-size:50px"></i></p>
+                    <p><i class="fa fa-users text-light" style="font-size:50px"></i></p>
                     <h2 id="student-counter"></h2>
                     <h4>Students</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-shapes" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-shapes text-light" style="font-size:50px"></i></p>
                     <h2 id="course-counter"></h2>
                     <h4>Courses</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-clipboard-list" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-clipboard-list text-light" style="font-size:50px"></i></p>
                     <h2 id="exam-counter"></h2>
                     <h4>Exams</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-question-circle" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-question-circle text-light" style="font-size:50px"></i></p>
                     <h2 id="question-counter"></h2>
                     <h4>Questions</h4>
                 </div>
@@ -40,7 +39,7 @@
 </div>
 <div class="container-teacher">
     <div class="container">
-        <div class="row pt-4 pb-5" style="background-color:rgb(255,255,255,0.01)">
+        <div class="row pt-5 pb-5" style="background-color:rgb(255,255,255,0.01)">
             <div class="col-12">
                 <div class="row pt-3 pb-2 bg-light rounded shadow-sm border">
                     <div class="col-6">
@@ -54,7 +53,7 @@
                     </div>
                 </div>
                 <br />
-                <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
+                <div class="row bg-white mt-2 pt-4 pb-4 rounded shadow-sm border">
                     <div class="col-12">
                         <table id="tblData" class="table table-bordered table-striped w-100">
                             <thead class="thead-light">
@@ -95,9 +94,6 @@
 @section Scripts{
     <script src="~/js/course-datatables.js"></script>
     <script src="~/js/course-modal-form.js"></script>
-    <script>
-        document.getElementById("container-main").className = "container-fluid p-0";
-    </script>
 }
 
 

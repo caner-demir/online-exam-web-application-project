@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OnlineExam.DataAccess.Repository.IRepository;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 namespace OnlineExam.Areas.Student.Controllers
 {
     [Area("Student")]
+    [Authorize(Roles = SD.Role_Student + "," + SD.Role_Teacher + "," + SD.Role_Admin)]
     public class QuestionController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

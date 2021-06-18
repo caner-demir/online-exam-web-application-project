@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace OnlineExam.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
-    [Authorize(Roles = SD.Role_Teacher)]
+    [Authorize(Roles = SD.Role_Teacher + "," + SD.Role_Admin)]
     public class QuestionController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -148,7 +148,7 @@ namespace OnlineExam.Areas.Teacher.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Question question)
         {
-            if (ModelState.IsValid && question.CorrectChoice != null && question.Choices.Count() <= 5)
+            if (ModelState.IsValid && question.CorrectChoice != null && question.Choices.Count() <= 5 && question.Points > 0)
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;

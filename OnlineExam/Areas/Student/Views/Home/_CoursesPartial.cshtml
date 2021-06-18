@@ -1,0 +1,51 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<OnlineExam.Models.ViewModels.HomeCourseVM>
+
+@foreach (var course in Model)
+{
+    <div class="col-md-3 mb-3">
+        <div class="card mb-4 bg-light card-home shadow-lg">
+            <div class="overflow-hidden rounded-top">
+                <img src="@course.Course.ImageUrl" class="card-img-top" style="width:100%; height:225px; object-fit:cover" />
+            </div>
+            <div class="card-body text-black-50 rounded-bottom">
+                <h5 class="font-weight-bolder text-secondary">@course.Course.Name</h5>
+                <div class="d-flex justify-content-between font-weight-bold">
+                    <p style="font-size:small"><i class="fas fa-user text-primary"></i>&nbsp; By @course.Course.ApplicationUser.Name</p>
+                    <p style="font-size:small">
+                        <i class="fas fa-users text-primary"></i>&nbsp;
+                        @course.Students Students
+                    </p>
+                </div>
+                <p class="card-text text-dark home-description" style="font-family: sans-serif;">@course.Course.DescriptionShort</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="sendRequest(this, @course.Course.Id)">Enroll</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="redirectToLogin()">Enroll</button>
+                    }
+                    <small class="font-weight-bold">@course.Course.DateCreated.ToString("MMM dd yyyy")</small>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTerm = ViewData["searchTerm"] }),
+    new PagedListRenderOptions
+    {
+        MaximumPageNumbersToDisplay = 5,
+        ContainerDivClasses = new string[] { "container mt-auto" },
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+        UlElementClasses = new string[] { "pagination justify-content-center" },
+        LinkToFirstPageFormat = "<< First",
+        LinkToLastPageFormat = "Last >>",
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always
+    }
+)

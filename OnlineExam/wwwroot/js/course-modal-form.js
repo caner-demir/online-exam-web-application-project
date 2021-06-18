@@ -1,9 +1,11 @@
-﻿openModal = (url, title) => {
-    
+﻿openModal = async (url, title) => {
+    $("#loader-body").removeClass('d-none');
+    await new Promise(r => setTimeout(r, 400));
     $.ajax({
         type: "GET",
         url: url,
         success: function (response) {
+            $("#loader-body").addClass('d-none');
             $("#form-modal .modal-body").html(response)
             $("#form-modal .modal-title").html(title)
             $("#form-modal").modal("show")
@@ -23,7 +25,7 @@
                 //menubar: 'file edit format',
                 toolbar: 'undo redo | styleselect | fontselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | removeformat',
                 toolbar_mode: 'floating',
-                height: 195,
+                height: 190,
             })
         }
     })

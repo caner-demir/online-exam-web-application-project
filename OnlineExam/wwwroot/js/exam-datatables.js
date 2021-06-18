@@ -7,8 +7,18 @@ $(document).ready(function () {
     loadTableExams()
     loadTableStudents()
     loadTableRequests()
+    changeNav()
 })
 
+// Change nav content on click event.
+function changeNav() {
+    $(".container-teacher").on("click", ".nav-link", function () {
+        $(".nav-exam").each(function () {
+            $(this).addClass("d-none")
+        })
+        $("." + $(this).attr("id")).removeClass("d-none")
+    })
+}
 
 // ------------------------------- Code section for counter panel. ---------------------------
 function loadCounterValues() {
@@ -43,7 +53,7 @@ function loadTableExams() {
                 "data": "exam",
                 "render": function (data) {
                     return `
-                            <a href="/Teacher/Question/Index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
+                            <a href="/teacher/question/index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
                             `
                 }, "width": "20%"
             },
@@ -93,6 +103,13 @@ function loadTableExams() {
             }
         ]
     })
+
+    //Scroll top after clicking a page button.
+    dataTable.on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top - 100
+        }, 'fast');
+    });
 }
 
 function Delete(url) {
@@ -165,6 +182,13 @@ function loadTableStudents() {
             }
         ]
     })
+
+    //Scroll top after clicking a page button.
+    dataTableStudents.on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top - 100
+        }, 'fast');
+    });
 }
 
 function deleteStudent(userName) {
@@ -243,6 +267,13 @@ function loadTableRequests() {
             }
         ]
     })
+
+    //Scroll top after clicking a page button.
+    dataTableRequests.on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top - 100
+        }, 'fast');
+    });
 }
 
 function acceptRequest(userName) {

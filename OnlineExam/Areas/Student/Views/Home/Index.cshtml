@@ -1,48 +1,73 @@
 ﻿@using OnlineExam.Utilities
-@model IEnumerable<OnlineExam.Models.ViewModels.HomeCourseVM>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<OnlineExam.Models.ViewModels.HomeCourseVM>
 
-    <div class="container-main-intro">
+@section NavbarSearch{ 
+    <div class="container-main-head" style="">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <h1 style="margin-top: 80px">Create your own test</h1>
-                    <h2 style="margin-bottom: 60px">The online exam builder you've been looking for</h2>
-                    <h4>Courses</h4>
-                    <a class="text-success" style="display:inline-block; margin-bottom:40px" href="#container-main-courses">
-                        <h1 class="display-3 fas fa-angle-double-down arrow"></h1>
-                    </a>
+                <div class="col-6">
+                    <div class="d-flex flex-column align-items-start justify-content-center" style="height:280px">
+                        <h1 class="text-light">Your Online<br>Testing Partner</h1>
+                        <p class="text-white-50">Online exam system for all your testing needs for <strong>assessment, recruitment, selection</strong> and <strong>certifications.</strong></p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex flex-column align-items-end" style="height:280px">
+                        <form method="get" data-ajax="true" data-ajax-begin="ajaxBegin" data-ajax-success="ajaxSuccess" asp-action="Index" class="mt-auto mb-4 form-inline">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchTerm">
+                            <button type="submit" class="ml-2 btn btn-outline-light rounded-0">SEARCH</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+}
+<div class="container-main-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center text-dark">
+                <h1 style="margin-top: 60px">Create Your Own Test</h1>
+                <h2 style="margin-bottom: 60px">The Online Exam Builder You've Been Looking For</h2>
+                <h4>Courses</h4>
+                <a class="text-success" style="display:inline-block; margin-bottom:60px" href="#courses">
+                    <h1 class="display-3 fas fa-angle-double-down arrow"></h1>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-main-counter">
     <div class="container">
-        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:400px">
-            <h2 class="col-12 text-center text-white mb-0">Numbers Speak Aloud</h2>
+        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:450px">
+            <h1 class="col-12 text-center text-light mb-0">Numbers Speak Aloud</h1>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fa fa-users" style="font-size:50px"></i></p>
+                    <p><i class="fa fa-users text-light" style="font-size:50px"></i></p>
                     <h2><span id="user-counter"></span>+</h2>
                     <h4>Users</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-shapes" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-shapes text-light" style="font-size:50px"></i></p>
                     <h2><span id="course-counter"></span>+</h2>
                     <h4>Courses</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-clipboard-list" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-clipboard-list text-light" style="font-size:50px"></i></p>
                     <h2><span id="exam-counter"></span>+</h2>
                     <h4>Exams</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-question-circle" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-question-circle text-light" style="font-size:50px"></i></p>
                     <h2><span id="question-counter"></span>+</h2>
                     <h4>Questions</h4>
                 </div>
@@ -50,50 +75,47 @@
         </div>
     </div>
 </div>
-<div class="container-main-courses p-0" id="container-main-courses">
-    <div class="container pt-4">
-        <h2 class="text-light text-center">Courses</h2>
-        <div class="row pt-4 pb-4">
-            @foreach (var course in Model)
-            {
-                <div class="col-md-3">
-                    <div class="card mb-4 card-home border">
-                        <div class="overflow-hidden rounded-top">
-                            <img src="@course.Course.ImageUrl" class="card-img-top" style="width:100%; height:225px; object-fit:cover" />
-                        </div>
-                        <div class="card-body text-black-50 rounded-bottom">
-                            <h5 class="font-weight-bolder">@course.Course.Name</h5>
-                            <div class="d-flex justify-content-between font-weight-bold">
-                                <p style="font-size:small"><i class="fas fa-user"></i>&nbsp; By @course.Course.ApplicationUser.Name</p>
-                                <p style="font-size:small">
-                                    <i class="fas fa-users"></i>&nbsp;
-                                    @course.Students Students
-                                </p>
-                            </div>
-                            <p class="card-text text-dark home-description" style="font-family: sans-serif;">@course.Course.DescriptionShort</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="sendRequest(this, @course.Course.Id)">Enroll</button>
-                                }
-                                else
-                                {
-                                    <button type="button" class="btn btn-sm btn-success" style="width:80px" onclick="redirectToLogin()">Enroll</button>
-                                }
-                                <small class="font-weight-bold">@course.Course.DateCreated.ToString("MMM dd yyyy")</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
+<div class="container-main-courses p-0" id="courses">
+    <div class="container pt-5">
+        <h1 class="text-light text-center">Courses</h1>
+        <div class="row pt-4 pb-5" id="courses-partial" style="min-height:1114px">
+            <partial name="_CoursesPartial" model="Model" />           
         </div>
     </div>
 </div>
 
-
 @section Scripts{
     <script src="~/js/student-home-index.js"></script>
     <script>
-        document.getElementById("container-main").className = "container-fluid p-0";
+        var loadingIcon =
+                    `<div class="d-flex align-items-center justify-content-center w-100" style="height:768px">
+                        <div class="fa-3x text-light">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </div>
+                    </div>`
+
+        $(function () {
+            $('#courses-partial').on('click', 'a', function () {                
+                window.location = "#courses"
+                $('#courses-partial').html(loadingIcon);
+                $.ajax({
+                    url: this.href,
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#courses-partial').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+        function ajaxBegin() {
+            $('#courses-partial').html(loadingIcon);
+            window.location = "#courses";
+        }
+        function ajaxSuccess(xhr) {
+            $('#courses-partial').html(xhr);
+        }
     </script>
 }

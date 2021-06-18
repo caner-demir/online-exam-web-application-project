@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace OnlineExam.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
-    [Authorize(Roles = SD.Role_Teacher)]
+    [Authorize(Roles = SD.Role_Teacher + "," + SD.Role_Admin)]
     public class ExamController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

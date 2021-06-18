@@ -6,85 +6,42 @@
 
 <div class="container-main-counter">
     <div class="container">
-        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:300px">
-            <h2 class="col-12 text-center text-white pb-3">Exam: @Model.Name</h2>
+        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:360px">
+            <h2 class="col-12 text-center text-light pb-3"><span class="text-white-50">Exam:</span> @Model.Name</h2>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-question-circle" style="font-size:50px"></i></p>
-                    <h2 id="question-counter"></h2>
+                    <p><i class="fas fa-question-circle text-light" style="font-size:50px"></i></p>
+                    <h2 class="text-light" id="question-counter"></h2>
                     <h4>Questions</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fa fa-star" style="font-size:50px"></i></p>
-                    <h2 id="points-counter"></h2>
+                    <p><i class="fa fa-star text-light" style="font-size:50px"></i></p>
+                    <h2 class="text-light" id="points-counter"></h2>
                     <h4>Total Points</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-hourglass-end" style="font-size:50px"></i></p>
-                    <h2><span id="hours-counter"></span>hrs <span id="minutes-counter"></span>min</h2>
+                    <p><i class="fas fa-hourglass-end text-light" style="font-size:50px"></i></p>
+                    <h2 class="text-light"><span id="hours-counter"></span>hrs <span id="minutes-counter"></span>min</h2>
                     <h4>Duration</h4>
                 </div>
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fa fa-users" style="font-size:50px"></i></p>
-                    <h2 id="student-counter"></h2>
+                    <p><i class="fa fa-users text-light" style="font-size:50px"></i></p>
+                    <h2 class="text-light" id="student-counter"></h2>
                     <h4>Students</h4>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@*<div class="container-main-counter">
-    <div class="container">
-        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:250px">
-            <h2 class="col-12 text-center text-white pb-3">Exam: @Model.Name</h2>
-            <div class="col-4">
-                <div class="col-12 border-thick border-primary rounded text-white d-flex align-items-center justify-content-center pt-5 pb-5 shadow">
-                    <div class="d-inline-block">
-                        <i class="fas fa-question-circle mr-4" style="font-size:60px"></i>
-                    </div>
-                    <div class="d-inline-block">
-                        <h2 class="d-inline-block" id="question-counter"></h2>
-                        <br />
-                        <h4 class="d-inline-block">Questions</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="col-12 border-thick border-primary rounded text-white d-flex align-items-center justify-content-center pt-5 pb-5 shadow">
-                    <div class="d-inline-block">
-                        <i class="fa fa-star mr-4" style="font-size:60px"></i>
-                    </div>
-                    <div class="d-inline-block">
-                        <h2 class="d-inline-block" id="points-counter"></h2>
-                        <br />
-                        <h4 class="d-inline-block">Total Points</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="col-12 border-thick border-primary rounded text-white d-flex align-items-center justify-content-center pt-5 pb-5 shadow">
-                    <div class="d-inline-block">
-                        <i class="fa fa-users mr-4" style="font-size:60px"></i>
-                    </div>
-                    <div class="d-inline-block">
-                        <h2 class="d-inline-block" id="student-counter"></h2>
-                        <br />
-                        <h4 class="d-inline-block">Students</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
 <div class="container-teacher">
     <div class="container">
-        <div class="row pt-4 pb-5" style="background-color:rgb(255,255,255,0.01)">
+        <div class="row pt-5 pb-5" style="background-color:rgb(255,255,255,0.01)">
             <div class="col-12">
                 <div class="row pt-3 pb-2 bg-light rounded shadow-sm border">
                     <div class="col-6">
@@ -98,7 +55,7 @@
                     </div>
                 </div>
                 <br />
-                <div class="row bg-white pt-3 pb-3 rounded shadow-sm border">
+                <div class="row bg-white mt-2 pt-4 pb-4 rounded shadow-sm border">
                     <div class="col-12">
                         <table id="tblData" class="table table-bordered table-striped w-100">
                             <thead class="thead-light">
@@ -139,7 +96,4 @@
 @section Scripts{
     <script src="~/js/question-datatables.js"></script>
     <script src="~/js/question-modal-form.js"></script>
-    <script>
-        document.getElementById("container-main").className = "container-fluid p-0";
-    </script>
 }

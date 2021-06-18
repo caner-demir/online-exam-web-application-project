@@ -1,9 +1,9 @@
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\bin\Debug\netcoreapp3.1\OnlineExam.Models.deps.json
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\bin\Debug\netcoreapp3.1\OnlineExam.Models.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\bin\Debug\netcoreapp3.1\OnlineExam.Models.pdb
-C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.csprojAssemblyReference.cache
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.AssemblyInfoInputs.cache
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.AssemblyInfo.cs
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.csproj.CoreCompileInputs.cache
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.Models\obj\Debug\netcoreapp3.1\OnlineExam.Models.csproj.AssemblyReference.cache

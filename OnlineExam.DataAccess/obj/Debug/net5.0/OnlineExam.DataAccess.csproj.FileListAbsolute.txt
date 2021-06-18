@@ -23,7 +23,6 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\bin\Debug\net5.0\Onl
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\bin\Debug\net5.0\OnlineExam.Utilities.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\bin\Debug\net5.0\OnlineExam.Models.pdb
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\bin\Debug\net5.0\OnlineExam.Utilities.pdb
-C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.csprojAssemblyReference.cache
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.AssemblyInfoInputs.cache
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.AssemblyInfo.cs
@@ -32,3 +31,4 @@ C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\Onl
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\ref\OnlineExam.DataAccess.dll
 C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.pdb
+C:\Users\Caner Demir\Caner\OnlineExam\OnlineExam.DataAccess\obj\Debug\net5.0\OnlineExam.DataAccess.csproj.AssemblyReference.cache

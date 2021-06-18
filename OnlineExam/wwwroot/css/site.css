@@ -58,11 +58,16 @@ html {
     min-height: 100%;
     /* Scrolling behavior for page scrolling */
     scroll-behavior: smooth;
+    /* Prevent sticky header from overlapping with page sections when using anchor links */
+    scroll-padding-top: 72px;
+}
+.sticky-div-padding {
+    padding-top: 72px !important;
 }
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     font-family: Helvetica;
 }
 .footer {
@@ -70,16 +75,21 @@ body {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 80px; /* Vertically center the text there */
+  line-height: 100px; /* Vertically center the text there */
 }
 
 /* ------------------------ Background images for different containers -------------------------- */
+.container-main-head {
+    background-image: url(../images/background/background_head.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 280px;
+}
 .container-main-intro {
     background: #f1f1f1 url(../images/background/cloud_background.jpg);
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: 100% auto;
-    background-size: cover;
 }
 .container-main-counter {
     background: url(../images/background/counter.jpg);
@@ -92,8 +102,8 @@ body {
     background-image: url(../images/background/tortoise-shell.svg);
 }
 .container-teacher {
-    background-image:url(../images/background/rose-petals.svg);
-    background-size: cover;
+    background-image: url(../images/background/rose-petals.svg);
+    background-size: 100% auto;
 }
 .container-question {
     height: 220px;
@@ -193,7 +203,7 @@ div.rounded.border-thick {
 
 /*Dropdown menu styling.*/
 .dropdown-menu a {
-    height: 36px;
+    height: 42px;
     display: flex;
     align-items: center;
 }
@@ -202,36 +212,34 @@ div.rounded.border-thick {
     color: white !important;
 }
 .dropdown-menu {
-    margin-top: 0.03rem;
+    margin-top: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
 
 /*Nav styling.*/
 nav {
-    height: 64px;
+    height: 72px;
 }
 nav ul li {
-    height: 64px;
+    height: 72px;
     display: flex;
     align-items: center;
 }
 nav ul li.nav-hover:hover > a {
-    color: #495057 !important;
+    color: #e9ecef !important;
     transition: .02s ease 0.02s;
 }
 nav ul li > a {
+    font-size: 105%;
     color: #fff !important;
     transition: .02s ease 0.02s;
 }
 nav ul li a:hover {
-    color: #495057 !important;
+    color: #e9ecef !important;
 }
 
 /*Animation for cards.*/
-.card-home {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 .card-home .card-body {
     height: 227px;
     overflow: hidden;
@@ -258,6 +266,27 @@ nav ul li a:hover {
 }
 .card-home:hover .card-body small {
     opacity: 1;
+}
+
+/*Styling for loading icon*/
+.loader-body {
+    width: 100%;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
+    position: fixed;
+    background-color: rgba(128,128,128,0.2);
+    z-index: 2147483647;
+}
+.d-none {
+    display: none !important;
+}
+
+/*Stick navbar styling*/
+.navbar-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 /*Animation for intro arrow.*/

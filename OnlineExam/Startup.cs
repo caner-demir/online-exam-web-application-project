@@ -41,6 +41,11 @@ namespace OnlineExam
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<Filters.GetCoursesAttribute>();
+            services.AddRouting(options => 
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
