@@ -68,7 +68,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 100px;
-    font-family: Helvetica;
+    font-family: 'Roboto', sans-serif;
 }
 .footer {
   position: absolute;

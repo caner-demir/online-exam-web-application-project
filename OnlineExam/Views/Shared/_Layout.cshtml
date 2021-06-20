@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Asap:wght@500&family=Lato:wght@700&family=Montserrat&family=Nunito:wght@700&family=Poppins:wght@300&family=Raleway&family=Roboto+Mono:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/aos/aos.css" />
 </head>
-<body>    
+<body>
     <header>
         @await RenderSectionAsync("NavbarSearch", required: false)
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary shadow @(IsSectionDefined("NavbarSearch") == true ? null : "fixed-top")" id="navbar-brand" style="font-family: Helvetica">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary shadow @(IsSectionDefined("NavbarSearch") == true ? null : "fixed-top")" id="navbar-brand">
             <div class="container">
                 <a class="navbar-brand font-weight-bold" style="font-size:150%" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-check-double text-warning"></i> ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -117,6 +119,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/dayjs/dayjs.min.js"></script>
     <script src="~/lib/moment.js/moment.min.js"></script>
+    <script src="~/lib/aos/aos.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
@@ -127,5 +130,11 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        AOS.init({
+            duration: 1200,
+            offset: 200
+        });
+    </script>
 </body>
 </html>

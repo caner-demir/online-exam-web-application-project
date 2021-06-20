@@ -4,85 +4,63 @@
 @{
     ViewData["Title"] = "Register";
 }
-
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Name"></label>
-                <input asp-for="Input.Name" class="form-control" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            @if (!User.IsInRole(SD.Role_Admin))
-            {
-                <div class="form-check pb-2">
-                    <input asp-for="Input.IsInRoleTeacher" class="form-check-input" />
-                    <label asp-for="Input.IsInRoleTeacher"></label>
-                    <span asp-validation-for="Input.IsInRoleTeacher" class="text-danger"></span>
-                </div>
-            }
-            else
-            {
-                <input type="hidden" asp-for="Input.IsInRoleTeacher" value="true" />
-            }
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+<div class="container py-4">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-6 offset-3">
+            <div class="card bg-light">
+                <div class="card-body px-lg-5 pt-4">
+                    <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <h3 class="col-12 text-success text-center py-4">
+                            @if (User.IsInRole(SD.Role_Admin))
+                            {
+                                <strong>Create an Admin Account</strong>
+                            }
+                            else
+                            {
+                                <strong>Sign Up</strong>
+                            }
+                        </h3>
+                        <div class="py-2">
+                            <input asp-for="Input.Name" placeholder="Name" class="form-control" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                        <div class="py-2">
+                            <input asp-for="Input.Email" type="email" placeholder="Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-row py-2">
+                            <div class="col">
+                                <input asp-for="Input.Password" type="password" placeholder="Password" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <input asp-for="Input.ConfirmPassword" type="password" placeholder="Confirm Password" class="form-control" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @if (!User.IsInRole(SD.Role_Admin))
+                        {
+                            <div class="form-check py-2">
+                                <input asp-for="Input.IsInRoleTeacher" class="form-check-input" />
+                                <label asp-for="Input.IsInRoleTeacher"></label>
+                                <span asp-validation-for="Input.IsInRoleTeacher" class="text-danger"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="hidden" asp-for="Input.IsInRoleTeacher" value="true" />
+                        }
+                        <div class="py-2">
+                            <button type="submit" class="btn btn-success form-control"><i class="fas fa-user-plus"></i>&nbsp; Register</button>
+                        </div>
+                    </form>         
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.getElementById("container-main").className = "container p-3";
-    </script>
 }

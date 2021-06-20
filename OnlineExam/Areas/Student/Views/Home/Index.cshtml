@@ -5,13 +5,13 @@
 @model IPagedList<OnlineExam.Models.ViewModels.HomeCourseVM>
 
 @section NavbarSearch{ 
-    <div class="container-main-head" style="">
+    <div class="container-main-head">
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <div class="d-flex flex-column align-items-start justify-content-center" style="height:280px">
-                        <h1 class="text-light">Your Online<br>Testing Partner</h1>
-                        <p class="text-white-50">Online exam system for all your testing needs for <strong>assessment, recruitment, selection</strong> and <strong>certifications.</strong></p>
+                    <div class="d-flex flex-column align-items-start justify-content-center" style="height: 280px; font-family: 'Montserrat', sans-serif; ">
+                        <h1 data-aos="fade-in" data-aos-delay="100" class="text-light">Your Online<br>Testing Partner</h1>
+                        <p data-aos="fade-in" data-aos-delay="100" class="text-white-50">Online exam system for all your testing needs for <strong>assessment, recruitment, selection</strong> and <strong>certifications.</strong></p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -27,11 +27,11 @@
     </div>
 }
 <div class="container-main-intro">
-    <div class="container">
+    <div class="container overflow-hidden">
         <div class="row">
-            <div class="col-md-12 text-center text-dark">
-                <h1 style="margin-top: 60px">Create Your Own Test</h1>
-                <h2 style="margin-bottom: 60px">The Online Exam Builder You've Been Looking For</h2>
+            <div class="col-md-12 text-center text-dark" style="font-family: 'Asap', sans-serif; ">
+                <h1 data-aos="fade-down" data-aos-delay="100" style="margin-top: 60px; font-size:42px">Create Your Own Test</h1>
+                <h2 data-aos="fade-right" data-aos-delay="100" style="margin-bottom: 60px">The Online Exam Builder You've Been Looking For</h2>
                 <h4>Courses</h4>
                 <a class="text-success" style="display:inline-block; margin-bottom:60px" href="#courses">
                     <h1 class="display-3 fas fa-angle-double-down arrow"></h1>
@@ -40,10 +40,10 @@
         </div>
     </div>
 </div>
-<div class="container-main-counter">
-    <div class="container">
-        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:450px">
-            <h1 class="col-12 text-center text-light mb-0">Numbers Speak Aloud</h1>
+<div class="container-main-counter" style="font-family: 'Asap', sans-serif; ">
+    <div class="container overflow-hidden">
+        <div class="row py-5 d-flex align-items-center" style="min-height:450px">
+            <h2 class="col-12 text-center text-light font-weight-bold mb-0" data-aos="fade-down" style="font-size: 42px; font-family: 'Nunito', sans-serif;">Numbers Speak Aloud</h2>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
                     <p><i class="fa fa-users text-light" style="font-size:50px"></i></p>
@@ -67,7 +67,7 @@
             </div>
             <div class="col-3">
                 <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-question-circle text-light" style="font-size:50px"></i></p>
+                    <p><i class="fas fa-question-circle text-light" style="font-size:46px"></i></p>
                     <h2><span id="question-counter"></span>+</h2>
                     <h4>Questions</h4>
                 </div>
@@ -75,9 +75,9 @@
         </div>
     </div>
 </div>
-<div class="container-main-courses p-0" id="courses">
-    <div class="container pt-5">
-        <h1 class="text-light text-center">Courses</h1>
+<div class="container-main-courses p-0 overflow-hidden" id="courses">
+    <div class="container pt-4">
+        <h2 class="text-light text-center font-weight-bold" data-aos="fade-right" style="font-size: 46px; font-family: 'Nunito', sans-serif; ">Course List</h2>
         <div class="row pt-4 pb-5" id="courses-partial" style="min-height:1114px">
             <partial name="_CoursesPartial" model="Model" />           
         </div>

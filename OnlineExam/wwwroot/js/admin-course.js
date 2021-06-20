@@ -37,7 +37,7 @@ function loadDataTable() {
                 "data": "course",
                 "render": function (data) {
                     return `
-                            <a href="/teacher/exam/index/${data.id}" class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</a>
+                            <span class="text-dark font-weight-bold table-button-center" style="font-size: 110%">${data.name}</span>
                             `
                 }, "width": "18%"
             },
