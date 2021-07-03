@@ -20,6 +20,8 @@ namespace OnlineExam.DataAccess.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<Choice> Choices { get; set; }
         public DbSet<CourseUser> CourseUsers { get; set; }
+        public DbSet<ExamResult> ExamResults { get; set; }
+        public DbSet<QuestionResult> QuestionResults { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

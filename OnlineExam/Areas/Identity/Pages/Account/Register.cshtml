@@ -4,57 +4,59 @@
 @{
     ViewData["Title"] = "Register";
 }
-<div class="container py-4">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="row form-group">
-        <div class="col-6 offset-3">
-            <div class="card bg-light">
-                <div class="card-body px-lg-5 pt-4">
-                    <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <h3 class="col-12 text-success text-center py-4">
-                            @if (User.IsInRole(SD.Role_Admin))
+<div class="container-student-exam" style="min-height:77vh">
+    <div class="container py-4">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row form-group">
+            <div class="col-6 offset-3">
+                <div class="card bg-light" style="border-color:lightgray !important;">
+                    <div class="card-body px-lg-5 pt-4">
+                        <form autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <h3 class="col-12 text-success text-center py-4">
+                                @if (User.IsInRole(SD.Role_Admin))
+                                {
+                                    <strong>Create an Admin Account</strong>
+                                }
+                                else
+                                {
+                                    <strong>Sign Up</strong>
+                                }
+                            </h3>
+                            <div class="py-2">
+                                <input asp-for="Input.Name" placeholder="Name" class="form-control" />
+                                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                            </div>
+                            <div class="py-2">
+                                <input asp-for="Input.Email" type="email" placeholder="Email" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-row py-2">
+                                <div class="col">
+                                    <input asp-for="Input.Password" type="password" placeholder="Password" class="form-control" />
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="col">
+                                    <input asp-for="Input.ConfirmPassword" type="password" placeholder="Confirm Password" class="form-control" />
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                            @if (!User.IsInRole(SD.Role_Admin))
                             {
-                                <strong>Create an Admin Account</strong>
+                                <div class="form-check py-2">
+                                    <input asp-for="Input.IsInRoleTeacher" class="form-check-input" />
+                                    <label asp-for="Input.IsInRoleTeacher"></label>
+                                    <span asp-validation-for="Input.IsInRoleTeacher" class="text-danger"></span>
+                                </div>
                             }
                             else
                             {
-                                <strong>Sign Up</strong>
+                                <input type="hidden" asp-for="Input.IsInRoleTeacher" value="true" />
                             }
-                        </h3>
-                        <div class="py-2">
-                            <input asp-for="Input.Name" placeholder="Name" class="form-control" />
-                            <span asp-validation-for="Input.Name" class="text-danger"></span>
-                        </div>
-                        <div class="py-2">
-                            <input asp-for="Input.Email" type="email" placeholder="Email" class="form-control" />
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-row py-2">
-                            <div class="col">
-                                <input asp-for="Input.Password" type="password" placeholder="Password" class="form-control" />
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <div class="py-2">
+                                <button type="submit" class="btn btn-success form-control"><i class="fas fa-user-plus"></i>&nbsp; Register</button>
                             </div>
-                            <div class="col">
-                                <input asp-for="Input.ConfirmPassword" type="password" placeholder="Confirm Password" class="form-control" />
-                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                            </div>
-                        </div>
-                        @if (!User.IsInRole(SD.Role_Admin))
-                        {
-                            <div class="form-check py-2">
-                                <input asp-for="Input.IsInRoleTeacher" class="form-check-input" />
-                                <label asp-for="Input.IsInRoleTeacher"></label>
-                                <span asp-validation-for="Input.IsInRoleTeacher" class="text-danger"></span>
-                            </div>
-                        }
-                        else
-                        {
-                            <input type="hidden" asp-for="Input.IsInRoleTeacher" value="true" />
-                        }
-                        <div class="py-2">
-                            <button type="submit" class="btn btn-success form-control"><i class="fas fa-user-plus"></i>&nbsp; Register</button>
-                        </div>
-                    </form>         
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,11 +20,11 @@ namespace OnlineExam.Models
 
         [Required]
         [MaxLength(120)]
-        [Display(Name = "Description for Homepage")]
+        [Display(Name = "Description for the Homepage")]
         public string DescriptionShort { get; set; }
 
         [Required]
-        [Display(Name = "Description for Course Page")]
+        [Display(Name = "Description for the Course Page")]
         public string DescriptionDetailed { get; set; }
 
         public string ImageUrl { get; set; }

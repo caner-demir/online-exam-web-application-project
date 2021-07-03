@@ -339,6 +339,32 @@ namespace OnlineExam.DataAccess.Migrations
                     b.ToTable("Exams");
                 });
 
+            modelBuilder.Entity("OnlineExam.Models.ExamResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("ExamResults");
+                });
+
             modelBuilder.Entity("OnlineExam.Models.Question", b =>
                 {
                     b.Property<int>("Id")
@@ -366,6 +392,31 @@ namespace OnlineExam.DataAccess.Migrations
                     b.HasIndex("ExamId");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("OnlineExam.Models.QuestionResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ChoiceSelected")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExamResultId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamResultId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("QuestionResults");
                 });
 
             modelBuilder.Entity("OnlineExam.Models.ApplicationUser", b =>
@@ -482,6 +533,25 @@ namespace OnlineExam.DataAccess.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("OnlineExam.Models.ExamResult", b =>
+                {
+                    b.HasOne("OnlineExam.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineExam.Models.Exam", "Exam")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Exam");
+                });
+
             modelBuilder.Entity("OnlineExam.Models.Question", b =>
                 {
                     b.HasOne("OnlineExam.Models.Exam", "Exam")
@@ -491,6 +561,25 @@ namespace OnlineExam.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Exam");
+                });
+
+            modelBuilder.Entity("OnlineExam.Models.QuestionResult", b =>
+                {
+                    b.HasOne("OnlineExam.Models.ExamResult", "ExamResult")
+                        .WithMany()
+                        .HasForeignKey("ExamResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineExam.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExamResult");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("OnlineExam.Models.Course", b =>

@@ -6,34 +6,34 @@
 
 <div class="container-main-counter">
     <div class="container">
-        <div class="row pt-5 pb-5 d-flex align-items-center" style="min-height:360px">
-            <h1 data-aos="fade-down" data-aos-delay="100" class="col-12 text-center text-light font-weight-bold pb-3" style="font-size:34px"><span class="text-white-50">Exam:</span> @Model.Name</h1>
+        <div data-aos="fade-in" data-aos-once="true" class="row pt-5 pb-5 d-flex align-items-center" style="min-height:360px">
+            <h1 data-aos="fade-down" data-aos-delay="100" class="col-12 text-center font-weight-bold pb-3" style="font-size:34px; color:#e8b87e"><span class="text-white-50">Exam:</span> @Model.Name</h1>
             <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
                     <p><i class="fas fa-question-circle text-light" style="font-size:50px"></i></p>
-                    <h2 class="text-light" id="question-counter"></h2>
-                    <h4>Questions</h4>
+                    <h3 class="text-light" id="question-counter"></h3>
+                    <h3>Questions</h3>
                 </div>
             </div>
             <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fa fa-star text-light" style="font-size:50px"></i></p>
-                    <h2 class="text-light" id="points-counter"></h2>
-                    <h4>Total Points</h4>
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
+                    <p><i class="fa fa-hashtag text-light" style="font-size:50px"></i></p>
+                    <h3 class="text-light" id="points-counter"></h3>
+                    <h3>Total Points</h3>
                 </div>
             </div>
             <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-hourglass-end text-light" style="font-size:50px"></i></p>
-                    <h2 class="text-light"><span id="hours-counter"></span>hrs <span id="minutes-counter"></span>min</h2>
-                    <h4>Duration</h4>
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
+                    <p><i class="fas fa-clock text-light" style="font-size:50px"></i></p>
+                    <h3 class="text-light"><span id="hours-counter"></span>h <span id="minutes-counter"></span>m</h3>
+                    <h3>Duration</h3>
                 </div>
             </div>
             <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
                     <p><i class="fa fa-users text-light" style="font-size:50px"></i></p>
-                    <h2 class="text-light" id="student-counter"></h2>
-                    <h4>Students</h4>
+                    <h3 class="text-light" id="student-counter"></h3>
+                    <h3>Students</h3>
                 </div>
             </div>
         </div>
@@ -42,33 +42,70 @@
 <div class="container-teacher">
     <div class="container">
         <div class="row pt-5 pb-5" style="background-color:rgb(255,255,255,0.01)">
+            <div class="col-12 p-0 pt-3 rounded-top bg-light">
+                <ul class="nav nav-tabs border-bottom">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="question" data-toggle="tab" href="#question-tab"><i class="fas fa-question"></i> Questions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="result" data-toggle="tab" href="#result-tab"><i class="fas fa-hashtag"></i> Results</a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-12">
-                <div class="row pt-3 pb-2 bg-light rounded shadow-sm border">
+                <div class="row pt-3 pb-2 rounded-bottom bg-light shadow-sm nav-question question">
                     <div class="col-6">
                         <h2 class="font-weight-normal text-secondary"><i class="fas fa-question text-danger"></i>&nbsp; Questions</h2>
                     </div>
                     <div class="col-6 text-right">
                         <button onclick="openModal('/Teacher/Question/Upsert?examId=@Model.Id', 'Create Question')"
                                 class="btn btn-primary text-white">
-                            <i class="fas fa-plus"></i> &nbsp; Create New Question
+                            <i class="fas fa-plus" style="color:#eebd81"></i> &nbsp; Create New Question
                         </button>
                     </div>
                 </div>
-                <br />
-                <div class="row bg-white mt-2 pt-4 pb-4 rounded shadow-sm border">
+                <div class="row pt-3 pb-2 rounded-bottom bg-light shadow-sm d-none nav-question result">
                     <div class="col-12">
-                        <table id="tblData" class="table table-bordered table-striped w-100">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Image</th>
-                                    <th>Date Created</th>
-                                    <th>Points</th>
-                                    <th>Choices</th>
-                                    <th class="text-center">Edit</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <h2 class="font-weight-normal text-secondary"><i class="fas fa-hashtag text-danger"></i>&nbsp; Results</h2>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="col-12">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="question-tab" role="tabpanel" aria-labelledby="question-tab">
+                        <div class="row bg-white mt-2 pt-4 pb-4 rounded shadow-sm border">
+                            <div class="col-12">
+                                <table id="table-question" class="table table-bordered border-top-0 table-striped w-100">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Image</th>
+                                            <th>Date Created</th>
+                                            <th>Points</th>
+                                            <th>Choices</th>
+                                            <th class="text-center">Edit</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="result-tab" role="tabpanel" aria-labelledby="result-tab">
+                        <div class="row bg-white mt-2 pt-4 pb-4 rounded shadow-sm border">
+                            <div class="col-12">
+                                <table id="table-results" class="table table-bordered border-top-0 table-striped w-100">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Score</th>
+                                            <th class="text-center">View</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,10 +113,10 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Question -->
 <div class="modal fade" tabindex="-1" role="dialog" id="form-modal">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content bg-light border-0">
             <div class="modal-header">
                 <h5 class="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -88,6 +125,29 @@
             </div>
             <div class="modal-body">
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Result -->
+<div class="modal fade" tabindex="-1" role="dialog" id="form-result-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-light border-0">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-result">
+                <table id="table-questions" class="card" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-light"></th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

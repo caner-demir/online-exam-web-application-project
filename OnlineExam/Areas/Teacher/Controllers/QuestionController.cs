@@ -244,5 +244,28 @@ namespace OnlineExam.Areas.Teacher.Controllers
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete successful." });
         }
+
+        [HttpGet]
+        public IActionResult GetResults()
+        {
+            var examId = HttpContext.Session.GetInt32(SD.Session_SelectedExamId);
+            var results = _unitOfWork.ExamResult.GetAll(er => er.ExamId == examId, includeProperties: "ApplicationUser");
+            return Json(new { data = results });
+        }
+
+        [HttpGet]
+        public IActionResult ViewResult(int id)
+        {
+            var choices = _unitOfWork.QuestionResult.GetAll(q => q.ExamResultId == id, includeProperties: "Question.Choices");
+            //var output = JsonConvert.SerializeObject(choices);
+            foreach (var choice in choices)
+            {
+                //foreach (var item in collection)
+                //{
+
+                //}
+            }
+            return Json(new { data = choices });
+        }
     }
 }

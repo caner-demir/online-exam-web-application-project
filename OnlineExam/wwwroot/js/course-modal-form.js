@@ -22,7 +22,6 @@
                 selector: '#detailed-description',
                 plugins: 'lists',
                 menubar: false,
-                //menubar: 'file edit format',
                 toolbar: 'undo redo | styleselect | fontselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | removeformat',
                 toolbar_mode: 'floating',
                 height: 190,

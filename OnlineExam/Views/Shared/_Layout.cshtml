@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Asap:wght@500&family=Lato:wght@700&family=Montserrat&family=Nunito:wght@700&family=Poppins:wght@300&family=Raleway&family=Roboto+Mono:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/aos/aos.css" />
@@ -19,9 +20,9 @@
 <body>
     <header>
         @await RenderSectionAsync("NavbarSearch", required: false)
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary shadow @(IsSectionDefined("NavbarSearch") == true ? null : "fixed-top")" id="navbar-brand">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark shadow @(IsSectionDefined("NavbarSearch") == true ? "navbar-blue" : "fixed-top navbar-blue-fixed")" id="navbar-brand">
             <div class="container">
-                <a class="navbar-brand font-weight-bold" style="font-size:150%" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-check-double text-warning"></i> ExamHub</a>
+                <a class="navbar-brand font-weight-bold" style="font-size:150%; color:#f4f4f4" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-check-double text-warning"></i> ExamHub</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,10 +32,10 @@
                         @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Student) || User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item nav-hover dropdown">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Courses Taken
+                                <a class="nav-link dropdown-toggle text-light hvr-icon-sink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-sticky-note hvr-icon" style="color:#eebd81"></i>&nbsp; Courses Taken
                                 </a>
-                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:220px" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:260px" aria-labelledby="navbarDropdown">
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_CoursesTaken) != null)
                                     {
                                         var allCourses = HttpContextAccessor.HttpContext.Session.GetObject<List<Course>>(SD.Session_CoursesTaken);
@@ -56,10 +57,10 @@
                         @if (User.IsInRole(SD.Role_Teacher) || User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item nav-hover dropdown ml-1">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Course Management
+                                <a class="nav-link dropdown-toggle text-light hvr-icon-sink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-edit hvr-icon" style="color:#eebd81"></i>&nbsp; Course Management
                                 </a>
-                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:220px" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:260px" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" style="font-size:105%" asp-area="Teacher" asp-controller="Course" asp-action="Index">All Courses</a>
                                     @if (HttpContextAccessor.HttpContext.Session.GetString(SD.Session_MyCourses) != null)
                                     {
@@ -79,10 +80,10 @@
                         @if (User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item nav-hover dropdown ml-1">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Admin Area
+                                <a class="nav-link dropdown-toggle text-light hvr-icon-sink" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user-cog hvr-icon" style="color:#eebd81"></i>&nbsp; Admin Area
                                 </a>
-                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:220px" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu bg-light border-0 rounded-0 shadow" style="min-width:260px" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item border-bottom" style="font-size:105%" asp-area="Admin" asp-controller="User" asp-action="Index">All Users</a>
                                     <a class="dropdown-item" style="font-size:105%" asp-area="Admin" asp-controller="Course" asp-action="Index">All Courses</a>
                                 </div>
@@ -107,9 +108,10 @@
         </div>
     </div>
 
-    <footer class="footer text-light border-top" style="background:#2e5374; font-size:large;">
+    <footer class="footer text-light" style="background:#2e5374; font-size:large;">
         <div class="container">
             &copy; 2021 - ExamHub
+            <span class="d-none">Caner Demir &copy;</span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

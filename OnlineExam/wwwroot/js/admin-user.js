@@ -43,7 +43,7 @@ function loadDataTable() {
             {
                 "data": "courseCount",
                 "render": function (data) {
-                    return `${data}&nbsp;&nbsp; <i class="fas fa-pen text-secondary"></i>`
+                    return `${data}&nbsp;&nbsp; <i class="fas fa-book-open text-secondary"></i>`
                 },
                 "width": "12%"
             },

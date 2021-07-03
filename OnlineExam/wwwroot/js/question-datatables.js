@@ -1,9 +1,22 @@
-﻿var dataTable
+﻿var questionTable
+var resultTable
 
 $(document).ready(function () {
     loadCounterValues()
-    loadDataTable()
+    loadTableQuestions()
+    loadTableResults()
+    changeNav()
 })
+
+// Change nav content on click event.
+function changeNav() {
+    $(".container-teacher").on("click", ".nav-link", function () {
+        $(".nav-question").each(function () {
+            $(this).addClass("d-none")
+        })
+        $("." + $(this).attr("id")).removeClass("d-none")
+    })
+}
 
 // ------------------------------- Code section for counter panel. ---------------------------
 function loadCounterValues() {
@@ -26,14 +39,15 @@ function loadCounterValues() {
     })
 }
 
-function loadDataTable() {
-    dataTable = $("#tblData").DataTable({
+// ------------------------------- Code section for question table. ---------------------------
+function loadTableQuestions() {
+    questionTable = $("#table-question").DataTable({
         "autoWidth": false,
         "order": [[5, "asc"]],
         "columnDefs": [{
                 "searchable": false,
                 "orderable": false,
-                "className": "font-weight-bold table-cells-lg",
+                "className": "font-weight-bold table-cells-lg table-active",
                 "targets": 0,
             },
             { className: "table-cells-lg", "targets": [2, 3, 4] },
@@ -64,14 +78,14 @@ function loadDataTable() {
             {
                 "data": "points",
                 "render": function (data) {
-                    return `${data}&nbsp;&nbsp; <i class="fas fa-star text-secondary"></i>`
+                    return `${data}&nbsp;&nbsp; <i class="fas fa-hashtag text-secondary"></i>`
                 },
                 "width": "12%"
             },
             {
                 "data": "choices",
                 "render": function (data) {
-                    return `${data.length}&nbsp;&nbsp; <i class="fas fa-list-ul text-secondary"></i>`
+                    return `${data.length}&nbsp;&nbsp; <i class="fas fa-bars text-secondary"></i>`
                 },
                 "width": "12%"
             },
@@ -98,14 +112,14 @@ function loadDataTable() {
     })
 
     //Give index numbers to rows.
-    dataTable.on('order.dt search.dt', function () {
-        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+    questionTable.on('order.dt search.dt', function () {
+        questionTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = `<span style="font-size: 110%">${i + 1}</span>`;
         });
     }).draw();
 
     //Scroll top after clicking a page button.
-    dataTable.on('page.dt', function () {
+    questionTable.on('page.dt', function () {
         $('html, body').animate({
             scrollTop: $(".dataTables_wrapper").offset().top - 100
         }, 'fast');
@@ -127,7 +141,7 @@ function Delete(url) {
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.message)
-                        dataTable.ajax.reload()
+                        questionTable.ajax.reload()
                         loadCounterValues()
                     }
                     else {
@@ -137,4 +151,49 @@ function Delete(url) {
             })
         }
     })
+}
+
+// ------------------------------- Code section for result table. ---------------------------
+function loadTableResults() {
+    resultTable = $("#table-results").DataTable({
+        "autoWidth": false,
+        "columnDefs": [
+            { className: "table-active table-cells-sm", "targets": [0, 3] },
+            { className: "table-cells-sm", "targets": [0, 1, 2, 3] }
+        ],
+        "ajax": {
+            "url": "/Teacher/Question/GetResults"
+        },
+        "columns": [
+            {
+                "data": "applicationUser.name",
+                "render": function (data) {
+                    return `<span class="text-dark font-weight-bold" style="font-size: 110%">${data}</span>`
+                },
+                "width": "25%"
+            },
+            { "data": "applicationUser.userName", "width": "25%" },
+            { "data": "score", "width": "25%" },
+            {
+                "data": "id",
+                "render": function (data) {
+                    return `
+                            <div class="text-center">
+                                <a onclick="openModalResult('/Teacher/Question/ViewResult/${data}', 'View Results')"
+                                        class="btn btn-success text-white" style="cursor:pointer; width:113px">
+                                    <i class="fas fa-search"></i>&nbsp; View
+                                </a>
+                            </div>
+                            `
+                }, "width": "25%"
+            }
+        ]
+    })
+
+    //Scroll top after clicking a page button.
+    resultTable.on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top - 100
+        }, 'fast');
+    });
 }

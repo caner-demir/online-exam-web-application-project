@@ -12,6 +12,8 @@ namespace OnlineExam.DataAccess.Repository.IRepository
         IQuestionRepository Question { get; }
         IChoiceRepository Choice { get; }
         ICourseUserRepository CourseUser { get; }
+        IExamResultRepository ExamResult { get; }
+        IQuestionResultRepository QuestionResult { get; }
         ISP_Call SP_Call { get; }
         void Save();
     }

@@ -4,23 +4,23 @@
     <input type="hidden" asp-for="Duration" value="@string.Format("{0:hh\\:mm}", Model.Duration)" id="duration" />
     <input type="hidden" asp-for="CourseId" id="course-id" />
     <div class="container border-left border-right">
-        <div class="row pt-4" style="background-color:#f6f6f6; min-height:82vh">
+        <div class="row pt-4" style="background-color:#f6f6f6; min-height:77vh">
             <div class="col-md-2 text-center">
-                <div class="card shadow-sm" style="margin-top:6px">
+                <div class="card shadow-sm" style="margin-top:6px; background:#e3e7ea">
                     <div class="card-body">
-                        <h4 class="text-danger font-weight-bold">Question</h4>
-                        <h4 class="text-dark bg-light font-weight-bold card py-2" id="q-header">1</h4>
+                        <h4 class="text-primary font-weight-bold">Question</h4>
+                        <h4 class="text-secondary font-weight-bold shadow-sm card border-light py-2" style="background:#eebd81" id="q-header">1</h4>
                     </div>
                     <hr class="my-0">
-                    <div class="card-body bg-light">
+                    <div class="card-body rounded-bottom" style="background:#e3e7ea">
                         <h4 class="text-primary font-weight-bold mt-2">Points</h4>
-                        <h4 class="text-secondary font-weight-bold card py-2" style="background-color:#dadee1" id="q-points"></h4>
+                        <h4 class="text-secondary font-weight-bold card border-light shadow-sm py-2" style="background-color:#eebd81" id="q-points"></h4>
                     </div>
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="col-md-12 mb-4">
-                    <table id="table-questions" class="card shadow-sm" style="width:100%">
+                    <table id="table-questions" class="card shadow-sm border-secondary" style="width: 100%; border-color:#cecece !important">
                         <thead class="thead-dark">
                             <tr>
                                 <th class="text-light"></th>
@@ -37,15 +37,15 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card mb-3 shadow-sm" style="margin-top:6px">
-                    <div class="card-body text-primary text-center" id="clockdiv">                        
-                        <h4 class="font-weight-bold">Time Left</h4>
-                        <h4 class="text-secondary font-weight-bold card d-inline-block bg-light py-2 px-4">
+                <div class="card mb-3 shadow-sm" style="margin-top:6px; background:#e3e7ea">
+                    <div class="card-body text-primary text-center" id="clockdiv">
+                        <h4 class="font-weight-bold"><i class="far fa-clock"></i> Time Left</h4>
+                        <h4 class="text-secondary font-weight-bold card border-light shadow-sm d-inline-block py-2 px-4" style="background:#eebd81">
                             <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
-                        </h4>                        
+                        </h4>
                     </div>
                 </div>
-                <div class="col-md-12 rounded bg-white border shadow-sm" id="q-palette">
+                <div class="col-md-12 rounded border border-secondary shadow-sm" style="background:#e3e7ea; border-color:rgba(0,0,0,.125) !important" id="q-palette">
                     <h4 class="text-primary font-weight-bold text-center p-2">Questions</h4>
                     @{
                         int index = 1;
@@ -59,8 +59,8 @@
                         }
                     }
                     <div class="btn-group text-white text-md-center d-flex mt-3 mb-3" style="cursor:pointer">
-                        <a class="btn btn-danger overflow-hidden w-100 shadow-sm" id="q-prev">Previous Question</a>
-                        <a class="btn btn-success overflow-hidden w-100 shadow-sm" id="q-next">Next Question</a>
+                        <a class="btn btn-danger overflow-hidden w-100" id="q-prev">Previous Question</a>
+                        <a class="btn btn-success overflow-hidden w-100" id="q-next">Next Question</a>
                     </div>
                 </div>
                 <div class="col-md-12 rounded mt-3 p-0 shadow-sm" style="cursor:pointer">

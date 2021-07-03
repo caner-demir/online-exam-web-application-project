@@ -144,8 +144,8 @@ function loadTableStudents() {
     dataTableStudents = $("#table-students").DataTable({
         "autoWidth": false,
         "columnDefs": [
-            { className: "table-active", "targets": [0, 3] },
-            { className: "table-cells-sm", "targets": [0, 1, 2] }
+            { className: "table-active table-cells-sm", "targets": [0, 3] },
+            { className: "table-cells-sm", "targets": [0, 1, 2, 3] }
         ],
         "ajax": {
             "url": "/Teacher/Student/GetStudents"
@@ -225,9 +225,8 @@ function loadTableRequests() {
     dataTableRequests = $("#table-requests").DataTable({
         "autoWidth": false,
         "columnDefs": [
-            { className: "table-active", "targets": [0] },          
-            { className: "table-cells-sm", "targets": [0, 1, 2] },
-            { className: "table-active", "targets": [3] }
+            { className: "table-active table-cells-sm", "targets": [0, 3] },
+            { className: "table-cells-sm", "targets": [0, 1, 2, 3] }
         ],
         "ajax": {
             "url": "/Teacher/Student/GetRequests"

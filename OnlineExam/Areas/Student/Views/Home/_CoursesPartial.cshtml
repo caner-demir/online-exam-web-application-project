@@ -5,10 +5,10 @@
 
 @foreach (var course in Model)
 {
-    <div class="col-md-3 mb-3">
-        <div class="card mb-4 bg-light card-home shadow-lg">
+    <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-4">
+        <div class="card bg-light card-home shadow-lg border-0">
             <div class="overflow-hidden rounded-top">
-                <img src="@course.Course.ImageUrl" class="card-img-top" style="width:100%; height:225px; object-fit:cover" />
+                <img src="@course.Course.ImageUrl" class="card-img-top" style="width:100%; height:200px; object-fit:cover" />
             </div>
             <div class="card-body text-black-50 rounded-bottom">
                 <h5 class="font-weight-bolder text-secondary">@course.Course.Name</h5>
@@ -40,7 +40,7 @@
     {
         MaximumPageNumbersToDisplay = 5,
         ContainerDivClasses = new string[] { "container mt-auto" },
-        LiElementClasses = new string[] { "page-item" },
+        LiElementClasses = new string[] { "page-item mt-4" },
         PageClasses = new string[] { "page-link" },
         UlElementClasses = new string[] { "pagination justify-content-center" },
         LinkToFirstPageFormat = "<< First",

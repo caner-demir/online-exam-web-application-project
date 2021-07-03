@@ -1,5 +1,13 @@
 ﻿openModal = async (url, title) => {
     $("#loader-body").removeClass('d-none');
+    //Delete the content of the other table to avoid class conflicting
+    $("#modal-result").html(`<table id="table-questions" class="" style="width:100%">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="text-light"></th>
+                                    </tr>
+                                </thead>
+                            </table>`);
     await new Promise(r => setTimeout(r, 400));
     $.ajax({
         type: "GET",
@@ -19,6 +27,25 @@
 
             addButtons()
         }
+    })
+}
+
+openModalResult = async (url, title) => {
+    $("#loader-body").removeClass('d-none');
+    $("#modal-result").html(`<table id="table-questions" class="" style="width:100%">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="text-light"></th>
+                                    </tr>
+                                </thead>
+                            </table>`);
+    await new Promise(r => setTimeout(r, 400));
+    $("#loader-body").addClass('d-none');
+    loadQuestionTable(url)
+    $("#form-result-modal .modal-title").html(title)
+    $("#form-result-modal").modal("show")
+    $('.modal-dialog').draggable({
+        handle: ".modal-header"
     })
 }
 
@@ -110,7 +137,7 @@ postModal = form => {
         processData: false,
         success: function (res) {
             if (res.isValid) {
-                dataTable.ajax.reload()
+                questionTable.ajax.reload()
                 loadCounterValues()
                 $('#form-modal .modal-body').html('');
                 $('#form-modal .modal-title').html('');
@@ -140,3 +167,81 @@ $(document).on('change', '.custom-file-input', function (event) {
         $(this).next('.custom-file-label').html(fileName.substr(0, 20) + "..." + fileName.substr(fileName.length - 7));
     }
 })
+
+
+// ------------------------------- Code section for result table. -----------------------------
+function loadQuestionTable(url) {
+    var arrayIndex = 0;
+    var questionTable = $('#table-questions').DataTable({
+        "pageLength": 5,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "ordering": false,
+        "searching": true,
+        "lengthChange": true,
+        "info": true,
+        "ajax": {
+            "url": url,
+            "type": "GET",
+            "datatype": "JSON"
+        },
+        "columns": [
+            {
+                "data": {},
+                "render": function (data) {
+                    arrayIndex++
+                    var choices = ""
+                    for (var i = 0; i < Object.keys(data.question.choices).length; i++) {
+                        var letter = String.fromCharCode(65 + i)
+                        choices += `                            
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text border">
+                                        <input type="radio" class="choice-radio" index="${data.id}" name="CorrectChoice" id="${data.question.choices[i].id}" value="${i}" disabled ` + `${data.choiceSelected == i ? 'checked' : '' }` + `>
+                                        <label class="form-check-label" for="${data.question.choices[i].id}">
+                                        &nbsp;Choice ${letter}
+                                        </label>
+                                    </div>
+                                </div>
+                                <label class="form-control border h-100" for="${data.question.choices[i].id}">
+                                ${data.question.choices[i].description}
+                                </label>
+                            </div>`
+                    }
+
+                    return `
+                    <div class="card mb-2 py-2">
+                        <p class="text-dark my-0 pl-3" style="font-size:150%"><i class="text-danger fas fa-pen-square"></i> Question ${arrayIndex}:</p>
+                        <hr class="my-1">
+                        <div class="text-center">
+                            <img src="${data.question.imageUrl}" class="img-fluid">
+                        </div>
+                        <form>
+                            <div class="col-md-12 pt-2">
+                                <input type="hidden" value="${data.question.examId}">
+                                <input type="hidden" value="${data.id}">
+                                <input type="hidden" name="Points" value="${data.question.points}">
+                                ${choices}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-dark my-0" style="font-size:120%">Correct Choice: ${String.fromCharCode(65 + data.question.correctChoice)} <i class="` + `${data.choiceSelected == data.question.correctChoice ? 'text-success far fa-check-circle' : 'text-danger far fa-times-circle'}` + `"></i></p>
+                                    <p class="text-dark my-0" style="font-size:120%"><i class="text-info fas fa-hashtag" style="font-size:90%"></i> Points: ${data.question.points}</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    `;
+                }, "width": "100%"
+            }
+        ],
+        "language": {
+            "emptyTable": "no data found"
+        },
+        "width": "100%"
+    });
+
+    //Scroll top after clicking a page button.
+    questionTable.on('page.dt', function () {
+        $('.modal').animate({
+            scrollTop: $("#table-questions_wrapper").offset().top -200
+        }, 'slow');
+    });
+}

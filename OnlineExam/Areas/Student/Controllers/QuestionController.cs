@@ -25,6 +25,7 @@ namespace OnlineExam.Areas.Student.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
         public IActionResult Index(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -52,6 +53,13 @@ namespace OnlineExam.Areas.Student.Controllers
                 return NotFound();
             }
 
+            //Check if the user has submitted the answers of this exam before.
+            var userAnswers = _unitOfWork.ExamResult.GetFirstOrDefault(es => (es.ApplicationUserId == claim.Value) && (es.ExamId == id));
+            if (userAnswers != null)
+            {
+                return Json(new { status = false });
+            }
+
             //Save the id of the selected exam to session storage.
             HttpContext.Session.SetInt32(SD.Session_StudentSelectedExamId, id);
 
@@ -68,7 +76,46 @@ namespace OnlineExam.Areas.Student.Controllers
         [HttpPost]
         public IActionResult Index([FromBody] List<Question> questions)
         {
-            return Json(questions[1]);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            //Get the id of the selected exam from session storage.
+            var examId = HttpContext.Session.GetInt32(SD.Session_StudentSelectedExamId);
+            //Get the questions of the exam from db.
+            var questionsFromDb = _unitOfWork.Question.GetAll(q => q.ExamId == examId).ToList();
+            //Create new examResult object.
+            var score = 0;
+            var examResult = new ExamResult()
+            {
+                ApplicationUserId = claim.Value,
+                ExamId = examId ?? 0,
+                Score = score
+            };
+            _unitOfWork.ExamResult.Add(examResult);
+            _unitOfWork.Save();
+            examResult = _unitOfWork.ExamResult.GetFirstOrDefault(e => e.ApplicationUserId == claim.Value && e.ExamId == examId);
+            //Compare selected choices with correct choices for each question.
+            foreach (var question in questions)
+            {
+                var questionSelected = questionsFromDb.Where(q => q.Id == question.Id).FirstOrDefault();
+                if (question.CorrectChoice == questionSelected.CorrectChoice)
+                {
+                    score += question.Points;
+                }
+                var questionToDb = new QuestionResult()
+                {
+                    ChoiceSelected = question.CorrectChoice,
+                    QuestionId = questionSelected.Id,
+                    ExamResultId = examResult.Id
+                };
+                _unitOfWork.QuestionResult.Add(questionToDb);
+            }
+
+            examResult.Score = score;
+            _unitOfWork.ExamResult.Update(examResult);
+            _unitOfWork.Save();
+
+            return Json(Url.Action("Index", "Exam", new { Area = "Student", id = HttpContext.Session.GetInt32(SD.Session_SelectedCourseId) }));
         }
 
         [HttpGet]

@@ -2,13 +2,13 @@
 
 <div class="container-student-exam">
     <div class="container border-left border-right">
-        <div class="row pt-4" style="background-color:#fafafa; min-height:85vh">
+        <div class="row pt-4" style="background-color:#fafafa; min-height:77vh">
             <div class="col-9">
                 <div class="mb-4 p-0 shadow-sm" id="course-details">
                     <div class="card rounded bg-primary">
                         <div class="card-header text-light">
                             <h3 style="margin:0px">
-                                <i class="fas fa-info-circle text-light"></i>&nbsp; About this course
+                                <i class="fas fa-info-circle" style="color:#eebd81"></i>&nbsp; About this course
                             </h3>
                         </div>
                         <div class="card-body bg-light rounded-bottom">
@@ -16,7 +16,7 @@
                             @Html.Raw(Model.Course.DescriptionDetailed)
                             <div class="text-secondary">
                                 <div class="mb-2" style="font-size:medium"><i class="fas fa-user text-dark"></i>&nbsp; Created by @Model.Course.ApplicationUser.Name</div>
-                                <div style="font-size:medium"><i class="fas fa-users text-dark"></i>&nbsp; @Model.CountCourseUsers Students</div>
+                                <div style="font-size:medium"><i class="fas fa-user-friends text-dark"></i>&nbsp; @Model.CountCourseUsers Students</div>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <input type="hidden" asp-for="@exam.EndDate" id="exam-@exam.Id-endDate" />
                         <div class="col-12 mb-3 bd-callout bd-callout-danger bg-primary shadow-sm" id="exam-@exam.Id">
                             <span class="text-light" style="font-size:larger">
-                                <i class="fas fa-user-edit text-light"></i>&nbsp; @exam.DateCreated.ToString("MMMM dd yyyy HH:mm")
+                                <i class="fas fa-user-edit"></i>&nbsp; @exam.DateCreated.ToString("MMMM dd yyyy HH:mm")
                             </span>
                         </div>
                         <div class="card shadow-sm rounded" style="background-color:#828b93">
@@ -41,7 +41,7 @@
                                 <p><span class="font-weight-bold text-secondary">Start Date:</span>&nbsp;@exam.StartDate.ToString("MMMM dd yyyy HH:mm")</p>
                                 <p><span class="font-weight-bold text-secondary">Duration:</span>&nbsp;@exam.Duration.Hours Hours, @exam.Duration.Minutes Minutes</p>
                                 <div class="text-center">
-                                    <button onclick="beginExam('@exam.Id')" class="btn btn-danger rounded-0 shadow-sm text-light py-2" style="width:130px; font-size:120%">Begin Exam</button>
+                                    <button onclick="beginExam('@exam.Id')" class="btn btn-danger rounded-0 border-0 shadow-sm text-light py-2 hvr-underline-from-center" style="width:130px; font-size:120%">Begin Exam</button>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
             <div class="col-3">
                 <div class="card bg-primary shadow-sm mb-4"  style="background:none">
                     <div class="card-header border-bottom">
-                        <h3 class="text-center text-light mb-0"><i class="fas fa-sitemap"></i>&nbsp; Navigation</h3>
+                        <h3 class="text-center text-light mb-0"><i class="fas fa-sitemap" style="color:#eebd81"></i>&nbsp; Navigation</h3>
                     </div>
                     <div class="bg-white rounded-bottom">
                         @{
@@ -59,23 +59,23 @@
                             {
                                 var exams = Model.ExamsNavigation.Where(e => e.CourseId == course.Id);
                                 <div class="accordion" id="accordionExample">
-                                    <div class="card">
-                                        <div class="card-header pl-2">
+                                    <div class="card border-0 rounded-bottom">
+                                        <div class="card-header pl-2 border-top rounded-0">
                                             <h6 class="mb-0">
-                                                <button class="btn btn-link text-dark" style="font-size:110%" type="button" data-toggle="collapse" data-target="#collapse-@course.Id" aria-expanded="true" aria-controls="collapse-@course.Id">
-                                                    <i class="fas fa-shapes text-secondary"></i>&nbsp; @course.Name
+                                                <button class="btn btn-link text-dark ml-2 px-0 text-decoration-none hvr-underline-from-center" style="font-size:110%" type="button" data-toggle="collapse" data-target="#collapse-@course.Id" aria-expanded="true" aria-controls="collapse-@course.Id">
+                                                    <i class="fas fa-book-open text-secondary"></i>&nbsp; @course.Name
                                                 </button>
                                             </h6>
                                         </div>
 
                                         <div id="collapse-@course.Id" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <a class="d-block mb-1 text-dark" asp-area="Student" asp-controller="Exam" asp-action="Index"
-                                                   asp-route-id="@course.Id" asp-fragment="course-details"><i class="fas fa-chevron-right text-secondary"></i>&nbsp; About this course</a>
+                                                <a class="btn btn-link text-dark p-0 pb-1 text-decoration-none hvr-icon-forward" asp-area="Student" asp-controller="Exam" asp-action="Index"
+                                                   asp-route-id="@course.Id" asp-fragment="course-details"><i class="fas fa-chevron-right text-secondary hvr-icon"></i>&nbsp; About this course</a>
                                                 @foreach (var exam in exams)
                                                 {
-                                                    <a class="d-block pl-4 mb-1 text-dark" asp-area="Student" asp-controller="Exam" asp-action="Index"
-                                                       asp-route-id="@course.Id" asp-fragment="exam-@exam.Id"><i class="fas fa-chevron-right text-secondary"></i>&nbsp; @exam.Name</a>
+                                                    <a class="btn btn-link text-dark ml-4 p-0 pb-1 text-decoration-none  hvr-icon-forward" asp-area="Student" asp-controller="Exam" asp-action="Index"
+                                                       asp-route-id="@course.Id" asp-fragment="exam-@exam.Id"><i class="fas fa-chevron-right text-secondary hvr-icon"></i>&nbsp; @exam.Name</a>
                                                 }
                                             </div>
                                         </div>

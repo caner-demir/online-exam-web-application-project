@@ -36,7 +36,7 @@ function loadQuestionTable() {
                                         </label>
                                     </div>
                                 </div>
-                                <label class="form-control border h-100" for="${data.choices[i].id}">
+                                <label class="form-control border h-100" style="background:#e3e7ea" for="${data.choices[i].id}">
                                 ${data.choices[i].description}
                                 </label>
                             </div>`
@@ -48,6 +48,7 @@ function loadQuestionTable() {
                     </div>
                     <form>
                         <div class="col-md-12 pt-3 pb-4">
+                            <input type="hidden" id="question-id" name="ExamId" value="${data.examId}">
                             <input type="hidden" id="q-id" name="Id" value="${data.id}">
                             <input type="hidden" id="q-points-${arrayIndex}" name="Points" value="${data.points}">
                             ${choices}
@@ -318,8 +319,7 @@ function finishExam() {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(finalArr),
                 success: function (result) {
-                    console.log("Data received: ");
-                    console.log(result);
+                    window.location.href = result;
                 }
             });
         }        

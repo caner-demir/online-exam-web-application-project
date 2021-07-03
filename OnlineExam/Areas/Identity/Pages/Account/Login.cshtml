@@ -5,22 +5,24 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="container py-4">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="row form-group">
-        <div class="col-6 offset-3">
-            <div class="card bg-light">
-                <div class="card-body px-lg-5 pt-4">
-                    <form id="account" method="post">
-                        <h3 class="text-primary font-weight-bold text-center py-4">Sign In</h3>
-                        <input asp-for="Input.Email" placeholder="Email..." type="email" class="mb-1 form-control my-3" />
-                        <input asp-for="Input.Password" placeholder="Password..." type="password" class="form-control my-3" />
-                        <button type="submit" class="btn btn-success btn-block mt-4 py-2"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</button>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"
-                           class="btn btn-primary btn-block text-white mt-3 py-2"><i class="fas fa-user-plus"></i>&nbsp; Register</a>
-                    </form>
-                </div>
+<div class="container-student-exam" style="min-height:77vh">
+    <div class="container py-4">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row form-group">
+            <div class="col-6 offset-3">
+                <div class="card bg-light" style="border-color:lightgray !important;">
+                    <div class="card-body px-lg-5 pt-4">
+                        <form id="account" method="post">
+                            <h3 class="text-primary font-weight-bold text-center py-4">Sign In</h3>
+                            <input asp-for="Input.Email" placeholder="Email..." type="email" class="mb-1 form-control my-3" />
+                            <input asp-for="Input.Password" placeholder="Password..." type="password" class="form-control my-3" />
+                            <button type="submit" class="btn btn-success btn-block mt-4 py-2"><i class="fas fa-sign-in-alt"></i>&nbsp; Sign In</button>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"
+                               class="btn btn-primary btn-block text-white mt-3 py-2"><i class="fas fa-user-plus"></i>&nbsp; Register</a>
+                        </form>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>

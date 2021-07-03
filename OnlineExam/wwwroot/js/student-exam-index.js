@@ -17,14 +17,30 @@
         })
         return false
     }
-    swal({
-        title: "Warning!",
-        text: "Are you sure you want to begin exam?",
-        icon: "warning",
-        buttons: true
-    }).then((accept) => {
-        if (accept) {
-            window.location.href = "/student/question/index/" + id
+    $.ajax({
+        type: "GET",
+        url: "/student/question/index/" + id,
+        success: function (data) {
+            if (data.status != null && !data.status) {
+                swal({
+                    title: "Error!",
+                    text: "You have already submitted your answers for the exam.",
+                    icon: "error"
+                })
+                return false
+            }
+            else {
+                swal({
+                    title: "Warning!",
+                    text: "Are you sure you want to begin exam?",
+                    icon: "warning",
+                    buttons: true
+                }).then((accept) => {
+                    if (accept) {
+                        window.location.href = "/student/question/index/" + id
+                    }
+                })
+            }
         }
     })
 

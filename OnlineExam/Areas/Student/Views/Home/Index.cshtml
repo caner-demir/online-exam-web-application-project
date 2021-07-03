@@ -10,15 +10,15 @@
             <div class="row">
                 <div class="col-6">
                     <div class="d-flex flex-column align-items-start justify-content-center" style="height: 280px; font-family: 'Montserrat', sans-serif; ">
-                        <h1 data-aos="fade-in" data-aos-delay="100" class="text-light">Your Online<br>Testing Partner</h1>
-                        <p data-aos="fade-in" data-aos-delay="100" class="text-white-50">Online exam system for all your testing needs for <strong>assessment, recruitment, selection</strong> and <strong>certifications.</strong></p>
+                        <h1 data-aos="fade-in" data-aos-delay="200" class="text-light">Your Online<br>Testing Partner</h1>
+                        <p data-aos="fade-in" data-aos-delay="200" class="text-light">Online exam system for all your testing needs for <strong>assessment, recruitment, selection</strong> and <strong>certifications.</strong></p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-flex flex-column align-items-end" style="height:280px">
                         <form method="get" data-ajax="true" data-ajax-begin="ajaxBegin" data-ajax-success="ajaxSuccess" asp-action="Index" class="mt-auto mb-4 form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchTerm">
-                            <button type="submit" class="ml-2 btn btn-outline-light rounded-0">SEARCH</button>
+                            <button type="submit" class="ml-2 btn btn-outline-light rounded-0"><i class="fas fa-search"></i>&nbsp; SEARCH</button>
                         </form>
                     </div>
                 </div>
@@ -42,32 +42,32 @@
 </div>
 <div class="container-main-counter" style="font-family: 'Asap', sans-serif; ">
     <div class="container overflow-hidden">
-        <div class="row py-5 d-flex align-items-center" style="min-height:450px">
+        <div data-aos="fade-in" data-aos-once="true" class="row py-5 d-flex align-items-center" style="min-height:450px">
             <h2 class="col-12 text-center text-light font-weight-bold mb-0" data-aos="fade-down" style="font-size: 42px; font-family: 'Nunito', sans-serif;">Numbers Speak Aloud</h2>
-            <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
+            <div class="col-6 col-md-3 mb-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
                     <p><i class="fa fa-users text-light" style="font-size:50px"></i></p>
                     <h2><span id="user-counter"></span>+</h2>
                     <h4>Users</h4>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-shapes text-light" style="font-size:50px"></i></p>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
+                    <p><i class="fas fa-book-open text-light" style="font-size:50px"></i></p>
                     <h2><span id="course-counter"></span>+</h2>
                     <h4>Courses</h4>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-clipboard-list text-light" style="font-size:50px"></i></p>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
+                    <p><i class="fas fa-sticky-note text-light" style="font-size:50px"></i></p>
                     <h2><span id="exam-counter"></span>+</h2>
                     <h4>Exams</h4>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="col-12 border-thick border-primary rounded text-white text-center pt-3 pb-3 shadow">
-                    <p><i class="fas fa-question-circle text-light" style="font-size:46px"></i></p>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="col-12 border-thick border-primary rounded text-white text-center py-3 rounded-0 shadow">
+                    <p><i class="fas fa-question-circle text-light" style="font-size:50px"></i></p>
                     <h2><span id="question-counter"></span>+</h2>
                     <h4>Questions</h4>
                 </div>
@@ -76,9 +76,9 @@
     </div>
 </div>
 <div class="container-main-courses p-0 overflow-hidden" id="courses">
-    <div class="container pt-4">
-        <h2 class="text-light text-center font-weight-bold" data-aos="fade-right" style="font-size: 46px; font-family: 'Nunito', sans-serif; ">Course List</h2>
-        <div class="row pt-4 pb-5" id="courses-partial" style="min-height:1114px">
+    <div class="container pt-5">
+        <h2 class="text-light font-weight-bold" data-aos="fade-right" style="font-size: 46px; font-family: 'Nunito', sans-serif; ">Course List</h2>
+        <div data-aos="fade-up" data-aos-once="true" class="row pb-5" id="courses-partial" style="min-height:1060px">
             <partial name="_CoursesPartial" model="Model" />           
         </div>
     </div>
@@ -97,6 +97,7 @@
         $(function () {
             $('#courses-partial').on('click', 'a', function () {                
                 window.location = "#courses"
+                var link = "/" + this.href.split("/").pop() + "#courses";
                 $('#courses-partial').html(loadingIcon);
                 $.ajax({
                     url: this.href,
@@ -104,6 +105,7 @@
                     cache: false,
                     success: function (result) {
                         $('#courses-partial').html(result);
+                        window.history.pushState("object or string", "Title", link);
                     }
                 });
                 return false;
@@ -115,6 +117,8 @@
             window.location = "#courses";
         }
         function ajaxSuccess(xhr) {
+            var link = "/?searchterm=" + $("input[name='searchTerm']").val() + "#courses";
+            window.history.pushState("object or string", "Title", link);
             $('#courses-partial').html(xhr);
         }
     </script>

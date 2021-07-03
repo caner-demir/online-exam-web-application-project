@@ -24,7 +24,7 @@ function loadDataTable() {
     dataTable = $("#tblData").DataTable({
         "autoWidth": false,
         "columnDefs": [
-            { className: "table-container-lg", "targets": [0] },
+            { className: "table-container-lg table-active", "targets": [0] },
             { className: "table-cells-lg", "targets": [2, 3, 4] },
             { className: "table-active table-cells-lg", "targets": [5] }
         ],
@@ -68,7 +68,7 @@ function loadDataTable() {
             {
                 "data": "exams",
                 "render": function (data) {
-                    return `${data}&nbsp;&nbsp; <i class="fas fa-clipboard text-secondary"></i>`
+                    return `${data}&nbsp;&nbsp; <i class="fas fa-sticky-note text-secondary"></i>`
                 },
                 "width": "12%"
             },

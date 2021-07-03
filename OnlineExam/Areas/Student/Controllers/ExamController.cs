@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Models.ViewModels;
@@ -42,7 +43,7 @@ namespace OnlineExam.Areas.Student.Controllers
             }
 
             //Save course Id to session storage.
-            //HttpContext.Session.SetInt32(SD.Session_SelectedCourseId, id);
+            HttpContext.Session.SetInt32(SD.Session_SelectedCourseId, id);
 
             //Return the exams belong to this course.
             var exams = _unitOfWork.Exam.GetAll(e => e.CourseId == id);

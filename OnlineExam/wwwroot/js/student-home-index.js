@@ -48,10 +48,10 @@ function hideNavbar() {
         var navbarBrand = $("#navbar-brand");
         if (window.pageYOffset > heightNavbarSearch) {
             divMain.addClass("sticky-div-padding")
-            navbarBrand.addClass("fixed-top")
+            navbarBrand.addClass("fixed-top navbar-blue-fixed")
         } else {
             divMain.removeClass("sticky-div-padding")
-            navbarBrand.removeClass("fixed-top")
+            navbarBrand.removeClass("fixed-top navbar-blue-fixed")
         }
     });
 }
