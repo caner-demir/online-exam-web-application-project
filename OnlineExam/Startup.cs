@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineExam.DataAccess.Data;
+using OnlineExam.DataAccess.Initializer;
 using OnlineExam.DataAccess.Repository;
 using OnlineExam.DataAccess.Repository.IRepository;
 using OnlineExam.Utilities;
@@ -40,6 +41,7 @@ namespace OnlineExam
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
             //services.AddScoped<Filters.GetCoursesAttribute>();
             services.AddRouting(options => 
             {
@@ -64,7 +66,7 @@ namespace OnlineExam
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +86,7 @@ namespace OnlineExam
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
+            dbInitializer.Initialize();
 
             app.UseEndpoints(endpoints =>
             {
