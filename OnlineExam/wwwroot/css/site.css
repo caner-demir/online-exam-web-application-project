@@ -2,53 +2,55 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
@@ -61,6 +63,7 @@ html {
     /* Prevent sticky header from overlapping with page sections when using anchor links */
     scroll-padding-top: 72px;
 }
+
 .sticky-div-padding {
     padding-top: 72px !important;
 }
@@ -70,12 +73,13 @@ body {
     margin-bottom: 100px;
     font-family: 'Roboto', sans-serif;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 100px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 100px; /* Vertically center the text there */
 }
 
 /* ------------------------ Background images for different containers -------------------------- */
@@ -85,16 +89,19 @@ body {
     background-size: cover;
     height: 280px;
 }
+
 .container-main-intro {
     background: #f1f1f1 url(../images/background/cloud_background.jpg);
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: 100% auto;
 }
+
 .container-main-counter {
     background: url(../images/background/counter.jpg);
     background-position: top;
 }
+
 .container-main-courses::before {
     content: "";
     position: absolute;
@@ -106,17 +113,20 @@ body {
     background-size: 100% 100%;
     filter: brightness(85%);
 }
-.container-main-courses{
+
+.container-main-courses {
     position: relative;
 }
 
 .container-student-exam {
     background-image: url(../images/background/tortoise-shell.svg);
 }
+
 .container-teacher {
     background-image: url(../images/background/rose-petals.svg);
     background-size: 100% auto;
 }
+
 .container-question {
     height: 220px;
     background: url(../images/background/thumbnail-question.svg);
@@ -133,24 +143,29 @@ td.table-cells-lg {
     height: 100px;
     line-height: 100px;
 }
+
 td.table-container-lg {
     position: relative;
     height: 100px;
 }
+
 td.table-cells-sm {
     height: 40px;
     line-height: 40px;
 }
+
 td.table-container-sm {
     position: relative;
     height: 40px;
 }
+
 .table-button-center {
     margin: 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
+
 th {
     border-bottom-width: 1px !important
 }
@@ -164,6 +179,7 @@ th {
     border-left-width: .50rem;
     border-radius: .50rem;
 }
+
 .bd-callout-danger {
     border-left-color: #d9534f;
 }
@@ -186,11 +202,13 @@ ul.nav.nav-tabs a:not(.active) {
     color: grey;
     transition: all 0.4s;
 }
-ul.nav.nav-tabs a:not(.active):hover {
-    background: #0366d6;
-    color: white;
-    border-color: #1265ac;
-}
+
+    ul.nav.nav-tabs a:not(.active):hover {
+        background: #0366d6;
+        color: white;
+        border-color: #1265ac;
+    }
+
 ul.nav.nav-tabs a.active {
     border-top: 3px solid #0275d8;
     border-left: 1px solid #0275d8;
@@ -200,7 +218,7 @@ ul.nav.nav-tabs a.active {
 /*Thick border for counter area*/
 div.rounded.border-thick {
     border: 3px solid red;
-    border-color: #166bc7!important;
+    border-color: #166bc7 !important;
 }
 
 /*Dropdown menu transition effect on hover.*/
@@ -211,6 +229,7 @@ div.rounded.border-thick {
     opacity: 0;
     transition: max-height 0.4s, opacity 0.2s 0.2s;
 }
+
 .dropdown:hover .dropdown-menu {
     max-height: 400px;
     opacity: 1;
@@ -223,10 +242,12 @@ div.rounded.border-thick {
     display: flex;
     align-items: center;
 }
-.dropdown-menu a:hover {
-    background: linear-gradient(to bottom, #42a5c3, #007bff);
-    color: #eeeeee !important;
-}
+
+    .dropdown-menu a:hover {
+        background: linear-gradient(to bottom, #396afc, #2948ff);
+        color: #eeeeee !important;
+    }
+
 .dropdown-menu {
     margin-top: 0px;
     border-top-left-radius: 0px;
@@ -237,33 +258,40 @@ div.rounded.border-thick {
 nav {
     height: 72px;
 }
-nav ul li {
-    height: 72px;
-    display: flex;
-    align-items: center;
-}
-nav ul li > a {
-    font-size: 105%;
-    color: #fff !important;
-    transition: .1s ease 0.02s;
-}
-nav ul li > a.text-light:hover {
-    color: #e9ecef !important;
-    transition: .1s ease 0.02s;
-}
-nav ul li.nav-hover:hover > a {
-    color: #e9ecef !important;
-    transition: .02s ease 0.02s;
-}
-nav ul li.nav-hover:hover > a .hvr-icon {
-    transform: translateY(4px);
-}
+
+    nav ul li {
+        height: 72px;
+        display: flex;
+        align-items: center;
+    }
+
+        nav ul li > a {
+            font-size: 105%;
+            color: #fff !important;
+            transition: .1s ease 0.02s;
+        }
+
+            nav ul li > a.text-light:hover {
+                color: #e9ecef !important;
+                transition: .1s ease 0.02s;
+            }
+
+        nav ul li.nav-hover:hover > a {
+            color: #e9ecef !important;
+            transition: .02s ease 0.02s;
+        }
+
+            nav ul li.nav-hover:hover > a .hvr-icon {
+                transform: translateY(4px);
+            }
+
 .navbar-blue {
-    background: #057af8;
+    background: linear-gradient(to right, #396afc, #2948ff);
     transition: .2s ease;
 }
+
 .navbar-blue-fixed {
-    background: #057af8 !important;
+    background: linear-gradient(to right, #396afc, #2948ff) !important;
 }
 
 /*Animation for cards.*/
@@ -272,25 +300,31 @@ nav ul li.nav-hover:hover > a .hvr-icon {
     overflow: hidden;
     transition: .3s ease 0.1s;
 }
-.card-home .card-body button {
-    opacity: 0;
-    transition: .3s ease 0.1s;
-}
+
+    .card-home .card-body button {
+        opacity: 0;
+        transition: .3s ease 0.1s;
+    }
+
 .card-home:hover .card-body button {
     opacity: 1;
     visibility: visible;
 }
+
 .card-home .card-body > p {
     height: 120px;
     transition: .3s ease 0.1s;
 }
+
 .card-home:hover .card-body > p {
     height: 72px;
 }
+
 .card-home .card-body small {
     opacity: 0;
     transition: .3s ease 0.1s;
 }
+
 .card-home:hover .card-body small {
     opacity: 1;
 }
@@ -305,6 +339,7 @@ nav ul li.nav-hover:hover > a .hvr-icon {
     background-color: rgba(128,128,128,0.2);
     z-index: 2147483647;
 }
+
 .d-none {
     display: none !important;
 }
@@ -324,21 +359,24 @@ nav ul li.nav-hover:hover > a .hvr-icon {
     animation-iteration-count: infinite;
     animation-duration: 2.5s;
 }
+
 @keyframes arrow {
     0% {
         opacity: 0.0;
         top: 0px;
     }
+
     25% {
         opacity: 0.75;
     }
+
     80% {
         top: 32px;
         opacity: 1.0;
     }
+
     100% {
         top: 40px;
         opacity: 0.0;
     }
-
 }
