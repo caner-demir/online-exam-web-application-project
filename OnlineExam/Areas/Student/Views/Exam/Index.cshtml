@@ -8,7 +8,7 @@
                     <div class="card rounded bg-primary">
                         <div class="card-header text-light">
                             <h3 style="margin:0px">
-                                <i class="fas fa-info-circle" style="color:#eebd81"></i>&nbsp; About this course
+                                <i class="fas fa-info-circle text-warning"></i>&nbsp; About this course
                             </h3>
                         </div>
                         <div class="card-body bg-light rounded-bottom">
@@ -51,7 +51,7 @@
             <div class="col-3">
                 <div class="card bg-primary shadow-sm mb-4"  style="background:none">
                     <div class="card-header border-bottom">
-                        <h3 class="text-center text-light mb-0"><i class="fas fa-sitemap" style="color:#eebd81"></i>&nbsp; Navigation</h3>
+                        <h3 class="text-center text-light mb-0"><i class="fas fa-sitemap text-warning"></i>&nbsp; Navigation</h3>
                     </div>
                     <div class="bg-white rounded-bottom">
                         @{
@@ -74,7 +74,7 @@
                                                    asp-route-id="@course.Id" asp-fragment="course-details"><i class="fas fa-chevron-right text-secondary hvr-icon"></i>&nbsp; About this course</a>
                                                 @foreach (var exam in exams)
                                                 {
-                                                    <a class="btn btn-link text-dark ml-4 p-0 pb-1 text-decoration-none  hvr-icon-forward" asp-area="Student" asp-controller="Exam" asp-action="Index"
+                                                    <a class="btn btn-link text-dark d-block text-left ml-4 p-0 pb-1 text-decoration-none  hvr-icon-forward" asp-area="Student" asp-controller="Exam" asp-action="Index"
                                                        asp-route-id="@course.Id" asp-fragment="exam-@exam.Id"><i class="fas fa-chevron-right text-secondary hvr-icon"></i>&nbsp; @exam.Name</a>
                                                 }
                                             </div>
